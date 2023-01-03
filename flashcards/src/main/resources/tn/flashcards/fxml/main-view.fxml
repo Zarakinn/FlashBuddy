@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import atlantafx.base.controls.Spacer?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -27,6 +28,9 @@
                         <RadioButton fx:id="b3" mnemonicParsing="false" onAction="#setViewStats" styleClass="toggle-button" text="Statistique" toggleGroup="$pan" />
                         <RadioButton fx:id="b4" mnemonicParsing="false" onAction="#setViewParameter" styleClass="toggle-button" text="Paramètre" toggleGroup="$pan" />
                     </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ToolBar>
             </children>
         </HBox>

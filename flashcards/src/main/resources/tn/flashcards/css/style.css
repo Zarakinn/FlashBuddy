@@ -3,6 +3,8 @@
     -fx-padding: 3px 15px 3px 13px;
     -fx-text-alignment: center;
     -fx-alignment: center;
+    -fx-font-size: 17px;
+    -fx-font-family: "Reem Kufi";
 }
 
 .header > .label {
