@@ -8,10 +8,10 @@
    <children>
       <ToolBar AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <items>
-          <Button mnemonicParsing="false" text="Apprentissage" />
-            <Button mnemonicParsing="false" text="Edition" />
-            <Button mnemonicParsing="false" text="Statistique" />
-            <Button mnemonicParsing="false" text="Paramètre" />
+        <Button onAction="#setViewTraining" mnemonicParsing="false" text="Apprentissage" />
+            <Button onAction="#setViewEdit" mnemonicParsing="false" text="Edition" />
+            <Button onAction="#setViewStats" mnemonicParsing="false" text="Statistique" />
+            <Button onAction="#setViewParameter" mnemonicParsing="false" text="Paramètre" />
         </items>
       </ToolBar>
        <StackPane fx:id="ViewHolder"  alignment="BOTTOM_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
