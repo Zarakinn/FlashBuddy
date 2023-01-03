@@ -3,6 +3,7 @@ module tn.flashcards {
     requires javafx.fxml;
     requires lombok;
     requires atlantafx.base;
+    requires com.google.gson;
 
     opens tn.flashcards to javafx.fxml;
     exports tn.flashcards;
