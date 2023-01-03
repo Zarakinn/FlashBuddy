@@ -1,10 +1,119 @@
-@startuml
-package model {
+@startuml class
 
-    class SujetObserve {
+class Launcher extends javafx.application.Application {
+    + void Launcher(String[] args)
+    + void start(Stage primaryStage)
+}
+
+package resources.tn.flashcards.fxml {
+
+    object main_view.fxml {
+    }
+
+    object edit_view.fxml {
+    }
+
+    object parameter_view.fxml {
+    }
+
+    object stats_view.fxml {
+    }
+
+    object training_view.fxml {
+    }
+
+}
+
+interface Observateur {
+        + void refresh()
+    }
+
+package view {
+
+    class QRViewFactory {
+        +Pane createQRView(Card card)
+    }
+
+    abstract QRView implements javafx.scene.layout.Pane {}
+
+    class QRTextView extends QRView {
+        # Label txt
+        
+        + QRTextView(String txt)
+    }
+
+    class QRImageView extends QRView {
+        # ImageView img
+        
+        + QRImageView(String url)
+    }
+}
+
+package controller {
+
+    class MainController implements javafx.fxml.Initializable, Observateur {
+        +void initialize(URL location, ResourceBundle resources)
+    }
+
+    class EditController implements javafx.fxml.Initializable, Observateur {
+        +void initialize(URL location, ResourceBundle resources)
+    }
+
+    class ParameterController implements javafx.fxml.Initializable, Observateur {
+        +void initialize(URL location, ResourceBundle resources)
+    }
+
+    class StatsController implements javafx.fxml.Initializable, Observateur {
+        +void initialize(URL location, ResourceBundle resources)
+    }
+
+    class TrainingController implements javafx.fxml.Initializable, Observateur {
+        +void initialize(URL location, ResourceBundle resources)
+    }
+
+    MainController --> EditController
+    MainController --> ParameterController
+    MainController --> StatsController
+    MainController --> TrainingController
+
+}
+
+TrainingController --> QRViewFactory
+
+class SujetObserve {
         + void addObs(Observateur obs)
         + void refreshAllObs()
     }
+
+    package commands {
+
+        interface Command {
+            + void execute()
+        }
+
+        class addPileCommand extends Command {
+            + void execute()
+        }
+
+        class addCardCommand extends Command {
+            + void execute()
+        }
+
+        class getNextQuestion extends Command {
+            + void execute()
+        }
+
+        class getAnswer extends Command {
+            + void execute()
+        }
+    }
+
+    EditController *--> Command
+    ParameterController *--> Command
+    TrainingController *--> Command
+    StatsController *--> Command
+
+package model {
 
     class Data extends SujetObserve {
         - Data instance
@@ -16,118 +125,92 @@ package model {
 
     package pile {
 
+        class Pile {
+            # String uniqueId
+            # String creator
+
+            '+ void nextCard()'
+
+            + void addCard()
+        }
+
         class Card {
             # Int id
 
-            + Pane show()
-            + void turn()
+            '+ Pane show()'
+            '+ void turn()'
         }
 
         interface QuestionRéponse {
-            + Pane show()
-            + void evaluate(int a)
+            '+ Pane show()'
+            '+ void evaluate(int a)'
 
-            + void edit(QuestionRéponse newValue)
+            '+ void edit(QuestionRéponse newValue)'
         }
 
         class QRText implements QuestionRéponse {}
 
         class QRImage implements QuestionRéponse {}
 
-        class Pile {
-            # String uniqueId
-            # String creator
+        Pile *--"..*" Card
+        Card *--"2" QuestionRéponse
+        'QuestionRéponseController *--"1" Data'
+    }
 
-            + void nextCard()
-            + Pane show()
-
-            + void newCard()
+    package stats {
+        note "Est utilisé pour afficher les\nstatistiques (calcul lent)\nOn garde toutes les données" as N2
+        class StatsPile {
+            # String pileId
+            # Int noJeuxPile
+            # Int noJeuxCarte
+            # Date lastOpened
         }
+
+        class StatTraining {
+            # Int cardId
+            # Date playDate
+            # Int difficulty
+        }
+
+        StatsPile -->"1 [HashMap]" StatTraining
+        StatsPile -->"1 [ArrayList]" StatTraining
 
     }
 
-    package user {
-        class User {
-            # String name
+    package settings {
+
+        class Settings {}
+
+        interface AlgoChoix {
+            + void handle()
         }
 
-        package lastPlayed {
+        class AlgoChoix_ParTemps implements AlgoChoix {}
+        class AlgoChoix_ParProba implements AlgoChoix {}
 
-            note "Est utilisé pour afficher la\nprochaine carte (calcul rapide)\nOn overwrite à chaque\napparition de la carte" as N1
-
-            class LastPlayed {
-                # String pileId
-            }
-
-            class Played {
-                # Date playDate
-                # Int difficulty
-            }
+        interface AlgoAffichage {
+            + void handle()
         }
 
-        package stats {
-            note "Est utilisé pour afficher les\nstatistiques (calcul lent)\nOn garde toutes les données" as N2
-            class Stats {
-                # String pileId
-            }
+        class AlgoAffichage_ParTemps implements AlgoAffichage {}
+        class AlgoAffichage_ParClic implements AlgoAffichage {}
 
-            class QuickStat {
-                # Int noJeuxPile
-                # Int noJeuxCarte
-                # Date lastOpened
-            }
-
-            class StatApprent {
-                # Int cardId
-                # Date playDate
-                # Int difficulty
-            }
-
+        interface Theme {
+            + void handle()
         }
 
-        package preferences {
+        class Theme_Clair implements Theme {}
+        class Theme_Fonce implements Theme {}
+        class Theme_Contraste implements Theme {}
 
-            class Preferences {}
-
-            interface AlgoDeRep {
-                + void handle()
-            }
-
-            class AlgoDeRep_ParTemps implements AlgoDeRep {}
-            class AlgoDeRep_ParProba implements AlgoDeRep {}
-
-            interface AlgoDAffichage {
-                + void handle()
-            }
-
-            class AlgoDAffichage_ParTemps implements AlgoDAffichage {}
-            class AlgoDAffichage_ParClic implements AlgoDAffichage {}
-
-            interface Theme {
-                + void handle()
-            }
-
-            class Theme_Clair implements Theme {}
-            class Theme_Fonce implements Theme {}
-            class Theme_Contraste implements Theme {}
-
-        }
-
-        User *--"..*" Stats
-        User *--"1" Preferences
-        User *--"..* [HashMap]" LastPlayed
-        Stats *--"1" StatApprent
-        Stats *--"1" QuickStat
-        LastPlayed *--"..* [HashMap]" Played
-        Preferences *--"1" AlgoDeRep
-        Preferences *--"1" AlgoDAffichage
-        Preferences *--"1" Theme
+        Settings -->"1" AlgoChoix
+        Settings -->"1" AlgoAffichage
+        Settings -->"1" Theme
     }
-}
 
-package controller {
+    
 
-    class DataController {
+    /'class DataController {
         + void open(URL file)
         + void saveAs(URL file)
         + void save()
@@ -146,49 +229,62 @@ package controller {
         + void editImage()
 
         + void evaluate(int a)
-    }
+    }'/
 
-    class ViewController implements javafx.fxml.Initializable {
-        +void initialize(URL location, ResourceBundle resources)
-    }
 
-    interface Observateur {
-        + void refresh()
-    }
+    /'package user {
+        class User {
+            # String name
+        }
 
-    class View implements Observateur {
-        +void refresh()
-    }
+        package lastPlayed {
 
+            note "Est utilisé pour afficher la\nprochaine carte (calcul rapide)\nOn overwrite à chaque\napparition de la carte" as N1
+
+            class LastPlayed {
+                # String pileId
+            }
+
+            class Played {
+                # Date playDate
+                # Int difficulty
+            }
+        }
+
+        User *--"..*" Stats
+        User *--"1" Preferences
+        User *--"..* [HashMap]" LastPlayed
+        Stats *--"1" StatApprent
+        Stats *--"1" QuickStat
+        LastPlayed *--"..* [HashMap]" Played                                                                                                                                                                                                                                                                                           
+        
+    }'/
+
+    Data *-->"..*" Pile
+    Data *-->"1" Settings
+    Data *-->"..*" StatsPile
 }
 
-class Launcher extends javafx.application.Application {
-    + void Launcher(String[] args)*
-    + void start(Stage primaryStage)
-}
 
-package resources.tn.flashcards.fxml {
 
-    object View.fxml {
-    }
+SujetObserve *-->"*" Observateur
 
-}
+Launcher -->"1" main_view.fxml
 
-Launcher *--"1" View.fxml
+main_view.fxml -->"1" MainController
+edit_view.fxml -->"1" EditController
+parameter_view.fxml -->"1" ParameterController
+training_view.fxml -->"1" TrainingController
+stats_view.fxml -->"1" StatsController
 
-View.fxml *--"1" ViewController
-View *--"1" Data
+/'MainController *--"1" DataController
+MainController *--"1" QuestionRéponseController
 
-ViewController *--"1" DataController
-ViewController *--"1" QuestionRéponseController
 
-SujetObserve *--"*" Observateur
 
 DataController *--"1" Data
-Data *--"..*" Pile
-Data *--"1" User
-Pile *--"..*" Card
-Card *--"2" QuestionRéponse
-QuestionRéponseController *--"1" Data
+
+Data *--"1" User'/
+
 
 @enduml
