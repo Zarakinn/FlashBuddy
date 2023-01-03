@@ -1,0 +1,13 @@
+.header {
+    -fx-background-color: #3b812e;
+    -fx-padding: 3px 15px 3px 13px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.header > .label {
+    -fx-text-fill: white;
+    -fx-font-size: 29px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Arial Rounded MT Bold";
+}
