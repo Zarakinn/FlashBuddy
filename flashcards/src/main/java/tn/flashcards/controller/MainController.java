@@ -1,5 +1,6 @@
 package tn.flashcards.controller;
 
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
@@ -29,7 +30,10 @@ public class MainController implements Initializable, Observateur {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Arrays.asList(b1, b2, b3, b4).forEach(radioButton -> radioButton.getStyleClass().remove("radio-button"));
+        Arrays.asList(b1, b2, b3, b4).forEach(
+                radioButton -> {
+                    radioButton.getStyleClass().remove("radio-button");
+                });
         onglets = Arrays.asList(edit, parameter, stats, training);
         setViewTraining();
     }
