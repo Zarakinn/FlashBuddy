@@ -1,21 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import atlantafx.base.controls.Spacer?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.MainController">
-   <children>
-      <ToolBar AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
-        <items>
-        <Button onAction="#setViewTraining" mnemonicParsing="false" text="Apprentissage" />
-            <Button onAction="#setViewEdit" mnemonicParsing="false" text="Edition" />
-            <Button onAction="#setViewStats" mnemonicParsing="false" text="Statistique" />
-            <Button onAction="#setViewParameter" mnemonicParsing="false" text="Paramètre" />
-        </items>
-      </ToolBar>
-       <StackPane fx:id="ViewHolder"  alignment="BOTTOM_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-       </StackPane>
-
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.MainController">
+    <top>
+        <HBox prefHeight="65.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
+            <children>
+                <Label contentDisplay="BOTTOM" text="Flashcards">
+                </Label>
+                <Spacer />
+                <ToolBar AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                    <items>
+                        <RadioButton fx:id="b1" mnemonicParsing="false" onAction="#setViewTraining" selected="true" styleClass="toggle-button" text="Apprentissage">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="pan" />
+                     </toggleGroup></RadioButton>
+                        <RadioButton fx:id="b2" mnemonicParsing="false" onAction="#setViewEdit" styleClass="toggle-button" text="Edition" toggleGroup="$pan" />
+                        <RadioButton fx:id="b3" mnemonicParsing="false" onAction="#setViewStats" styleClass="toggle-button" text="Statistique" toggleGroup="$pan" />
+                        <RadioButton fx:id="b4" mnemonicParsing="false" onAction="#setViewParameter" styleClass="toggle-button" text="Paramètre" toggleGroup="$pan" />
+                    </items>
+                </ToolBar>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <StackPane fx:id="ViewHolder" alignment="BOTTOM_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <fx:include fx:id="training" source="training-view.fxml" />
+            <fx:include fx:id="edit" source="edit-view.fxml" />
+            <fx:include fx:id="stats" source="stats-view.fxml" />
+            <fx:include fx:id="parameter" source="parameter-view.fxml" />
+        </StackPane>
+    </center>
+</BorderPane>
