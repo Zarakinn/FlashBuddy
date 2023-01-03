@@ -1,0 +1,194 @@
+@startuml
+package model {
+
+    class SujetObserve {
+        + void addObs(Observateur obs)
+        + void refreshAllObs()
+    }
+
+    class Data extends SujetObserve {
+        - Data instance
+        - Data()
+        + Data static getInstance()
+    }
+    class Data
+    note right: Pattern Singleton
+
+    package pile {
+
+        class Card {
+            # Int id
+
+            + Pane show()
+            + void turn()
+        }
+
+        interface QuestionRéponse {
+            + Pane show()
+            + void evaluate(int a)
+
+            + void edit(QuestionRéponse newValue)
+        }
+
+        class QRText implements QuestionRéponse {}
+
+        class QRImage implements QuestionRéponse {}
+
+        class Pile {
+            # String uniqueId
+            # String creator
+
+            + void nextCard()
+            + Pane show()
+
+            + void newCard()
+        }
+
+    }
+
+    package user {
+        class User {
+            # String name
+        }
+
+        package lastPlayed {
+
+            note "Est utilisé pour afficher la\nprochaine carte (calcul rapide)\nOn overwrite à chaque\napparition de la carte" as N1
+
+            class LastPlayed {
+                # String pileId
+            }
+
+            class Played {
+                # Date playDate
+                # Int difficulty
+            }
+        }
+
+        package stats {
+            note "Est utilisé pour afficher les\nstatistiques (calcul lent)\nOn garde toutes les données" as N2
+            class Stats {
+                # String pileId
+            }
+
+            class QuickStat {
+                # Int noJeuxPile
+                # Int noJeuxCarte
+                # Date lastOpened
+            }
+
+            class StatApprent {
+                # Int cardId
+                # Date playDate
+                # Int difficulty
+            }
+
+        }
+
+        package preferences {
+
+            class Preferences {}
+
+            interface AlgoDeRep {
+                + void handle()
+            }
+
+            class AlgoDeRep_ParTemps implements AlgoDeRep {}
+            class AlgoDeRep_ParProba implements AlgoDeRep {}
+
+            interface AlgoDAffichage {
+                + void handle()
+            }
+
+            class AlgoDAffichage_ParTemps implements AlgoDAffichage {}
+            class AlgoDAffichage_ParClic implements AlgoDAffichage {}
+
+            interface Theme {
+                + void handle()
+            }
+
+            class Theme_Clair implements Theme {}
+            class Theme_Fonce implements Theme {}
+            class Theme_Contraste implements Theme {}
+
+        }
+
+        User *--"..*" Stats
+        User *--"1" Preferences
+        User *--"..* [HashMap]" LastPlayed
+        Stats *--"1" StatApprent
+        Stats *--"1" QuickStat
+        LastPlayed *--"..* [HashMap]" Played
+        Preferences *--"1" AlgoDeRep
+        Preferences *--"1" AlgoDAffichage
+        Preferences *--"1" Theme
+    }
+}
+
+package controller {
+
+    class DataController {
+        + void open(URL file)
+        + void saveAs(URL file)
+        + void save()
+
+        + void newPile()
+        + void newCardInCurrentPile()
+        + void rmCurrentPile()
+        + void rmCurrentCard()
+    }
+
+    class QuestionRéponseController {
+        + void changeQRForText()
+        + void editText()
+
+        + void changeQRForImage()
+        + void editImage()
+
+        + void evaluate(int a)
+    }
+
+    class ViewController implements javafx.fxml.Initializable {
+        +void initialize(URL location, ResourceBundle resources)
+    }
+
+    interface Observateur {
+        + void refresh()
+    }
+
+    class View implements Observateur {
+        +void refresh()
+    }
+
+}
+
+class Launcher extends javafx.application.Application {
+    + void Launcher(String[] args)*
+    + void start(Stage primaryStage)
+}
+
+package resources.tn.flashcards.fxml {
+
+    object View.fxml {
+    }
+
+}
+
+Launcher *--"1" View.fxml
+
+View.fxml *--"1" ViewController
+View *--"1" Data
+
+ViewController *--"1" DataController
+ViewController *--"1" QuestionRéponseController
+
+SujetObserve *--"*" Observateur
+
+DataController *--"1" Data
+Data *--"..*" Pile
+Data *--"1" User
+Pile *--"..*" Card
+Card *--"2" QuestionRéponse
+QuestionRéponseController *--"1" Data
+
+@enduml
