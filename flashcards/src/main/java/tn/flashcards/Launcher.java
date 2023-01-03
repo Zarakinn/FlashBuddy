@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import tn.flashcards.controller.HelloController;
+import tn.flashcards.controller.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -16,25 +16,34 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
         // Création modèle
-        // TODO
+        // TODO -
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(Launcher.class.getResource("fxml/hello-view.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader();
+        mainLoader.setLocation(Launcher.class.getResource("fxml/main-view.fxml"));
+        mainLoader.setControllerFactory(factory -> new MainController());
+        Parent main = mainLoader.load();
 
-        // Création des controlleurs
-        var HelloController = new HelloController();
+        FXMLLoader editLoader = new FXMLLoader();
+        editLoader.setLocation(Launcher.class.getResource("fxml/edit-view.fxml"));
+        editLoader.setControllerFactory(factory -> new EditController());
+        Parent edit = editLoader.load();
 
-        // model.ajouterObservateur(HelloController);
-        // ...
+        FXMLLoader statsLoader = new FXMLLoader();
+        statsLoader.setLocation(Launcher.class.getResource("fxml/stats-view.fxml"));
+        statsLoader.setControllerFactory(factory -> new StatsController());
+        Parent stats = statsLoader.load();
 
-        fxmlLoader.setControllerFactory(ic -> {
-            if (ic.equals(HelloController.class)) return HelloController;
-            // ...
-            return null;
-        });
+        FXMLLoader parameterLoader = new FXMLLoader();
+        parameterLoader.setLocation(Launcher.class.getResource("fxml/parameter-view.fxml"));
+        parameterLoader.setControllerFactory(factory -> new ParameterController());
+        Parent parameter = parameterLoader.load();
 
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 1000, 700);
+        FXMLLoader trainingLoader = new FXMLLoader();
+        trainingLoader.setLocation(Launcher.class.getResource("fxml/training-view.fxml"));
+        trainingLoader.setControllerFactory(factory -> new MainController());
+        Parent train = trainingLoader.load();
+
+        Scene scene = new Scene(main, 1000, 700);
         scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource("css/style.css")).toURI().toString());
         stage.setScene(scene);
         stage.show();
