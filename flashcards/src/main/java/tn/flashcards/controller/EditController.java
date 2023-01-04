@@ -95,7 +95,7 @@ public class EditController implements Initializable, Observateur {
         });
 
 
-        cDelete.setCellFactory(ActionButtonTableCell.forTableColumn("Remove", (Pile p) -> {
+        cDelete.setCellFactory(ActionButtonTableCell.forTableColumn(new String[]{BUTTON_ICON, BUTTON_OUTLINED, DANGER}, (Pile p) -> {
             table.getItems().remove(p);
             return p;
         }));
