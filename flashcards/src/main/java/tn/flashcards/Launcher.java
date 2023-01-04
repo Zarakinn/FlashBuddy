@@ -39,9 +39,9 @@ public class Launcher extends Application {
         var mainController = new MainController();
 
         Pile p = Data.getInstance().createPile("temp","Valentin");
+        Data.getInstance().setCurrentPile(p);
 
-
-        var editPileController = new EditPileController(p);
+        var editPileController = new EditPileController();
         // Ajout des vues au modèle
         Data model = Data.getInstance();
         model.ajouterObservateur(editController);
