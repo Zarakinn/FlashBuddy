@@ -127,6 +127,10 @@ public class EditController implements Initializable, Observateur {
 
     }
 
+    @FXML
+    public void createPile() {
+        Data.getInstance().createPile("Nom", "Auteur");
+    }
 
     @Override
     public void reagir() {
