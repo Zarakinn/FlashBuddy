@@ -81,5 +81,11 @@ public class MainController implements Initializable, Observateur {
             case APPRENTISSAGE -> training.setVisible(true);
             case EDIT_PILE -> editpile.setVisible(true);
         }
+        switch (Data.getInstance().getMode()) {
+            case EDITION -> b2.setSelected(true);
+            case PARAM -> b4.setSelected(true);
+            case STATS -> b3.setSelected(true);
+            case APPRENTISSAGE -> b1.setSelected(true);
+        }
     }
 }
