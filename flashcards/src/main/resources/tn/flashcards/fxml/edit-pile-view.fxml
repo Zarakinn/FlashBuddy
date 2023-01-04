@@ -8,9 +8,9 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.flashcards.controller.EditPileController"
-            prefHeight="400.0" prefWidth="600.0">
-    <ListView fx:id="view">
+            fx:controller="tn.flashcards.controller.EditPileController">
+    <TextField fx:id="name"/>
+    <ListView fx:id="view" AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25" AnchorPane.topAnchor="25" AnchorPane.bottomAnchor="25">
 
     </ListView>
 </AnchorPane>
