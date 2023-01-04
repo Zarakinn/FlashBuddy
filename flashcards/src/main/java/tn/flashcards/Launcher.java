@@ -11,6 +11,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import tn.flashcards.controller.*;
+import tn.flashcards.model.pile.Pile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -34,7 +35,9 @@ public class Launcher extends Application {
         var statsController = new StatsController();
         var trainingController = new TrainingController();
         var mainController = new MainController();
-        var editPileController = new EditPileController();
+        Pile p = new Pile();
+        p.setName("temp");
+        var editPileController = new EditPileController(p);
         // Ajout des vues au modèle
         // TODO
 
