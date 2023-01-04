@@ -22,11 +22,9 @@ public class EditPileController implements Initializable, Observateur {
     @FXML
     ListView<Card> view;
 
-    Pile pile;
-
-    public EditPileController(Pile pile)
+    public EditPileController()
     {
-        this.pile = pile;
+        Pile pile = Data.getInstance().getCurrentPile();
 
         Data.getInstance().createCard(pile.getUniqueId(), QRType.TEXT,"la première question",QRType.TEXT,"la première réponse");
         Data.getInstance().createCard(pile.getUniqueId(), QRType.TEXT,"la deuxième question",QRType.TEXT,"la deuxième réponse");
@@ -35,6 +33,7 @@ public class EditPileController implements Initializable, Observateur {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        Pile pile = Data.getInstance().getCurrentPile();
         view.setCellFactory(view -> new EditCell(pile)
         );
         name.setText(pile.getName());
@@ -44,14 +43,14 @@ public class EditPileController implements Initializable, Observateur {
 
     public void display()
     {
-        ObservableList<Card> oCards = FXCollections.observableList(pile.getCards());
+        ObservableList<Card> oCards = FXCollections.observableList(Data.getInstance().getCurrentPile().getCards());
         view.setItems(oCards);
     }
 
     @FXML
     public void AddCard()
     {
-        Data.getInstance().createDefaultCard(pile.getUniqueId());
+        Data.getInstance().createDefaultCard(Data.getInstance().getCurrentPile().getUniqueId());
     }
 
     @Override
