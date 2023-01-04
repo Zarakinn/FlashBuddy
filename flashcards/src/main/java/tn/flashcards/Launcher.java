@@ -34,6 +34,7 @@ public class Launcher extends Application {
         var statsController = new StatsController();
         var trainingController = new TrainingController();
         var mainController = new MainController();
+        var editPileController = new EditPileController();
         // Ajout des vues au modèle
         // TODO
 
@@ -43,6 +44,7 @@ public class Launcher extends Application {
             if (ic.equals(ParameterController.class)) return parameterController;
             if (ic.equals(StatsController.class)) return statsController;
             if (ic.equals(TrainingController.class)) return trainingController;
+            if (ic.equals(EditPileController.class)) return editPileController;
             // ...
             return null;
         });
