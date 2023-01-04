@@ -118,7 +118,7 @@ package model {
     class Data extends SujetObserve {
         - Data instance
         - Data()
-        + Data static getInstance()
+        + static Data getInstance()
     }
     class Data
     note right: Pattern Singleton
@@ -158,7 +158,6 @@ package model {
     }
 
     package stats {
-        note "Est utilisé pour afficher les\nstatistiques (calcul lent)\nOn garde toutes les données" as N2
         class StatsPile {
             # String pileId
             # Int noJeuxPile
@@ -166,14 +165,21 @@ package model {
             # Date lastOpened
         }
 
-        class StatTraining {
-            # Int cardId
+        class LastStats {
             # Date playDate
             # Int difficulty
         }
 
-        StatsPile -->"1 [HashMap]" StatTraining
-        StatsPile -->"1 [ArrayList]" StatTraining
+        class FullStats extends LastStats {
+            # Int cardId
+        }
+
+        class DataFormat {
+            + static DateTimeFormatter getDateTimeFormatter()
+        }
+
+        StatsPile -->"1 [HashMap]" LastStats
+        StatsPile -->"1 [ArrayList]" FullStats
 
     }
 
