@@ -11,7 +11,10 @@ import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
+import tn.flashcards.model.settings.AlgoAffichage;
 import tn.flashcards.model.settings.Settings;
+import tn.flashcards.model.settings.StrategyChoix;
+import tn.flashcards.model.settings.Theme;
 import tn.flashcards.model.stats.StatsPile;
 
 import lombok.Getter;
@@ -32,6 +35,7 @@ public class Data extends SujetObserve {
     private Data() {
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
+        this.settings = new Settings();
 
         piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag1"));
         piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag2"));

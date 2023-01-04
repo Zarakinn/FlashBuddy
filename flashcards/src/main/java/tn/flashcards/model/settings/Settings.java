@@ -11,4 +11,10 @@ public class Settings {
     protected StrategyChoix algoChoix;
     protected AlgoAffichage algoAffichage;
     protected Theme theme;
+
+    public Settings() {
+        this.algoChoix = new StrategyChoixProbaEgales();
+        this.algoAffichage = AlgoAffichage.CLIC;
+        this.theme = Theme.FONCE;
+    }
 }
