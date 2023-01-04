@@ -14,12 +14,19 @@ import tn.flashcards.model.pile.QuestionReponse;
 import tn.flashcards.model.settings.Settings;
 import tn.flashcards.model.stats.StatsPile;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Data extends SujetObserve {
     // Singleton
     private static Data INSTANCE;
     protected HashMap<String, StatsPile> statsPile;
     protected ObservableList<Pile> piles;
 
+    @Getter @Setter
+    private Pile currentPile ;
+
+    @Getter
     private Settings settings ;
 
     private Data() {
@@ -46,12 +53,9 @@ public class Data extends SujetObserve {
         return this.piles;
     }
 
-    public Settings getSettings() {
-        return this.settings ;
-    }
 
     //Recuperer une pile specifique
-    private Pile getAPile(String id) {
+    public Pile getAPile(String id) {
         for (Pile p:this.piles) {
             if (p.getUniqueId().equals(id)) {
                 return p ;
