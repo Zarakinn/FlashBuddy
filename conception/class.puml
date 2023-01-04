@@ -32,7 +32,7 @@ package view {
         +Pane createQRView(Card card)
     }
 
-    abstract QRView implements javafx.scene.layout.Pane {}
+    abstract QRView extends javafx.scene.layout.Pane {}
 
     class QRTextView extends QRView {
         # Label txt
@@ -112,25 +112,17 @@ package model {
 
         class Card {
             # Int id
-
-            '+ Pane show()'
-            '+ void turn()'
         }
 
-        interface QuestionRéponse {
-            '+ Pane show()'
-            '+ void evaluate(int a)'
-
-            '+ void edit(QuestionRéponse newValue)'
+        class QuestionRéponse {
+            # String content
         }
 
-        class QRText implements QuestionRéponse {}
-
-        class QRImage implements QuestionRéponse {}
+        enum QRType {}
 
         Pile *--"..*" Card
         Card *--"2" QuestionRéponse
-        'QuestionRéponseController *--"1" Data'
+        QuestionRéponse -->"1" QRType
     }
 
     package stats {
