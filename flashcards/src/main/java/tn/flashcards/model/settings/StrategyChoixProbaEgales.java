@@ -10,7 +10,12 @@ public class StrategyChoixProbaEgales implements StrategyChoix {
     @Override
     public Card execute() {
         ArrayList<Card> cards = Data.getInstance().getCurrentPile().getCards() ;
-        var index = new Random().nextInt(cards.size());
-        return cards.get(index);
-    }
+
+        if (cards.size() > 0) {
+            var index = new Random().nextInt(cards.size());
+            return cards.get(index);
+        }
+
+        return null ;
+        }
 }
