@@ -15,13 +15,10 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable, Observateur {
 
     @FXML
-    StackPane ViewHolder;
-
-    @FXML
     RadioButton b1, b2, b3, b4;
 
     @FXML
-    Pane edit, parameter, stats, training;
+    Pane edit, parameter, stats, training, editpile;
 
     List<Pane> onglets;
 
@@ -34,8 +31,9 @@ public class MainController implements Initializable, Observateur {
                 radioButton -> {
                     radioButton.getStyleClass().remove("radio-button");
                 });
-        onglets = Arrays.asList(edit, parameter, stats, training);
-        setViewTraining();
+        b2.setSelected(true);
+        onglets = Arrays.asList(edit, parameter, stats, training,editpile);
+        setEditPile();
     }
 
     @FXML
@@ -58,6 +56,12 @@ public class MainController implements Initializable, Observateur {
         setView(training);
     }
 
+
+    public void setEditPile()
+    {
+        //Comment le déclencher ?
+        setView(editpile);
+    }
 
     public void setView(Pane pane) {
         for (Pane p : onglets) {
