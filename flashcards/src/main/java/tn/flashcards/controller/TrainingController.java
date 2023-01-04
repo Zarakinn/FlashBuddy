@@ -9,6 +9,7 @@ import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
+import tn.flashcards.view.QRView;
 import tn.flashcards.view.QRViewFactory;
 
 import java.net.URL;
@@ -20,11 +21,7 @@ public class TrainingController implements Initializable, Observateur {
     @FXML
     private Pane pileList ;
     @FXML
-    private Button startTraining ;
-    @FXML
     private BorderPane trainingView ;
-    @FXML
-    private Button closeTraining ;
     @FXML
     private HBox cardView ;
     @FXML
@@ -55,16 +52,30 @@ public class TrainingController implements Initializable, Observateur {
 
         this.cardView.getChildren().removeAll(this.cardView.getChildren()) ;
 
-        this.cardView.getChildren().add(QRViewFactory.createQRView(c.getQuestion())) ;
-        this.cardView.getChildren().add(QRViewFactory.createQRView(c.getReponse())) ;
 
-        this.cardView.getChildren().get(1).setVisible(false);
+        if (c != null) {
+            QRView q = QRViewFactory.createQRView(c.getQuestion());
+            QRView r = QRViewFactory.createQRView(c.getReponse());
+
+            q.setPrefWidth(this.cardView.getWidth() / 2);
+            r.setPrefWidth(this.cardView.getWidth() / 2);
+            q.getStyleClass().add("view") ;
+            r.getStyleClass().add("view") ;
+
+            this.cardView.getChildren().add(r);
+            this.cardView.getChildren().add(q);
+
+            this.cardView.getChildren().get(1).setVisible(false);
+        }
     }
 
     @FXML
     public void startTraining() {
         this.pileList.setVisible(false);
         this.trainingView.setVisible(true);
+
+        Data d = Data.getInstance() ;
+        d.setCurrentPile(d.getAPile("0"));
 
         if (this.cardView.getChildren().size() < 2) {
             this.nextCardView();
@@ -81,10 +92,7 @@ public class TrainingController implements Initializable, Observateur {
     public void affReponse() {
         this.scoreButtons.setVisible(true);
         this.showAnsButton.setVisible(false);
-
-        try {
-            this.cardView.getChildren().get(1).setVisible(true);
-        } catch (Exception ignored) {}
+        this.cardView.getChildren().get(1).setVisible(true);
     }
 
     @FXML
