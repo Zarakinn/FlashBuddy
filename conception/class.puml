@@ -188,27 +188,21 @@ package model {
 
         class Settings {}
 
-        interface AlgoChoix {
-            + void handle()
+        enum AlgoChoix {
+            TEMPS
+            PROBA
         }
 
-        class AlgoChoix_ParTemps implements AlgoChoix {}
-        class AlgoChoix_ParProba implements AlgoChoix {}
-
-        interface AlgoAffichage {
-            + void handle()
+        enum AlgoAffichage {
+            TEMPS
+            CLIC
         }
 
-        class AlgoAffichage_ParTemps implements AlgoAffichage {}
-        class AlgoAffichage_ParClic implements AlgoAffichage {}
-
-        interface Theme {
-            + void handle()
+        enum Theme {
+            CLAIR
+            FONCE
+            CONTRASTE
         }
-
-        class Theme_Clair implements Theme {}
-        class Theme_Fonce implements Theme {}
-        class Theme_Contraste implements Theme {}
 
         Settings -->"1" AlgoChoix
         Settings -->"1" AlgoAffichage
