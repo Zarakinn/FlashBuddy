@@ -17,11 +17,11 @@ public class Data extends SujetObserve {
     // Singleton
     private static Data INSTANCE;
     protected HashMap<String, StatsPile> statsPile;
-    protected ArrayList<Pile> piles;
+    protected ObservableList<Pile> piles;
 
     private Data() {
         this.statsPile = new HashMap<String, StatsPile>();
-        this.piles = new ArrayList<Pile>();
+        this.piles = FXCollections.observableArrayList();
 
         piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag1"));
         piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag2"));
@@ -39,7 +39,7 @@ public class Data extends SujetObserve {
         return INSTANCE;
     }
 
-    public ArrayList<Pile> getPiles() {
+    public ObservableList<Pile> getPiles() {
         return this.piles;
     }
 
