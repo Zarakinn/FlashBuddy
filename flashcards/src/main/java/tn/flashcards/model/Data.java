@@ -39,7 +39,6 @@ public class Data extends SujetObserve {
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
-
         this.addPile(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag1"));
         this.addPile(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag2"));
         this.addPile(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag3"));
