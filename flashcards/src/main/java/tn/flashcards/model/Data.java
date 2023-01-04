@@ -40,9 +40,9 @@ public class Data extends SujetObserve {
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
-        this.addPile(new Pile("user1", "0", "moi", new ArrayList<Card>(), 0, "tag1"));
-        this.addPile(new Pile("user1", "1", "moi", new ArrayList<Card>(), 0, "tag2"));
-        this.addPile(new Pile("user1", "2", "moi", new ArrayList<Card>(), 0, "tag3"));
+        this.addPile(new Pile("user1", "_0", "moi", new ArrayList<Card>(), 0, "tag1"));
+        this.addPile(new Pile("user1", "_1", "moi", new ArrayList<Card>(), 0, "tag2"));
+        this.addPile(new Pile("user1", "_2", "moi", new ArrayList<Card>(), 0, "tag3"));
 
 
         // TODO : vérifier si peut être importer depuis un fichier
@@ -76,7 +76,6 @@ public class Data extends SujetObserve {
     private void addPile(Pile p) {
         this.piles.add(p) ;
         StatsPile pile = new StatsPile(p.getUniqueId());
-        //pile.setLastOpened(LocalDateTime.now());
         this.statsPile.put(p.getUniqueId(), pile) ;
     }
 

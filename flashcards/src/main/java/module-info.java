@@ -9,6 +9,7 @@ module tn.flashcards {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.feather;
     requires org.kordamp.ikonli.material2;
+    requires org.kordamp.ikonli.fontawesome;
 
     opens tn.flashcards to javafx.fxml;
     exports tn.flashcards;
