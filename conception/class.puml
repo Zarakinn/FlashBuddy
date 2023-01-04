@@ -24,9 +24,7 @@ package resources.tn.flashcards.fxml {
 
 }
 
-interface Observateur {
-        + void refresh()
-    }
+
 
 package view {
 
@@ -50,6 +48,10 @@ package view {
 }
 
 package controller {
+
+    interface Observateur {
+        + void reagir()
+    }
 
     class MainController implements javafx.fxml.Initializable, Observateur {
         +void initialize(URL location, ResourceBundle resources)
@@ -80,40 +82,13 @@ package controller {
 
 TrainingController --> QRViewFactory
 
-class SujetObserve {
-        + void addObs(Observateur obs)
-        + void refreshAllObs()
-    }
-
-    package commands {
-
-        interface Command {
-            + void execute()
-        }
-
-        class addPileCommand extends Command {
-            + void execute()
-        }
-
-        class addCardCommand extends Command {
-            + void execute()
-        }
-
-        class getNextQuestion extends Command {
-            + void execute()
-        }
-
-        class getAnswer extends Command {
-            + void execute()
-        }
-    }
-
-    EditController *--> Command
-    ParameterController *--> Command
-    TrainingController *--> Command
-    StatsController *--> Command
 
 package model {
+
+    class SujetObserve {
+        + void ajouterObservateur(Observateur observateur)
+        + void notifierObservateur()
+    }
 
     class Data extends SujetObserve {
         - Data instance
@@ -181,6 +156,7 @@ package model {
 
         StatsPile -->"1 [HashMap]" LastStats
         StatsPile -->"1 [ArrayList]" FullStats
+        
 
     }
 
@@ -188,9 +164,16 @@ package model {
 
         class Settings {}
 
-        enum AlgoChoix {
-            TEMPS
-            PROBA
+        interface StrategyChoix {
+            + void execute()
+        }
+
+        class StrategyChoixProba implements StrategyChoix{
+            + void execute()
+        }
+
+        class StrategyChoixTemps implements StrategyChoix{
+            + void execute()
         }
 
         enum AlgoAffichage {
@@ -204,66 +187,15 @@ package model {
             CONTRASTE
         }
 
-        Settings -->"1" AlgoChoix
+        Settings -->"1" StrategyChoix
         Settings -->"1" AlgoAffichage
         Settings -->"1" Theme
     }
 
-    
-
-    /'class DataController {
-        + void open(URL file)
-        + void saveAs(URL file)
-        + void save()
-
-        + void newPile()
-        + void newCardInCurrentPile()
-        + void rmCurrentPile()
-        + void rmCurrentCard()
-    }
-
-    class QuestionRéponseController {
-        + void changeQRForText()
-        + void editText()
-
-        + void changeQRForImage()
-        + void editImage()
-
-        + void evaluate(int a)
-    }'/
-
-
-    /'package user {
-        class User {
-            # String name
-        }
-
-        package lastPlayed {
-
-            note "Est utilisé pour afficher la\nprochaine carte (calcul rapide)\nOn overwrite à chaque\napparition de la carte" as N1
-
-            class LastPlayed {
-                # String pileId
-            }
-
-            class Played {
-                # Date playDate
-                # Int difficulty
-            }
-        }
-
-        User *--"..*" Stats
-        User *--"1" Preferences
-        User *--"..* [HashMap]" LastPlayed
-        Stats *--"1" StatApprent
-        Stats *--"1" QuickStat
-        LastPlayed *--"..* [HashMap]" Played                                                                                                                                                                                                                                                                                           
-        
-    }'/
-
     Data *-->"..*" Pile
     Data *-->"1" Settings
     Data *-->"..*" StatsPile
+        
 }
 
 
