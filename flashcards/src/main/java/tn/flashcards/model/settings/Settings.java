@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Settings {
-    protected AlgoChoix algoChoix;
+    protected StrategyChoix algoChoix;
     protected AlgoAffichage algoAffichage;
     protected Theme theme;
 }
