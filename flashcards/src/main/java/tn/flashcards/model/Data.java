@@ -1,5 +1,6 @@
 package tn.flashcards.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import tn.flashcards.model.pile.Card;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
@@ -20,6 +22,7 @@ import tn.flashcards.model.stats.StatsPile;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
 public class Data extends SujetObserve {
     // Singleton
     private static Data INSTANCE;
@@ -37,9 +40,9 @@ public class Data extends SujetObserve {
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
 
-        piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag1"));
-        piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag2"));
-        piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag3"));
+        this.addPile(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag1"));
+        this.addPile(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag2"));
+        this.addPile(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag3"));
 
 
         // TODO : vérifier si peut être importer depuis un fichier
@@ -72,7 +75,9 @@ public class Data extends SujetObserve {
     // Ajouter une pile
     private void addPile(Pile p) {
         this.piles.add(p) ;
-        this.statsPile.put(p.getUniqueId(), new StatsPile(p.getUniqueId())) ;
+        StatsPile pile = new StatsPile(p.getUniqueId());
+        //pile.setLastOpened(LocalDateTime.now());
+        this.statsPile.put(p.getUniqueId(), pile) ;
     }
 
     /*
@@ -103,4 +108,7 @@ public class Data extends SujetObserve {
         return c;
     }
 
+    public void deletePile(Pile pile){
+        // TODO
+    }
 }

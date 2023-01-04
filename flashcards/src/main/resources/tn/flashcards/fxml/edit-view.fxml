@@ -14,8 +14,9 @@
             <TableColumn fx:id="cTags" prefWidth="149.0" text="Tags 🖉" />
             <TableColumn fx:id="cCreateur" minWidth="4.0" prefWidth="120.0" text="Créateur" />
             <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="151.0" text="Dernière utilisation" />
-            <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="90.0" sortable="false" text="Modifier" />
-            <TableColumn fx:id="cExport" editable="false" minWidth="0.0" prefWidth="130.0" sortable="false" text="Exporter" />
+            <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="30.0" sortable="false" />
+            <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="30.0" sortable="false" />
+            <TableColumn fx:id="cDelete" editable="false" maxWidth="30.0" minWidth="0.0" prefWidth="130.0" sortable="false" />
         </columns>
          <BorderPane.margin>
             <Insets />

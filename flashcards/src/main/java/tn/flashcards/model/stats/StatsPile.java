@@ -1,9 +1,13 @@
 package tn.flashcards.model.stats;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@Getter @Setter
 public class StatsPile {
     protected String pileId;
     protected int noJeuxPile;
@@ -19,6 +23,7 @@ public class StatsPile {
         this.noJeuxCarte = 0;
         this.lastStats = new HashMap<Integer, LastStats>();
         this.fullStats = new ArrayList<FullStats>();
+        this.lastOpened = LocalDateTime.now();
     }
 
     // NoJeuxPile

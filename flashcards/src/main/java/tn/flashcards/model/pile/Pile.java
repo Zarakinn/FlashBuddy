@@ -6,10 +6,12 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
-@Getter @Setter @AllArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
 public class Pile {
 
-    private static int ID = 0 ;
+    private static int ID = 0;
     protected String name;
     protected String uniqueId;
     protected String creator;
@@ -19,15 +21,21 @@ public class Pile {
 
     public Pile() {
         this.name = "Nom de la pile";
-        this.uniqueId = Integer.toString(ID) ;
+        this.uniqueId = Integer.toString(ID);
         this.creator = "";
         this.cards = new ArrayList<Card>();
         this.nextCardId = 0;
-        this.incrID() ;
+        this.incrID();
     }
 
-    public void incrID()  {
-        ID++ ;
+    public void incrID() {
+        ID++;
+    }
+
+    public Card createCard() {
+        this.cards.add(new Card(this.nextCardId));
+        this.nextCardId++;
+        return this.cards.get(this.cards.size() - 1);
     }
 
     public Card getCard(int i) {
@@ -36,6 +44,6 @@ public class Pile {
 
     public void addCard(Card c) {
         this.cards.add(c);
-        this.nextCardId ++;
+        this.nextCardId++;
     }
 }
