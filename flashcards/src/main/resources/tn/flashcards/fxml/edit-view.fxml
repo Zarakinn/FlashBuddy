@@ -9,10 +9,10 @@
    <center>
       <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="cName" prefWidth="149.59997862577438" text="Nom de la pile 🖉" />
-          <TableColumn fx:id="cNb" prefWidth="88.0" text="Nb. cartes" />
-            <TableColumn fx:id="cTags" prefWidth="68.80001831054688" text="Tags 🖉" />
-            <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="76.7999267578125" text="Créateur" />
+          <TableColumn fx:id="cName" prefWidth="160.0" text="Nom de la pile 🖉" />
+          <TableColumn fx:id="cNb" prefWidth="100.0" text="Nb. cartes" />
+            <TableColumn fx:id="cTags" prefWidth="120.0" text="Tags 🖉" />
+            <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="120.0" text="Créateur" />
             <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="153.0" text="Dernière utilisation" />
             <TableColumn fx:id="cExport" editable="false" prefWidth="60.0" sortable="false" />
             <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="60.0" sortable="false" />
