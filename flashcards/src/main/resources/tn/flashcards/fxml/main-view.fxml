@@ -41,6 +41,7 @@
             <fx:include fx:id="edit" source="edit-view.fxml" />
             <fx:include fx:id="stats" source="stats-view.fxml" />
             <fx:include fx:id="parameter" source="parameter-view.fxml" />
+            <fx:include fx:id="editpile" source="edit-pile-view.fxml"/>
         </StackPane>
     </center>
 </BorderPane>
