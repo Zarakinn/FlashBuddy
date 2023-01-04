@@ -94,6 +94,12 @@ package model {
         - Data instance
         - Data()
         + static Data getInstance()
+        + Settings getSettings()
+        + ObservableList<Pile> getPiles()
+        + Pile getAPile(String id)
+        - void addPile(Pile p)
+        + void createPile(String name, String creator)
+        + void createCard(String pileId, QRType qType, String question, QRType rType, String reponse)
     }
     class Data
     note right: Pattern Singleton
