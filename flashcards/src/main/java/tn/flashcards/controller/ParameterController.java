@@ -30,8 +30,8 @@ public class ParameterController implements Initializable, Observateur {
     public ParameterController() {
         /* Theme */
         themeChoices = new ArrayList<String>();
-        themeChoices.add("Foncé");
-        themeChoices.add("Clair");
+        themeChoices.add("Nuit");
+        themeChoices.add("Jour");
         themes = new ArrayList<Theme>();
         themes.add(Theme.FONCE);
         themes.add(Theme.CLAIR);
