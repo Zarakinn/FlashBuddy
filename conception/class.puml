@@ -126,6 +126,7 @@ package model {
     package pile {
 
         class Pile {
+            # String name
             # String uniqueId
             # String creator
 

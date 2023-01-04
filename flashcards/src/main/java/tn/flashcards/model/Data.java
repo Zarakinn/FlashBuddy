@@ -10,11 +10,11 @@ public class Data {
     // Singleton
     private static Data INSTANCE;
     protected HashMap<String, StatsPile> statsPile;
-    protected ArrayList<Pile> pile;
+    protected ArrayList<Pile> piles;
 
     private Data() {
         this.statsPile = new HashMap<String, StatsPile>();
-        this.pile = new ArrayList<Pile>();
+        this.piles = new ArrayList<Pile>();
         // TODO : vérifier si peut être importer depuis un fichier
     }
 
@@ -24,5 +24,16 @@ public class Data {
             INSTANCE = new Data();
         }
         return INSTANCE;
+    }
+
+    // Create Pile
+    public void createPile() {
+        Pile p = new Pile();
+        this.piles.add(p);
+        this.statsPile.put(p.getUniqueId(), new StatsPile(p.getUniqueId()));
+    }
+
+    public ArrayList<Pile> getPiles() {
+        return this.piles;
     }
 }
