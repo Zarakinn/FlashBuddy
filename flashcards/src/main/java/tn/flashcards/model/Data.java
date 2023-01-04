@@ -11,13 +11,23 @@ import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
+import tn.flashcards.model.settings.Settings;
 import tn.flashcards.model.stats.StatsPile;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public class Data extends SujetObserve {
     // Singleton
     private static Data INSTANCE;
     protected HashMap<String, StatsPile> statsPile;
     protected ObservableList<Pile> piles;
+
+    @Getter @Setter
+    private Pile currentPile ;
+
+    @Getter
+    private Settings settings ;
 
     private Data() {
         this.statsPile = new HashMap<String, StatsPile>();
@@ -43,8 +53,9 @@ public class Data extends SujetObserve {
         return this.piles;
     }
 
+
     //Recuperer une pile specifique
-    private Pile getAPile(String id) {
+    public Pile getAPile(String id) {
         for (Pile p:this.piles) {
             if (p.getUniqueId().equals(id)) {
                 return p ;
@@ -61,7 +72,7 @@ public class Data extends SujetObserve {
     }
 
     /*
-    METHODES COMPLEXES
+    METHODES COMPLEXES POUR MODIFIER LE MODELE
      */
 
     public Pile createPile(String name, String creator) {
@@ -87,4 +98,5 @@ public class Data extends SujetObserve {
         this.notifierObservateur();
         return c;
     }
+
 }
