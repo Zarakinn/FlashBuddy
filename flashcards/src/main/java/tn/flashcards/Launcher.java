@@ -38,13 +38,18 @@ public class Launcher extends Application {
         var trainingController = new TrainingController();
         var mainController = new MainController();
 
-
         Pile p = Data.getInstance().createPile("temp","Valentin");
 
 
         var editPileController = new EditPileController(p);
         // Ajout des vues au modèle
-        // TODO
+        Data model = Data.getInstance();
+        model.ajouterObservateur(editController);
+        model.ajouterObservateur(parameterController);
+        model.ajouterObservateur(statsController);
+        model.ajouterObservateur(trainingController);
+        model.ajouterObservateur(mainController);
+        model.ajouterObservateur(editPileController);
 
         fxmlLoader.setControllerFactory(ic -> {
             if (ic.equals(MainController.class)) return mainController;
@@ -56,32 +61,6 @@ public class Launcher extends Application {
             // ...
             return null;
         });
-
-/*        FXMLLoader editLoader = new FXMLLoader();
-        editLoader.setLocation(Launcher.class.getResource("fxml/edit-view.fxml"));
-        editLoader.setControllerFactory(factory -> new EditController());
-        Pane edit = editLoader.load();
-
-        FXMLLoader statsLoader = new FXMLLoader();
-        statsLoader.setLocation(Launcher.class.getResource("fxml/stats-view.fxml"));
-        statsLoader.setControllerFactory(factory -> new StatsController());
-        Pane stats = statsLoader.load();
-
-        FXMLLoader parameterLoader = new FXMLLoader();
-        parameterLoader.setLocation(Launcher.class.getResource("fxml/parameter-view.fxml"));
-        parameterLoader.setControllerFactory(factory -> new ParameterController());
-        Pane parameter = parameterLoader.load();
-
-        FXMLLoader trainingLoader = new FXMLLoader();
-        trainingLoader.setLocation(Launcher.class.getResource("fxml/training-view.fxml"));
-        trainingLoader.setControllerFactory(factory -> new TrainingController());
-        Pane train = trainingLoader.load();
-
-        FXMLLoader mainLoader = new FXMLLoader();
-        mainLoader.setLocation(Launcher.class.getResource("fxml/main-view.fxml"));
-        mainLoader.setControllerFactory(factory -> new MainController(edit,parameter,stats,train));
-        Pane main = mainLoader.load();*/
-
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root, 1000, 700);
@@ -93,6 +72,8 @@ public class Launcher extends Application {
 
         Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
         //Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
+
+        model.notifierObservateur();
     }
 
     public static void main(String[] args) {

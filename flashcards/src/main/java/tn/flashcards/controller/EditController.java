@@ -54,18 +54,6 @@ public class EditController implements Initializable, Observateur {
         createViewTable();
         //Data.getIstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).updateLastOpened(LocalDateTime.now().minusDays(10));
         //Systems.out.println(Data.getInstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).getLastOpenedFormated());
-
-
-
-    }
-
-    public Button createButton(Pile pile){
-        var removeBtn = new Button("", new FontIcon(Feather.TRASH));
-        removeBtn.getStyleClass().addAll(BUTTON_ICON, BUTTON_OUTLINED, DANGER);
-        removeBtn.setOnAction(e -> {
-            Data.getInstance().deletePile(pile);
-        });
-        return removeBtn;
     }
 
     public void createViewTable() {
@@ -95,10 +83,22 @@ public class EditController implements Initializable, Observateur {
         });
 
 
-        cDelete.setCellFactory(ActionButtonTableCell.forTableColumn(new String[]{BUTTON_ICON, BUTTON_OUTLINED, DANGER}, (Pile p) -> {
-            table.getItems().remove(p);
-            return p;
-        }));
+        cDelete.setCellFactory(ActionButtonTableCell.forTableColumn(
+                new String[]{BUTTON_ICON, BUTTON_OUTLINED, DANGER},
+                Feather.TRASH,
+                (Pile p) -> {
+                    table.getItems().remove(p);
+                    return p;
+                }));
+
+        cEdit.setCellFactory(ActionButtonTableCell.forTableColumn(
+                new String[]{BUTTON_ICON, BUTTON_OUTLINED, ACCENT},
+                Feather.EDIT,
+                (Pile p) -> {
+                    Data.getInstance().setCurrentPile(p);
+                    Data.getInstance().setMode(Data.Mode.EDIT_PILE);
+                    return p;
+                }));
 
         cDate.setEditable(false);
 
@@ -117,15 +117,13 @@ public class EditController implements Initializable, Observateur {
         }
     }*/
 
-    public void saveStack()
-    {
+    public void saveStack() {
         Pile stack = new Pile(); // Fetch selected
-        FileHandler.SaveStackAs(stack,String.valueOf(stack.hashCode())); // changer en stack.name quand dispo
+        FileHandler.SaveStackAs(stack, String.valueOf(stack.hashCode())); // changer en stack.name quand dispo
     }
 
 
-    public void display()
-    {
+    public void display() {
 
     }
 
