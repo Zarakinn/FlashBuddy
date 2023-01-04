@@ -1,11 +1,14 @@
 package tn.flashcards.controller;
 
+import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import lombok.val;
+import tn.flashcards.Launcher;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.settings.AlgoAffichage;
 import tn.flashcards.model.settings.StrategyChoix;
@@ -16,7 +19,11 @@ import tn.flashcards.model.settings.Theme;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
+
+import atlantafx.base.theme.NordDark;
+import atlantafx.base.theme.NordLight;
 
 public class ParameterController implements Initializable, Observateur {
 
@@ -24,16 +31,13 @@ public class ParameterController implements Initializable, Observateur {
         /* Theme */
         themeChoices = new ArrayList<String>();
         themeChoices.add("Foncé");
-        /*
         themeChoices.add("Clair");
-        themeChoices.add("Contrasté");
-        */
         themes = new ArrayList<Theme>();
         themes.add(Theme.FONCE);
-        /*
         themes.add(Theme.CLAIR);
-        themes.add(Theme.CONTRASTE);
-        */
+        sheets = new ArrayList<String>();
+        sheets.add(new NordDark().getUserAgentStylesheet());
+        sheets.add(new NordLight().getUserAgentStylesheet());
         /* AlgoChoix */
         algoChoixChoices = new ArrayList<String>();
         algoChoixChoices.add("Aléatoire");
@@ -65,10 +69,12 @@ public class ParameterController implements Initializable, Observateur {
     ChoiceBox<String> themeChoiceBox;
     private ArrayList<String> themeChoices;
     private ArrayList<Theme> themes;
+    private ArrayList<String> sheets;
 
     private class themeListener implements ChangeListener<Number> {
         public void changed(ObservableValue ov, Number value, Number new_value) {
             Data.getInstance().getSettings().setTheme(themes.get(new_value.intValue()));
+            Application.setUserAgentStylesheet(sheets.get(new_value.intValue()));
         }
     }
 
