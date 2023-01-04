@@ -11,6 +11,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import tn.flashcards.controller.*;
+import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Pile;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class Launcher extends Application {
     public void start(Stage stage) throws IOException, URISyntaxException {
         // Création modèle
         // TODO -
+        Data.getInstance();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Launcher.class.getResource("fxml/main-view.fxml"));
@@ -35,8 +37,11 @@ public class Launcher extends Application {
         var statsController = new StatsController();
         var trainingController = new TrainingController();
         var mainController = new MainController();
-        Pile p = new Pile();
-        p.setName("temp");
+
+
+        Pile p = Data.getInstance().createPile("temp","Valentin");
+
+
         var editPileController = new EditPileController(p);
         // Ajout des vues au modèle
         // TODO

@@ -64,20 +64,27 @@ public class Data extends SujetObserve {
     METHODES COMPLEXES
      */
 
-    public void createPile(String name, String creator) {
+    public Pile createPile(String name, String creator) {
         Pile p = new Pile() ;
         p.setName(name);
         p.setCreator(creator);
         this.addPile(p) ;
         this.notifierObservateur() ;
+        return p;
     }
 
-    public void createCard(String pileId, QRType qType, String question, QRType rType, String reponse) {
+    public Card createDefaultCard(String pileId)
+    {
+        return createCard(pileId,QRType.TEXT,"question",QRType.TEXT,"réponse");
+    }
+
+    public Card createCard(String pileId, QRType qType, String question, QRType rType, String reponse) {
         Pile p = this.getAPile(pileId) ;
         Card c = new Card(p.getNextCardId()) ;
         c.setQuestion(new QuestionReponse(qType, question));
         c.setReponse(new QuestionReponse(rType, reponse));
         p.addCard(c);
         this.notifierObservateur();
+        return c;
     }
 }

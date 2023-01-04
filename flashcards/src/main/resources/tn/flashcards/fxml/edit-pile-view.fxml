@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tn.flashcards.controller.EditPileController">
-    <TextField fx:id="name"/>
-    <ListView fx:id="view" AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25" AnchorPane.topAnchor="25" AnchorPane.bottomAnchor="25">
-
+<AnchorPane prefHeight="450.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditPileController">
+    <TextField fx:id="name" layoutX="14.0" layoutY="14.0" />
+    <ListView fx:id="view" layoutY="49.0" prefHeight="376.0" prefWidth="248.0" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="25" AnchorPane.rightAnchor="25" AnchorPane.topAnchor="50.0">
     </ListView>
+    <Button layoutX="164.0" layoutY="413.0" onAction="#AddCard" text="Ajouter une Carte" />
 </AnchorPane>
