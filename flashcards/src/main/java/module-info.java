@@ -5,6 +5,11 @@ module tn.flashcards {
     requires atlantafx.base;
     requires com.google.gson;
 
+    requires org.kordamp.ikonli.core;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.feather;
+    requires org.kordamp.ikonli.material2;
+
     opens tn.flashcards to javafx.fxml;
     exports tn.flashcards;
     exports tn.flashcards.controller;
