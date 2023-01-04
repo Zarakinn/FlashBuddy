@@ -32,7 +32,7 @@ package view {
         +Pane createQRView(Card card)
     }
 
-    abstract QRView implements javafx.scene.layout.Pane {}
+    abstract QRView extends javafx.scene.layout.Pane {}
 
     class QRTextView extends QRView {
         # Label txt
@@ -94,6 +94,12 @@ package model {
         - Data instance
         - Data()
         + static Data getInstance()
+        + Settings getSettings()
+        + ObservableList<Pile> getPiles()
+        + Pile getAPile(String id)
+        - void addPile(Pile p)
+        + void createPile(String name, String creator)
+        + void createCard(String pileId, QRType qType, String question, QRType rType, String reponse)
     }
     class Data
     note right: Pattern Singleton
@@ -112,25 +118,17 @@ package model {
 
         class Card {
             # Int id
-
-            '+ Pane show()'
-            '+ void turn()'
         }
 
-        interface QuestionRéponse {
-            '+ Pane show()'
-            '+ void evaluate(int a)'
-
-            '+ void edit(QuestionRéponse newValue)'
+        class QuestionRéponse {
+            # String content
         }
 
-        class QRText implements QuestionRéponse {}
-
-        class QRImage implements QuestionRéponse {}
+        enum QRType {}
 
         Pile *--"..*" Card
         Card *--"2" QuestionRéponse
-        'QuestionRéponseController *--"1" Data'
+        QuestionRéponse -->"1" QRType
     }
 
     package stats {
@@ -165,15 +163,19 @@ package model {
         class Settings {}
 
         interface StrategyChoix {
-            + void execute()
+            + Card execute()
         }
 
         class StrategyChoixProba implements StrategyChoix{
-            + void execute()
+            + Card execute()
         }
 
         class StrategyChoixTemps implements StrategyChoix{
-            + void execute()
+            + Card execute()
+        }
+
+        class StrategyChoixTProbaEgales implements StrategyChoix{
+            + Card execute()
         }
 
         enum AlgoAffichage {
