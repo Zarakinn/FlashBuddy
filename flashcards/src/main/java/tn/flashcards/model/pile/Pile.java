@@ -1,7 +1,12 @@
 package tn.flashcards.model.pile;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@Getter @Setter @AllArgsConstructor
 public class Pile {
 
     private static int ID = 0 ;
@@ -10,7 +15,8 @@ public class Pile {
     protected String creator;
     protected ArrayList<Card> cards;
     private int nextCardId;
-    
+    private String tags;
+
     public Pile() {
         this.name = "Nom de la pile";
         this.uniqueId = Integer.toString(ID) ;
@@ -20,28 +26,8 @@ public class Pile {
         this.incrID() ;
     }
 
-    public void setName(String n) {
-        this.name = n;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setCreator(String c) {
-        this.creator = c;
-    }
-    public String getCreator() {
-        return this.creator;
-    }
-
-    public String getUniqueId() {
-        return this.uniqueId;
-    }
-
-
-    public Card createCard() {
-        Card c = new Card(this.nextCardId);
-        this.cards.add(c);
+    public void createCard() {
+        this.cards.add(new Card(this.nextCardId));
         this.nextCardId ++;
         return c ;
     }
@@ -51,5 +37,9 @@ public class Pile {
 
     public void incrID()  {
         ID++ ;
+    }
+    public void addCard(Card c) {
+        this.cards.add(c.copyWithId(this.nextCardId));
+        this.nextCardId ++;
     }
 }
