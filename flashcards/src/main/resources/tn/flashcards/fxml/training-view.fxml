@@ -4,8 +4,42 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
+<?import tn.flashcards.view.QRView?>
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="238.0" layoutY="158.0" prefHeight="84.0" prefWidth="124.0" text="Entrainements" />
+      <Pane fx:id="pileList">
+         <Button fx:id="startTraining" onAction="#startTraining" alignment="CENTER" contentDisplay="CENTER" layoutX="238.0" layoutY="158.0" text="Commencer l'apprentissage" />
+      </Pane>
+      <BorderPane fx:id="trainingView" visible="false">
+         <top>
+            <BorderPane>
+               <left>
+                  <Label fx:id="pileName" text="Nom de la pile"/>
+               </left>
+               <right>
+                  <Button fx:id="closeTraining" onAction="#closeTraining" alignment="BASELINE_RIGHT" text="Terminer l'apprentissage"/>
+               </right>
+            </BorderPane>
+         </top>
+
+         <center>
+            <HBox fx:id="cardView"/>
+         </center>
+
+         <bottom>
+            <StackPane alignment="CENTER">
+               <Button fx:id="showAnsButton" onAction="#affReponse" text="Afficher la réponse"/>
+               <HBox fx:id="scoreButtons" visible="false" alignment="CENTER">
+                  <Button onAction="#nextCard" text="0" style="text-align: center"/>
+                  <Button onAction="#nextCard" text="1" style="text-align: center"/>
+                  <Button onAction="#nextCard" text="2" style="text-align: center"/>
+                  <Button onAction="#nextCard" text="3" style="text-align: center"/>
+                  <Button onAction="#nextCard" text="4" style="text-align: center"/>
+                  <Button onAction="#nextCard" text="5" style="text-align: center"/>
+               </HBox>
+            </StackPane>
+         </bottom>
+
+      </BorderPane>
    </children>
-</AnchorPane>
+</StackPane>
