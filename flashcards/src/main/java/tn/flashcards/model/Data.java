@@ -3,6 +3,10 @@ package tn.flashcards.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+import tn.flashcards.model.pile.Card;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
@@ -18,6 +22,12 @@ public class Data extends SujetObserve {
     private Data() {
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = new ArrayList<Pile>();
+
+        piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag1"));
+        piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag2"));
+        piles.add(new Pile("user1", "pile1", "moi", new ArrayList<Card>(), 0, "tag3"));
+
+
         // TODO : vérifier si peut être importer depuis un fichier
     }
 
@@ -63,9 +73,11 @@ public class Data extends SujetObserve {
     }
 
     public void createCard(String pileId, QRType qType, String question, QRType rType, String reponse) {
-        Card c = this.getAPile(pileId).createCard() ;
+        Pile p = this.getAPile(pileId) ;
+        Card c = new Card(p.getNextCardId()) ;
         c.setQuestion(new QuestionReponse(qType, question));
         c.setReponse(new QuestionReponse(rType, reponse));
+        p.addCard(c);
         this.notifierObservateur();
     }
 }

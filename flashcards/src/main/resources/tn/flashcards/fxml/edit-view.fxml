@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditController">
-   <children>
-      <Label alignment="CENTER" layoutX="247.0" layoutY="173.0" prefHeight="55.0" prefWidth="106.0" text="Edition" />
-      <TableView layoutX="136.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditController">
+   <center>
+      <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="cName" prefWidth="166.0" text="Nom de la pile 🖉" />
+          <TableColumn fx:id="cNb" prefWidth="84.0" text="Nb. cartes" />
+            <TableColumn fx:id="cTags" prefWidth="149.0" text="Tags 🖉" />
+            <TableColumn fx:id="cCreateur" minWidth="4.0" prefWidth="120.0" text="Créateur" />
+            <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="151.0" text="Dernière utilisation" />
+            <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="90.0" sortable="false" text="Modifier" />
+            <TableColumn fx:id="cExport" editable="false" minWidth="0.0" prefWidth="130.0" sortable="false" text="Exporter" />
         </columns>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </TableView>
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>
