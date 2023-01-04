@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import tn.flashcards.model.Data;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -32,45 +33,53 @@ public class MainController implements Initializable, Observateur {
                     radioButton.getStyleClass().remove("radio-button");
                 });
         b2.setSelected(true);
-        onglets = Arrays.asList(edit, parameter, stats, training,editpile);
-        setEditPile();
+        onglets = Arrays.asList(edit, parameter, stats, training, editpile);
+        //setEditPile();
     }
 
     @FXML
     public void setViewEdit() {
-        setView(edit);
+        //setView(edit);
+        Data.getInstance().setMode(Data.Mode.EDITION);
     }
 
     @FXML
     public void setViewParameter() {
-        setView(parameter);
+        //setView(parameter);
+        Data.getInstance().setMode(Data.Mode.PARAM);
     }
 
     @FXML
     public void setViewStats() {
-        setView(stats);
+        //setView(stats);
+        Data.getInstance().setMode(Data.Mode.STATS);
     }
 
     @FXML
     public void setViewTraining() {
-        setView(training);
+        //setView(training);
+        Data.getInstance().setMode(Data.Mode.APPRENTISSAGE);
     }
 
-
-    public void setEditPile()
-    {
-        //Comment le déclencher ?
-        setView(editpile);
+    public void setEditPile() {
+        //setView(editpile);
     }
 
     public void setView(Pane pane) {
-        for (Pane p : onglets) {
-            p.setVisible(p == pane);
-        }
+        //for (Pane p : onglets) {
+        //    p.setVisible(p == pane);
+        //}
     }
 
     @Override
     public void reagir() {
-
+        onglets.forEach(pane -> pane.setVisible(false));
+        switch (Data.getInstance().getMode()) {
+            case EDITION -> edit.setVisible(true);
+            case PARAM -> parameter.setVisible(true);
+            case STATS -> stats.setVisible(true);
+            case APPRENTISSAGE -> training.setVisible(true);
+            case EDIT_PILE -> editpile.setVisible(true);
+        }
     }
 }

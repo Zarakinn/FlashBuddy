@@ -24,6 +24,10 @@
     -fx-padding: 15px;
 }
 
+.action-button-table-cell{
+    -fx-alignment: center;
+}
+
 .param {
     -fx-font-size: 17px;
 }

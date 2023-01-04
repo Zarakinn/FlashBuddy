@@ -10,16 +10,14 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.util.function.Function;
 
-import static atlantafx.base.theme.Styles.*;
-
 public class ActionButtonTableCell<S> extends TableCell<S, Button> {
 
     private final Button actionButton;
 
-    public ActionButtonTableCell(String[] styles, Function< S, S> function) {
+    public ActionButtonTableCell(String[] styles, Feather fontIcon, Function< S, S> function) {
         this.getStyleClass().add("action-button-table-cell");
 
-        this.actionButton = new Button("", new FontIcon(Feather.TRASH));
+        this.actionButton = new Button("", new FontIcon(fontIcon));
         this.actionButton.setOnAction((ActionEvent e) -> {
             function.apply(getCurrentItem());
         });
@@ -30,8 +28,8 @@ public class ActionButtonTableCell<S> extends TableCell<S, Button> {
         return (S) getTableView().getItems().get(getIndex());
     }
 
-    public static <S> Callback<TableColumn<S, Button>, TableCell<S, Button>> forTableColumn(String[] label, Function< S, S> function) {
-        return param -> new ActionButtonTableCell<>(label, function);
+    public static <S> Callback<TableColumn<S, Button>, TableCell<S, Button>> forTableColumn(String[] label, Feather fontIcon, Function< S, S> function) {
+        return param -> new ActionButtonTableCell<>(label, fontIcon, function);
     }
 
     @Override

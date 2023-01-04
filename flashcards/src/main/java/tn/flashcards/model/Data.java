@@ -22,20 +22,21 @@ import tn.flashcards.model.stats.StatsPile;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
+@Getter @Setter
 public class Data extends SujetObserve {
     // Singleton
     private static Data INSTANCE;
     protected HashMap<String, StatsPile> statsPile;
     protected ObservableList<Pile> piles;
 
-    @Getter @Setter
-    private Pile currentPile ;
+    public enum Mode {APPRENTISSAGE, EDITION, STATS, PARAM, EDIT_PILE}
+    private Mode mode;
 
-    @Getter
+    private Pile currentPile ;
     private Settings settings ;
 
     private Data() {
+        this.mode = Mode.APPRENTISSAGE;
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
@@ -105,6 +106,11 @@ public class Data extends SujetObserve {
         p.addCard(c);
         this.notifierObservateur();
         return c;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+        this.notifierObservateur();
     }
 
     public void deletePile(Pile pile){
