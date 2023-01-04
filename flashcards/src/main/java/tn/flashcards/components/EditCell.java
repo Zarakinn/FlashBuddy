@@ -1,15 +1,26 @@
-package tn.flashcards.controller;
+package tn.flashcards.components;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
+import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
+import tn.flashcards.view.QRImageView;
+import tn.flashcards.view.QRView;
+import tn.flashcards.view.QRViewFactory;
 
+import java.io.File;
 import java.util.Arrays;
 
 public class EditCell extends ListCell<Card> {
@@ -19,13 +30,13 @@ public class EditCell extends ListCell<Card> {
 
     ComboBox<QRType> AnswerType;
 
-    Label l,l2;
+    Button editQuestion, editAnswer, deleteCard;
 
-    Button editQuestion, editAnswer;
+    Pile pile;
 
-    public EditCell()
+    public EditCell(Pile pile)
     {
-
+        this.pile = pile;
     }
 
     public void createComboBox(Card c)
@@ -33,17 +44,17 @@ public class EditCell extends ListCell<Card> {
         QuestionType = new ComboBox<QRType>();
         ObservableList<QRType> oS = FXCollections.observableList(Arrays.asList(QRType.TEXT,QRType.IMAGE));
         QuestionType.setItems(oS);
-        QuestionType.getSelectionModel().selectFirst();
+        QuestionType.setValue(c.getQuestion().getType());
 
         QuestionType.setOnAction(
                 event -> {
                     switch (QuestionType.getValue())
                     {
                         case TEXT:
-                            System.out.println("La question de " + String.valueOf(c.getId()) + " devient un Text");
+                            c.getQuestion().setType(QRType.TEXT);
                             break;
                         case IMAGE:
-                            System.out.println("La question de " + String.valueOf(c.getId()) + " devient une Image");
+                            c.getQuestion().setType(QRType.IMAGE);
                             break;
                         default:
                             break;
@@ -53,17 +64,15 @@ public class EditCell extends ListCell<Card> {
 
         AnswerType = new ComboBox<QRType>();
         AnswerType.setItems(oS);
-        AnswerType.getSelectionModel().selectFirst();
+        AnswerType.setValue(c.getReponse().getType());
         AnswerType.setOnAction(event -> {
-            switch (QuestionType.getValue())
+            switch (AnswerType.getValue())
             {
                 case TEXT:
-                    System.out.println("La réponse de " + String.valueOf(c.getId()) + " devient un Text");
-                    c.getQuestion().setType(QRType.TEXT);
+                    c.getReponse().setType(QRType.TEXT);
                     break;
                 case IMAGE:
-                    c.getQuestion().setType(QRType.IMAGE);
-                    System.out.println("La réponse de " + String.valueOf(c.getId()) + " devient une Image");
+                    c.getReponse().setType(QRType.IMAGE);
                     break;
                 default:
                     break;
@@ -108,7 +117,13 @@ public class EditCell extends ListCell<Card> {
                     formStage.show();
                     break;
                 case IMAGE:
-                    System.out.println("Créer file chooser, modifie c sachant que c'est une image");
+                    FileChooser fc = new FileChooser();
+                    Window w = this.getScene().getWindow();
+                    File file = fc.showOpenDialog(w);
+                    if (file!=null)
+                    {
+                        c.getQuestion().setContent(file.toURI().toString());
+                    }
                     break;
                 default:
                     break;
@@ -147,13 +162,23 @@ public class EditCell extends ListCell<Card> {
                     formStage.show();
                     break;
                 case IMAGE:
-                    System.out.println("Créer file chooser, modifie c sachant que c'est une image");
+                    FileChooser fc = new FileChooser();
+                    Window w = this.getScene().getWindow();
+                    File file = fc.showOpenDialog(w);
+                    if (file!=null)
+                    {
+                        c.getReponse().setContent(file.toURI().toString());
+                    }
                     break;
                 default:
                     break;
             }
         });
 
+        deleteCard = new Button("Delete");
+        deleteCard.setOnAction(event -> {
+            Data.getInstance().deleteCard(pile,c);
+        });
 
     }
 
@@ -169,10 +194,14 @@ public class EditCell extends ListCell<Card> {
         {
             createComboBox(c);
             createButton(c);
-            l = new Label(c.getQuestion().getContent());
-            l2 = new Label(c.getReponse().getContent());
             view = new HBox();
-            view.getChildren().addAll(QuestionType,l, editQuestion, AnswerType, l2, editAnswer);
+            view.getChildren().addAll(QuestionType,
+                    QRViewFactory.createQRView(c.getQuestion()),
+                    editQuestion,
+                    AnswerType,
+                    QRViewFactory.createQRView(c.getReponse()),
+                    editAnswer,
+                    deleteCard);
             view.setSpacing(10);
             setGraphic(view);
         }

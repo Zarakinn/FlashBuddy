@@ -108,6 +108,12 @@ public class Data extends SujetObserve {
         return c;
     }
 
+    public void deleteCard(Pile pile, Card card)
+    {
+        pile.getCards().remove(card);
+        notifierObservateur();
+    }
+
     public void setMode(Mode mode) {
         this.mode = mode;
         this.notifierObservateur();
