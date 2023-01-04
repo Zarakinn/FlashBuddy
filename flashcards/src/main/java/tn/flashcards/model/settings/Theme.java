@@ -1,5 +1,7 @@
 package tn.flashcards.model.settings;
 
-public interface Theme {
-    
+public enum Theme {
+    CLAIR,
+    FONCE,
+    CONTRASTE
 }
