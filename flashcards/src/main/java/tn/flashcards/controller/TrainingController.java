@@ -45,10 +45,10 @@ public class TrainingController implements Initializable, Observateur {
     }
 
     private void nextCardView() {
-        //Card c = Data.getInstance().getSettings().getAlgoChoix().execute();
-        Card c = new Card(0) ;
-        c.setReponse(new QuestionReponse(QRType.TEXT, "question"));
-        c.setQuestion(new QuestionReponse(QRType.TEXT, "reponse"));
+        Card c = Data.getInstance().getSettings().getAlgoChoix().execute();
+        //Card c = new Card(0) ;
+        //c.setReponse(new QuestionReponse(QRType.TEXT, "question"));
+        //c.setQuestion(new QuestionReponse(QRType.TEXT, "reponse"));
 
         this.cardView.getChildren().removeAll(this.cardView.getChildren()) ;
 
