@@ -3,6 +3,8 @@ package tn.flashcards.model.pile;
 import java.util.ArrayList;
 
 public class Pile {
+
+    private static int ID = 0 ;
     protected String name;
     protected String uniqueId;
     protected String creator;
@@ -10,11 +12,12 @@ public class Pile {
     private int nextCardId;
     
     public Pile() {
-        this.name = "Titre de la pile";
-        this.uniqueId = "a";
+        this.name = "Nom de la pile";
+        this.uniqueId = Integer.toString(ID) ;
         this.creator = "";
         this.cards = new ArrayList<Card>();
         this.nextCardId = 0;
+        this.incrID() ;
     }
 
     public void setName(String n) {
@@ -35,15 +38,18 @@ public class Pile {
         return this.uniqueId;
     }
 
-    public void createCard() {
-        this.cards.add(new Card(this.nextCardId));
+
+    public Card createCard() {
+        Card c = new Card(this.nextCardId);
+        this.cards.add(c);
         this.nextCardId ++;
-    }
-    public void addCard(Card c) {
-        this.cards.add(c.copyWithId(this.nextCardId));
-        this.nextCardId ++;
+        return c ;
     }
     public Card getCard(int i) {
         return this.cards.get(i);
+    }
+
+    public void incrID()  {
+        ID++ ;
     }
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.stats.StatsPile;
 
-public class Data {
+public class Data extends SujetObserve {
     // Singleton
     private static Data INSTANCE;
     protected HashMap<String, StatsPile> statsPile;
@@ -26,14 +26,24 @@ public class Data {
         return INSTANCE;
     }
 
-    // Create Pile
-    public void createPile() {
-        Pile p = new Pile();
-        this.piles.add(p);
-        this.statsPile.put(p.getUniqueId(), new StatsPile(p.getUniqueId()));
-    }
-
     public ArrayList<Pile> getPiles() {
         return this.piles;
+    }
+
+    //Recuperer unr pile specifique
+    public Pile getAPile(String id) {
+        for (Pile p:this.piles) {
+            if (p.getUniqueId().equals(id)) {
+                return p ;
+            }
+        }
+
+        return null ;
+    }
+
+    // Ajouter une pile
+    public void addPile(Pile p) {
+        this.piles.add(p) ;
+        this.statsPile.put(p.getUniqueId(), new StatsPile(p.getUniqueId())) ;
     }
 }
