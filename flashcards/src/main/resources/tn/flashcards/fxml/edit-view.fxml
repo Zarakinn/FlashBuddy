@@ -4,6 +4,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Button?>
+
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditController">
    <center>
@@ -23,4 +26,11 @@
          </BorderPane.margin>
       </TableView>
    </center>
+   <bottom>
+      <StackPane minHeight="60" prefHeight="60.0" prefWidth="970.0" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <Button minHeight="40" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Créer une pile" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER" onAction="#createPile" />
+         </children>
+      </StackPane>
+   </bottom>
 </BorderPane>
