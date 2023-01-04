@@ -38,9 +38,6 @@ public class StatsPile {
     }
 
     // LastOpened
-    public LocalDateTime getLastOpened() {
-        return this.lastOpened;
-    }
     public String getLastOpenedFormated() {
         return this.lastOpened.format(DateFormat.getDateTimeFormatter());
     }
@@ -60,10 +57,5 @@ public class StatsPile {
     // LastStats
     public LastStats getPlayed(Integer cardId) {
         return this.lastStats.get(cardId);
-    }
-
-    // FullStats
-    public ArrayList<FullStats> getFullStats() {
-        return this.fullStats;
     }
 }
