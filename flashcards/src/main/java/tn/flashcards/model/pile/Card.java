@@ -7,8 +7,8 @@ public class Card {
 
     public Card(int id) {
         this.id = id;
-        this.question = new QRText();
-        this.reponse = new QRText();
+        this.question = new QuestionReponse(QRType.TEXT, "");
+        this.reponse = new QuestionReponse(QRType.TEXT, "");
     }
 
     public int getId() {
