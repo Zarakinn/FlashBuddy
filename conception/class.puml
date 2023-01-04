@@ -163,15 +163,19 @@ package model {
         class Settings {}
 
         interface StrategyChoix {
-            + void execute()
+            + Card execute()
         }
 
         class StrategyChoixProba implements StrategyChoix{
-            + void execute()
+            + Card execute()
         }
 
         class StrategyChoixTemps implements StrategyChoix{
-            + void execute()
+            + Card execute()
+        }
+
+        class StrategyChoixTProbaEgales implements StrategyChoix{
+            + Card execute()
         }
 
         enum AlgoAffichage {
