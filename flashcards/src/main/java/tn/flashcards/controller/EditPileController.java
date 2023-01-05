@@ -47,6 +47,7 @@ public class EditPileController implements Initializable, Observateur {
     }
 
     public void display() {
+        name.setText(Data.getInstance().getCurrentPile().getName());
         ObservableList<Card> oCards = FXCollections.observableList(Data.getInstance().getCurrentPile().getCards());
         view.setItems(oCards);
     }
