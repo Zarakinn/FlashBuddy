@@ -52,3 +52,9 @@
     -color-progress-indicator-fill: #3b812e;
 }
 
+.title {
+    -fx-font-size: 29px;
+    -fx-text-alignment: left;
+    -fx-font-family: "Bold";
+}
+
