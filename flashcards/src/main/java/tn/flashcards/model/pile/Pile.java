@@ -13,6 +13,7 @@ public class Pile {
 
     private static int ID = 0;
     protected String name;
+    protected String desc;
     protected String uniqueId;
     protected String creator;
     protected ArrayList<Card> cards;
@@ -21,6 +22,7 @@ public class Pile {
 
     public Pile() {
         this.name = "Nom de la pile";
+        this.desc = "Description par défaut";
         this.uniqueId = Integer.toString(ID);
         this.creator = "";
         this.cards = new ArrayList<>();

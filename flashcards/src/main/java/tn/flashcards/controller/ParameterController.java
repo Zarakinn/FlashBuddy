@@ -41,14 +41,14 @@ public class ParameterController implements Initializable, Observateur {
         /* AlgoChoix */
         algoChoixChoices = new ArrayList<String>();
         algoChoixChoices.add("Aléatoire");
-        /*
         algoChoixChoices.add("Par probabilité");
+        /*
         algoChoixChoices.add("Par temps");
         */
         algoChoixs = new ArrayList<StrategyChoix>();
         algoChoixs.add(new StrategyChoixProbaEgales());
-        /*
         algoChoixs.add(new StrategyChoixProba());
+        /*
         algoChoixs.add(new StrategyChoixTemps());
         */
         /* AlgoAffichage */
