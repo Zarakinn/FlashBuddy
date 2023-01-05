@@ -34,11 +34,8 @@ public class Launcher extends Application {
                 new MainController(),
                 new EditPileController());
 
-
         Pile p2 = Data.getInstance().createPile("temp","Valentin");
         Data.getInstance().setCurrentPile(p2);
-
-        var editPileController = new EditPileController();
 
         // Ajout des vues au modèle
         Data model = Data.getInstance();
@@ -57,9 +54,7 @@ public class Launcher extends Application {
         stage.show();
 
         var t = new TabPane();
-
         Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
-
         model.notifierObservateur();
     }
 

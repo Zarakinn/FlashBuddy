@@ -5,7 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import tn.flashcards.components.EditCell;
+import tn.flashcards.components.EditCellV2;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
@@ -19,7 +21,7 @@ public class EditPileController implements Initializable, Observateur {
     @FXML
     TextField name;
     @FXML
-    TextField desc;
+    TextArea desc;
     @FXML
     ListView<Card> view;
 
@@ -36,8 +38,10 @@ public class EditPileController implements Initializable, Observateur {
 
 
         Pile pile = Data.getInstance().getCurrentPile();
-        view.setCellFactory(view -> new EditCell()
-        );
+        //view.setCellFactory(view -> new EditCell(pile));
+        view.setCellFactory(view -> new EditCellV2());
+
+
         name.setText(pile.getName());
         desc.setText(pile.getDesc());
         name.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -70,5 +74,9 @@ public class EditPileController implements Initializable, Observateur {
     @FXML
     public void Retour() {
         Data.getInstance().setMode(Data.Mode.EDITION_SELECTION);
+    }
+
+    public void setTitre(KeyEvent keyEvent) {
+        // TODO
     }
 }
