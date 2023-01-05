@@ -1,14 +1,11 @@
 package tn.flashcards;
 
-import atlantafx.base.controls.Spacer;
 import atlantafx.base.theme.NordDark;
-import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import tn.flashcards.controller.*;
 import tn.flashcards.model.Data;
@@ -16,9 +13,7 @@ import tn.flashcards.model.pile.Pile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class Launcher extends Application {
@@ -39,7 +34,12 @@ public class Launcher extends Application {
                 new MainController(),
                 new EditPileController());
 
-        Data.getInstance().setCurrentPile(p);
+
+        Pile p2 = Data.getInstance().createPile("temp","Valentin");
+        Data.getInstance().setCurrentPile(p2);
+
+        var editPileController = new EditPileController();
+
         // Ajout des vues au modèle
         Data model = Data.getInstance();
         controllers.forEach(model::ajouterObservateur);

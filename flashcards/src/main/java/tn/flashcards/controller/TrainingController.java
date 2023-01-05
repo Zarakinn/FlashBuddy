@@ -1,10 +1,13 @@
 package tn.flashcards.controller;
 
+
+import javafx.event.ActionEvent;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -31,6 +34,8 @@ public class TrainingController implements Initializable, Observateur {
     private Pane pileList ;
     @FXML
     private BorderPane trainingView ;
+    @FXML
+    private Label pileName ;
     @FXML
     private HBox cardView ;
     @FXML
@@ -66,10 +71,8 @@ public class TrainingController implements Initializable, Observateur {
     }
 
     private void nextCardView() {
-        Card c = Data.getInstance().getSettings().getAlgoChoix().execute();
-        //Card c = new Card(0) ;
-        //c.setReponse(new QuestionReponse(QRType.TEXT, "question"));
-        //c.setQuestion(new QuestionReponse(QRType.TEXT, "reponse"));
+        Data.getInstance().getSettings().getAlgoChoix().execute();
+        Card c = Data.getInstance().getCurrentTrainingCard() ;
 
         this.cardView.getChildren().removeAll(this.cardView.getChildren()) ;
 
@@ -78,8 +81,8 @@ public class TrainingController implements Initializable, Observateur {
             QRView q = QRViewFactory.createQRView(c.getQuestion());
             QRView r = QRViewFactory.createQRView(c.getReponse());
 
-            q.setPrefWidth(this.cardView.getWidth() / 2);
-            r.setPrefWidth(this.cardView.getWidth() / 2);
+            q.setPrefWidth(this.cardView.getWidth() / 2 - 20);
+            r.setPrefWidth(this.cardView.getWidth() / 2 - 20);
             q.getStyleClass().add("view") ;
             r.getStyleClass().add("view") ;
 
@@ -95,18 +98,18 @@ public class TrainingController implements Initializable, Observateur {
         this.pileList.setVisible(false);
         this.trainingView.setVisible(true);
 
-        Data d = Data.getInstance() ;
-        d.setCurrentPile(d.getAPile("0"));
+        Pile p = Data.getInstance().getCurrentPile() ;
+        this.pileName.setText(p.getName());
 
-        if (this.cardView.getChildren().size() < 2) {
-            this.nextCardView();
-        }
+        this.nextCardView();
+
     }
 
     @FXML
     public void closeTraining() {
         this.pileList.setVisible(true);
         this.trainingView.setVisible(false);
+        Data.getInstance().setCurrentPile(null);
     }
 
     @FXML
@@ -117,7 +120,20 @@ public class TrainingController implements Initializable, Observateur {
     }
 
     @FXML
-    public void nextCard() {
+    public void scoreCard(ActionEvent e) {
+
+        String button = ((Button) e.getSource()).getText() ;
+        int score = switch (button) {
+            case "1" -> 1;
+            case "2" -> 2;
+            case "3" -> 3;
+            case "4" -> 4;
+            case "5" -> 5;
+            default -> 0;
+        };
+
+        Data.getInstance().scoreCard(score);
+
         this.nextCardView();
 
         this.scoreButtons.setVisible(false);

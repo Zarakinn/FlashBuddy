@@ -12,6 +12,7 @@ import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
 import tn.flashcards.model.settings.Settings;
+import tn.flashcards.model.stats.FullStats;
 import tn.flashcards.model.stats.StatsPile;
 
 import lombok.Setter;
@@ -26,7 +27,8 @@ public class Data extends SujetObserve {
     public enum Mode {APPRENTISSAGE_SELECTION, PARTIE_EN_COURS, EDITION, STATS, PARAM, EDIT_PILE}
     private Mode mode;
 
-    private Pile currentPile ;
+    private Pile currentPile;
+    private Card currentTrainingCard ;
     private Settings settings ;
 
     private Data() {
@@ -114,5 +116,10 @@ public class Data extends SujetObserve {
 
     public void deletePile(Pile pile){
         // TODO
+    }
+
+    public void scoreCard(int score) {
+        FullStats fs = new FullStats(score, this.currentTrainingCard.getId()) ;
+        this.getStatsPile().get(this.currentPile.getUniqueId()).addPlayed(this.currentTrainingCard.getId(), fs);
     }
 }

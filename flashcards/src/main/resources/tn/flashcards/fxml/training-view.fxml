@@ -27,10 +27,10 @@
          <top>
             <BorderPane>
                <left>
-                  <Label fx:id="pileName" text="Nom de la pile"/>
+                  <Label fx:id="pileName" styleClass="view; label"/>
                </left>
                <right>
-                  <Button fx:id="closeTraining" onAction="#closeTraining" alignment="BASELINE_RIGHT" text="Terminer l'apprentissage"/>
+                  <Button fx:id="closeTraining" onAction="#closeTraining" styleClass="view" alignment="BASELINE_RIGHT" text="Terminer l'apprentissage"/>
                </right>
             </BorderPane>
          </top>
@@ -41,14 +41,14 @@
 
          <bottom>
             <StackPane alignment="CENTER">
-               <Button fx:id="showAnsButton" onAction="#affReponse" text="Afficher la réponse"/>
-               <HBox fx:id="scoreButtons" visible="false" alignment="CENTER">
-                  <Button onAction="#nextCard" text="0" style="text-align: center"/>
-                  <Button onAction="#nextCard" text="1" style="text-align: center"/>
-                  <Button onAction="#nextCard" text="2" style="text-align: center"/>
-                  <Button onAction="#nextCard" text="3" style="text-align: center"/>
-                  <Button onAction="#nextCard" text="4" style="text-align: center"/>
-                  <Button onAction="#nextCard" text="5" style="text-align: center"/>
+               <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse"/>
+               <HBox fx:id="scoreButtons" styleClass="view" visible="false" alignment="CENTER">
+                  <Button onAction="#scoreCard" text="0" style="text-align: center"/>
+                  <Button onAction="#scoreCard" text="1" style="text-align: center"/>
+                  <Button onAction="#scoreCard" text="2" style="text-align: center"/>
+                  <Button onAction="#scoreCard" text="3" style="text-align: center"/>
+                  <Button onAction="#scoreCard" text="4" style="text-align: center"/>
+                  <Button onAction="#scoreCard" text="5" style="text-align: center"/>
                </HBox>
             </StackPane>
          </bottom>
