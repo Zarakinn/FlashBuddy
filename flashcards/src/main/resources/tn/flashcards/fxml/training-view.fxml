@@ -58,12 +58,12 @@
             <StackPane alignment="CENTER">
                <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse"/>
                <HBox fx:id="scoreButtons" styleClass="view" visible="false" alignment="CENTER">
-                  <Button onAction="#scoreCard" text="0" style="text-align: center"/>
-                  <Button onAction="#scoreCard" text="1" style="text-align: center"/>
-                  <Button onAction="#scoreCard" text="2" style="text-align: center"/>
-                  <Button onAction="#scoreCard" text="3" style="text-align: center"/>
-                  <Button onAction="#scoreCard" text="4" style="text-align: center"/>
-                  <Button onAction="#scoreCard" text="5" style="text-align: center"/>
+                  <Button onAction="#scoreCard" id="0" text="0" style="text-align: center"/>
+                  <Button onAction="#scoreCard" id="1" text="1" style="text-align: center"/>
+                  <Button onAction="#scoreCard" id="2" text="2" style="text-align: center"/>
+                  <Button onAction="#scoreCard" id="3" text="3" style="text-align: center"/>
+                  <Button onAction="#scoreCard" id="4" text="4" style="text-align: center"/>
+                  <Button onAction="#scoreCard" id="5" text="5" style="text-align: center"/>
                </HBox>
             </StackPane>
          </bottom>
