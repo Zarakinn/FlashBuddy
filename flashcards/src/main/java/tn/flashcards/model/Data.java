@@ -1,6 +1,5 @@
 package tn.flashcards.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -24,7 +23,7 @@ public class Data extends SujetObserve {
     protected HashMap<String, StatsPile> statsPile;
     protected ObservableList<Pile> piles;
 
-    public enum Mode {APPRENTISSAGE_SELECTION, PARTIE_EN_COURS, EDITION, STATS, PARAM, EDIT_PILE}
+    public enum Mode {APPRENTISSAGE_SELECTION, PARTIE_EN_COURS, EDITION_SELECTION, STATS, PARAM, EDIT_PILE}
     private Mode mode;
 
     private Pile currentPile;
@@ -36,7 +35,6 @@ public class Data extends SujetObserve {
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
-        // TODO : vérifier si peut être importer depuis un fichier
     }
 
     // Singleton
@@ -64,7 +62,8 @@ public class Data extends SujetObserve {
     }
 
     // Ajouter une pile
-    private void addPile(Pile p) {
+    public void addPile(Pile p) {
+        //TODO - Faire des vérifications, pile n'est pas déja dedans
         this.piles.add(p) ;
         StatsPile pile = new StatsPile(p.getUniqueId());
         this.statsPile.put(p.getUniqueId(), pile) ;

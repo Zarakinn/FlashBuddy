@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditPileController">
+<BorderPane prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditPileController">
     <top>
-        <TextField fx:id="name"/>
+      <VBox>
+         <children>
+              <TextField fx:id="name" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="341.0" />
+            <TextField fx:id="desc" />
+         </children>
+      </VBox>
     </top>
     <center>
         <ListView fx:id="view">
