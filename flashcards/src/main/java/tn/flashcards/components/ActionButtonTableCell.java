@@ -13,11 +13,16 @@ import java.util.function.Function;
 public class ActionButtonTableCell<S> extends TableCell<S, Button> {
 
     private final Button actionButton;
+    public static final String BLUE_GRADIENT_BTN = "gradient_btn";
 
-    public ActionButtonTableCell(String[] styles, Feather fontIcon, Function< S, S> function) {
+    public ActionButtonTableCell(String label, String[] styles, Feather fontIcon, Function<S, S> function) {
         this.getStyleClass().add("action-button-table-cell");
 
-        this.actionButton = new Button("", new FontIcon(fontIcon));
+        if(fontIcon != null) {
+            actionButton = new Button("", new FontIcon(fontIcon));
+        } else {
+            actionButton = new Button(label);
+        }
         this.actionButton.setOnAction((ActionEvent e) -> {
             function.apply(getCurrentItem());
         });
@@ -28,8 +33,12 @@ public class ActionButtonTableCell<S> extends TableCell<S, Button> {
         return (S) getTableView().getItems().get(getIndex());
     }
 
-    public static <S> Callback<TableColumn<S, Button>, TableCell<S, Button>> forTableColumn(String[] label, Feather fontIcon, Function< S, S> function) {
-        return param -> new ActionButtonTableCell<>(label, fontIcon, function);
+    public static <S> Callback<TableColumn<S, Button>, TableCell<S, Button>>
+    forTableColumn(String label,
+                   String[] styles,
+                   Feather fontIcon,
+                   Function<S, S> function) {
+        return param -> new ActionButtonTableCell<>(label, styles, fontIcon, function);
     }
 
     @Override
