@@ -39,7 +39,7 @@
                      <String fx:value="gradient_btn" />
                      <String fx:value="btn_font" />
                   </styleClass></Button>
-               <Button fx:id="importBtn" layoutX="376.0" layoutY="20.0" minHeight="40" mnemonicParsing="false" onAction="#createPile" prefHeight="40.0" prefWidth="240.0" text="Importer une pile" textAlignment="CENTER">
+               <Button fx:id="importBtn" layoutX="376.0" layoutY="20.0" minHeight="40" mnemonicParsing="false" onAction="#importePile" prefHeight="40.0" prefWidth="240.0" text="Importer une pile" textAlignment="CENTER">
                   <styleClass>
                      <String fx:value="gradient_btn" />
                      <String fx:value="btn_font" />
