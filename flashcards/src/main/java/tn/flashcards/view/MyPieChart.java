@@ -17,11 +17,6 @@ public class MyPieChart extends PieChart {
 
         if (donnees[0]+donnees[1]+donnees[2]+donnees[3]+donnees[4]+donnees[5] == 0) {
             pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Evident", 0),
-                new PieChart.Data("Facile", 0),
-                new PieChart.Data("Moyen", 0),
-                new PieChart.Data("Difficile", 0),
-                new PieChart.Data("Impossible", 0),
                 new PieChart.Data("Non jouées", 1));
         } else {
             pieChartData = FXCollections.observableArrayList(
