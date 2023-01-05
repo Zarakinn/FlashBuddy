@@ -11,7 +11,7 @@ public class QRViewFactory {
             return new QRTextView(qr.getContent()) ;
         }
         else if (qr.getType() == QRType.IMAGE) {
-            return new QRImageView(qr.getContent(), 200, 200) ;
+            return new QRImageView(qr.getContent()) ;
         }
 
         return null ;

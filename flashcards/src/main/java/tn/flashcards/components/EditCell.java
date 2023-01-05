@@ -46,11 +46,6 @@ public class EditCell extends ListCell<Card> {
         observateurs.forEach(Observateur::reagir);
     }
 
-
-    public EditCell(Pile pile) {
-        super();
-        this.pile = pile;
-    }
     public EditCell() {}
 
     public void createComboBox(Card c) {
@@ -176,7 +171,7 @@ public class EditCell extends ListCell<Card> {
 
         deleteCard = new Button("Delete");
         deleteCard.setOnAction(event -> {
-            Data.getInstance().deleteCard(pile, c);
+            Data.getInstance().deleteCard(Data.getInstance().getCurrentPile(), c);
         });
 
     }

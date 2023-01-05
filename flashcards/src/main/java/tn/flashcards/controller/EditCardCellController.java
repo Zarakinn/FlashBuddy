@@ -73,7 +73,7 @@ public class EditCardCellController {
         File f = FileHandler.getImageFileChooser().showOpenDialog(r_img.getScene().getWindow());
         if(f != null){
             card.getReponse().setContent(f.getAbsolutePath());
-            r_img.setImage(new Image(f.getAbsolutePath()));
+            //r_img.setImage(new Image(f.getAbsolutePath()));
         }
     }
 
