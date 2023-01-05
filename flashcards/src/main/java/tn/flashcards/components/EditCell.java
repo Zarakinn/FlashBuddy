@@ -33,12 +33,8 @@ public class EditCell extends ListCell<Card> {
 
     Button editQuestion, editAnswer, deleteCard;
 
-    Pile pile;
 
-    public EditCell(Pile pile)
-    {
-        this.pile = pile;
-    }
+    public EditCell() {}
 
     public void createComboBox(Card c)
     {
@@ -183,7 +179,7 @@ public class EditCell extends ListCell<Card> {
 
         deleteCard = new Button("Delete");
         deleteCard.setOnAction(event -> {
-            Data.getInstance().deleteCard(pile,c);
+            Data.getInstance().deleteCard(Data.getInstance().getCurrentPile(), c);
         });
 
     }
