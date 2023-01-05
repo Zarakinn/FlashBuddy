@@ -40,7 +40,7 @@ public class EditController implements Initializable, Observateur {
     @FXML
     public Button startBtn, importBtn;
     @FXML
-    TableColumn<Pile, String> cName, cCreateur, cTags;
+    TableColumn<Pile, String> cName, cCreateur, cTags, cDesc;
     @FXML
     TableColumn<Pile, Integer> cNb;
     @FXML
@@ -67,6 +67,9 @@ public class EditController implements Initializable, Observateur {
         cName.setCellFactory(TextFieldTableCell.forTableColumn());
         cName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
         cName.setOnEditCommit(event -> event.getRowValue().setName(event.getNewValue()));
+
+        cDesc.setCellFactory(TextFieldTableCell.forTableColumn());
+        cDesc.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getDesc()));
 
         cCreateur.setCellFactory(TextFieldTableCell.forTableColumn());
         cCreateur.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCreator()));
