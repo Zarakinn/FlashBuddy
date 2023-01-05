@@ -17,4 +17,5 @@ module tn.flashcards {
     opens tn.flashcards.controller to javafx.fxml;
     exports tn.flashcards.components;
     opens tn.flashcards.components to javafx.fxml;
+    opens tn.flashcards.model.pile to com.google.gson;
 }

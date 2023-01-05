@@ -13,7 +13,7 @@ import java.util.function.Function;
 public class ActionButtonTableCell<S> extends TableCell<S, Button> {
 
     private final Button actionButton;
-    public static final String BLUE_GRADIENT_BTN = "gradient_btn";
+    public static final String GRADIENT_BTN = "gradient_btn";
 
     public ActionButtonTableCell(String label, String[] styles, Feather fontIcon, Function<S, S> function) {
         this.getStyleClass().add("action-button-table-cell");
