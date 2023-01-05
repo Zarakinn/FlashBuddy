@@ -25,44 +25,32 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
         // Création modèle
-        // TODO -
         Data.getInstance();
+        Pile p = Data.getInstance().createPile("temp", "Valentin");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Launcher.class.getResource("fxml/main-view.fxml"));
 
-        // Création des controlleurs
-        var editController = new EditController();
-        var parameterController = new ParameterController();
-        var statsController = new StatsController();
-        var trainingController = new TrainingController();
-        var mainController = new MainController();
+        var controllers = Arrays.asList(
+                new EditController(),
+                new ParameterController(),
+                new StatsController(),
+                new TrainingController(),
+                new MainController(),
+                new EditPileController());
 
-        Pile p = Data.getInstance().createPile("temp","Valentin");
         Data.getInstance().setCurrentPile(p);
-
-        var editPileController = new EditPileController();
         // Ajout des vues au modèle
         Data model = Data.getInstance();
-        model.ajouterObservateur(editController);
-        model.ajouterObservateur(parameterController);
-        model.ajouterObservateur(statsController);
-        model.ajouterObservateur(trainingController);
-        model.ajouterObservateur(mainController);
-        model.ajouterObservateur(editPileController);
+        controllers.forEach(model::ajouterObservateur);
 
-        fxmlLoader.setControllerFactory(ic -> {
-            if (ic.equals(MainController.class)) return mainController;
-            if (ic.equals(EditController.class)) return editController;
-            if (ic.equals(ParameterController.class)) return parameterController;
-            if (ic.equals(StatsController.class)) return statsController;
-            if (ic.equals(TrainingController.class)) return trainingController;
-            if (ic.equals(EditPileController.class)) return editPileController;
-            // ...
-            return null;
-        });
+        fxmlLoader.setControllerFactory(ic ->
+                controllers.stream()
+                        .filter(c -> c.getClass().equals(ic))
+                        .findFirst().orElse(null)
+        );
+
         Parent root = fxmlLoader.load();
-
         Scene scene = new Scene(root, 1000, 700);
         scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource("css/style.css")).toURI().toString());
         stage.setScene(scene);
@@ -71,7 +59,6 @@ public class Launcher extends Application {
         var t = new TabPane();
 
         Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
-        //Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
 
         model.notifierObservateur();
     }

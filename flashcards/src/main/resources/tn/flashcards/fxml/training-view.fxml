@@ -5,10 +5,23 @@
 
 
 <?import tn.flashcards.view.QRView?>
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
+<?import javafx.geometry.Insets?>
+<StackPane styleClass="view" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
    <children>
       <Pane fx:id="pileList">
-         <Button fx:id="startTraining" onAction="#startTraining" alignment="CENTER" contentDisplay="CENTER" layoutX="238.0" layoutY="158.0" text="Commencer l'apprentissage" />
+         <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+            <columns>
+               <TableColumn fx:id="cName" prefWidth="160.0" text="Pile" />
+               <TableColumn fx:id="cNb" prefWidth="100.0" text="Nb. cartes" />
+               <TableColumn fx:id="cTags" prefWidth="120.0" text="Tags" />
+               <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="120.0" text="Créateur" />
+               <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="153.0" text="Dernière utilisation" />
+               <TableColumn fx:id="cJouer" editable="false" prefWidth="200.0" sortable="false" />
+            </columns>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+         </TableView>
       </Pane>
       <BorderPane fx:id="trainingView" visible="false">
          <top>
