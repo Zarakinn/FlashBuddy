@@ -38,7 +38,7 @@ public class MainController implements Initializable, Observateur {
     @FXML
     public void setViewEdit() {
         //setView(edit);
-        Data.getInstance().setMode(Data.Mode.EDITION);
+        Data.getInstance().setMode(Data.Mode.EDITION_SELECTION);
     }
 
     @FXML
@@ -73,14 +73,14 @@ public class MainController implements Initializable, Observateur {
     public void reagir() {
         onglets.forEach(pane -> pane.setVisible(false));
         switch (Data.getInstance().getMode()) {
-            case EDITION -> edit.setVisible(true);
+            case EDITION_SELECTION -> edit.setVisible(true);
             case PARAM -> parameter.setVisible(true);
             case STATS -> stats.setVisible(true);
             case APPRENTISSAGE_SELECTION -> training.setVisible(true);
             case EDIT_PILE -> editpile.setVisible(true);
         }
         switch (Data.getInstance().getMode()) {
-            case EDITION -> b2.setSelected(true);
+            case EDITION_SELECTION, EDIT_PILE -> b2.setSelected(true);
             case PARAM -> b4.setSelected(true);
             case STATS -> b3.setSelected(true);
             case APPRENTISSAGE_SELECTION -> b1.setSelected(true);

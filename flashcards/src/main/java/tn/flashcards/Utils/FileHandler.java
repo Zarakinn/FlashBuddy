@@ -2,6 +2,7 @@ package tn.flashcards.Utils;
 
 import com.google.gson.GsonBuilder;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import tn.flashcards.model.pile.Pile;
@@ -12,15 +13,44 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.Stack;
 
 public class FileHandler {
 
+    private static FileChooser fcImg;
+    private static FileChooser fcPile;
+
+    public static FileChooser getImageFileChooser()
+    {
+        if (fcImg == null)
+        {
+            fcImg = new FileChooser();
+            fcImg.setTitle("Sélectionner une image");
+            FileChooser.ExtensionFilter fileExtensions =
+                    new FileChooser.ExtensionFilter(
+                            "Image", "*.png","*.jpeg","*.bmp","*.tiff","*.ico");
+
+            fcImg.getExtensionFilters().add(fileExtensions);
+        }
+        return fcImg;
+    }
+
+    public static FileChooser getPileFileChooser()
+    {
+        if (fcPile == null)
+        {
+            fcPile = new FileChooser();
+            fcPile.setTitle("Sélectionner une pile");
+            FileChooser.ExtensionFilter fileExtensions =
+                    new FileChooser.ExtensionFilter(
+                            "Pile flashCard", "*.json","*.txt");
+
+            fcPile.getExtensionFilters().add(fileExtensions);
+        }
+        return fcPile;
+    }
 
     public static Pile LoadStack(Window window) {
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Selectionner une pile");
-        File file = fc.showOpenDialog(window);
+        File file = FileHandler.getPileFileChooser().showOpenDialog(window);
         if (file != null) {
             try {
                 Gson gson = new Gson();
@@ -42,7 +72,6 @@ public class FileHandler {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(stack);
         try {
-            //TODO - trouver un vrai nom
             FileWriter fw = new FileWriter(name);
             fw.write(json);
             fw.close();

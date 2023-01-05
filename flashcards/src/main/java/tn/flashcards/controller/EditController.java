@@ -4,6 +4,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -110,7 +111,7 @@ public class EditController implements Initializable, Observateur {
         cExport.setCellFactory(ActionButtonTableCell.forTableColumn(
                 "Export", new String[]{BUTTON_ICON, BUTTON_OUTLINED}, Feather.SAVE,
                 (Pile p) -> {
-                    FileHandler.SaveStackAs(p,p.getName());
+                    FileHandler.SaveStackAs(p,p.getName() + ".json");
                     return p;
                 }));
         cExport.setEditable(false);
@@ -133,7 +134,7 @@ public class EditController implements Initializable, Observateur {
     @FXML
     public void saveStack() {
         Pile stack = new Pile(); // Fetch selected
-        FileHandler.SaveStackAs(stack, String.valueOf(stack.getName()));
+        FileHandler.SaveStackAs(stack, stack.getName() + ".json");
     }
 
     public void display() {
@@ -145,9 +146,18 @@ public class EditController implements Initializable, Observateur {
         Data.getInstance().createPile("Nom", "Auteur");
     }
 
+    public void importePile() {
+        Pile p = FileHandler.LoadStack(importBtn.getScene().getWindow());
+        if (p !=null)
+        {
+               Data.getInstance().addPile(p);
+        }
+    }
+
     @Override
     public void reagir() {
-        // On pourra vérifier si cette vue est Visible avant de la rafraichir s'il y a des problèmes de performances
-        display();
+        if(Data.getInstance().getMode() == Data.Mode.EDITION_SELECTION) {
+            table.refresh();
+        }
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import tn.flashcards.Utils.FileHandler;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
@@ -120,9 +121,8 @@ public class EditCell extends ListCell<Card> {
                     formStage.show();
                     break;
                 case IMAGE:
-                    FileChooser fc = new FileChooser();
                     Window w = this.getScene().getWindow();
-                    File file = fc.showOpenDialog(w);
+                    File file = FileHandler.getImageFileChooser().showOpenDialog(w);
                     if (file!=null)
                     {
                         c.getQuestion().setContent(file.toURI().toString());

@@ -52,8 +52,8 @@ public class ParameterController implements Initializable, Observateur {
         /*
         algoAffichageChoices.add("Chrono");
         */
-        algoAffichages = new ArrayList<AlgoAffichage>();
-        algoAffichages.add(AlgoAffichage.CLIC);
+        //algoAffichages = new ArrayList<AlgoAffichage>();
+        //algoAffichages.add(AlgoAffichage.CLIC);
         /*
         algoAffichages.add(AlgoAffichage.TEMPS);
          */
@@ -97,11 +97,11 @@ public class ParameterController implements Initializable, Observateur {
     @FXML
     ChoiceBox<String> algoAffichageChoiceBox;
     private ArrayList<String> algoAffichageChoices;
-    private ArrayList<AlgoAffichage> algoAffichages;
+    //private ArrayList<AlgoAffichage> algoAffichages;
 
     private class AlgoAffichageListener implements ChangeListener<Number> {
         public void changed(ObservableValue ov, Number value, Number new_value) {
-            Data.getInstance().getSettings().setAlgoAffichage(algoAffichages.get(new_value.intValue()));
+            //Data.getInstance().getSettings().setAlgoAffichage(algoAffichages.get(new_value.intValue()));
         }
     }
 
@@ -128,7 +128,7 @@ public class ParameterController implements Initializable, Observateur {
     @Override
     public void reagir() {
         themeChoiceBox.setValue(themeChoices.get(themes.indexOf(Data.getInstance().getSettings().getTheme())));
-        algoAffichageChoiceBox.setValue(algoAffichageChoices.get(algoAffichages.indexOf(Data.getInstance().getSettings().getAlgoAffichage())));
+        //algoAffichageChoiceBox.setValue(algoAffichageChoices.get(algoAffichages.indexOf(Data.getInstance().getSettings().getAlgoAffichage())));
 
         /* à gérer avec des instance of */
         if (Data.getInstance().getSettings().getAlgoChoix() instanceof StrategyChoixProbaEgales) {
