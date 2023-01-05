@@ -28,9 +28,31 @@ public class Calculs {
         for (Card c : cards) {
             ls_thisCard = ls.get(c.getId());
             if (ls_thisCard == null || ls_thisCard.getDifficulty() > 4 || ls_thisCard.getDifficulty() < 0) {
-                res[6]++;
+                res[5]++;
             } else {
                 res[ls_thisCard.getDifficulty()]++;
+            }
+        }
+        
+        return res;
+    }
+
+    /**
+     * IRenvoie un tableau de 6 entiers : le nombre de cartes
+     * avec chaque difficulté
+     * (indice 0-4) et les cartes non jouées (indice 5).
+     * 
+     * @param p la pile pour laquelle vous voulez obtenir le camembert
+     * @return Un tableau d'entiers.
+     */
+    public static int[] camembert() {
+        int[] res = { 0, 0, 0, 0, 0, 0 };
+        int[] loc;
+
+        for (Pile p : Data.getInstance().getPiles()) {
+            loc = camembert(p);
+            for (int i = 0; i < 6; i++) {
+                res[i] = res[i] + loc[i];
             }
         }
 
