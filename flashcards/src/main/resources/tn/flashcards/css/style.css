@@ -31,3 +31,15 @@
 .param {
     -fx-font-size: 17px;
 }
+
+/*-color-success-emphasis*/
+.gradient_btn {
+    -color-button-bg:       linear-gradient(to bottom right, #4a77dc, darkblue);
+    -color-button-bg-hover:   -color-button-bg;
+    -color-button-bg-focused: -color-button-bg;
+    -color-button-bg-pressed: -color-button-bg;
+    -fx-opacity: 0.70;
+    -fx-cursor: hand;
+    -fx-padding: 5px 10px 5px 10px;
+}
+

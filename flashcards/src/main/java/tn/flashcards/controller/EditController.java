@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 import org.kordamp.ikonli.feather.Feather;
@@ -42,15 +43,19 @@ public class EditController implements Initializable, Observateur {
     TableColumn<Pile, String> cDate;
     @FXML
     TableColumn<Pile, Button> cEdit, cExport, cDelete;
-
     @FXML
     TableView<Pile> table;
+    @FXML
+    BorderPane container;
 
     public EditController() {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //table.prefHeight(500);
+        //table.prefWidthProperty().bind(container.widthProperty());
+
         createViewTable();
         //Data.getIstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).updateLastOpened(LocalDateTime.now().minusDays(10));
         //Systems.out.println(Data.getInstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).getLastOpenedFormated());
@@ -84,7 +89,7 @@ public class EditController implements Initializable, Observateur {
 
 
         cDelete.setCellFactory(ActionButtonTableCell.forTableColumn(
-                new String[]{BUTTON_ICON, BUTTON_OUTLINED, DANGER},
+                "", new String[]{BUTTON_ICON, BUTTON_OUTLINED, DANGER},
                 Feather.TRASH,
                 (Pile p) -> {
                     table.getItems().remove(p);
@@ -92,15 +97,22 @@ public class EditController implements Initializable, Observateur {
                 }));
 
         cEdit.setCellFactory(ActionButtonTableCell.forTableColumn(
-                new String[]{BUTTON_ICON, BUTTON_OUTLINED, ACCENT},
+                "", new String[]{BUTTON_ICON, BUTTON_OUTLINED, ACCENT},
                 Feather.EDIT,
                 (Pile p) -> {
                     Data.getInstance().setCurrentPile(p);
                     Data.getInstance().setMode(Data.Mode.EDIT_PILE);
                     return p;
                 }));
-
         cDate.setEditable(false);
+
+        cExport.setCellFactory(ActionButtonTableCell.forTableColumn(
+                "Export", new String[]{BUTTON_ICON, BUTTON_OUTLINED}, Feather.SAVE,
+                (Pile p) -> {
+                    FileHandler.SaveStackAs(p,p.getName());
+                    return p;
+                }));
+        cExport.setEditable(false);
 
         table.setItems(Data.getInstance().getPiles());
         table.setEditable(true);
@@ -119,7 +131,7 @@ public class EditController implements Initializable, Observateur {
 
     public void saveStack() {
         Pile stack = new Pile(); // Fetch selected
-        FileHandler.SaveStackAs(stack, String.valueOf(stack.hashCode())); // changer en stack.name quand dispo
+        FileHandler.SaveStackAs(stack, String.valueOf(stack.getName()));
     }
 
 
@@ -134,6 +146,6 @@ public class EditController implements Initializable, Observateur {
 
     @Override
     public void reagir() {
-        // On pourra vérifier si cette vue est Visible avant de la rafraichir si il y a des problèmes de performances
+        // On pourra vérifier si cette vue est Visible avant de la rafraichir s'il y a des problèmes de performances
     }
 }

@@ -1,11 +1,9 @@
 package tn.flashcards.controller;
 
-import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import tn.flashcards.model.Data;
 
 import java.net.URL;
@@ -58,7 +56,7 @@ public class MainController implements Initializable, Observateur {
     @FXML
     public void setViewTraining() {
         //setView(training);
-        Data.getInstance().setMode(Data.Mode.APPRENTISSAGE);
+        Data.getInstance().setMode(Data.Mode.APPRENTISSAGE_SELECTION);
     }
 
     public void setEditPile() {
@@ -78,14 +76,14 @@ public class MainController implements Initializable, Observateur {
             case EDITION -> edit.setVisible(true);
             case PARAM -> parameter.setVisible(true);
             case STATS -> stats.setVisible(true);
-            case APPRENTISSAGE -> training.setVisible(true);
+            case APPRENTISSAGE_SELECTION -> training.setVisible(true);
             case EDIT_PILE -> editpile.setVisible(true);
         }
         switch (Data.getInstance().getMode()) {
             case EDITION -> b2.setSelected(true);
             case PARAM -> b4.setSelected(true);
             case STATS -> b3.setSelected(true);
-            case APPRENTISSAGE -> b1.setSelected(true);
+            case APPRENTISSAGE_SELECTION -> b1.setSelected(true);
         }
     }
 }

@@ -13,6 +13,8 @@ import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
 import tn.flashcards.model.settings.Settings;
 import tn.flashcards.model.stats.FullStats;
+import tn.flashcards.model.settings.StrategyChoix;
+import tn.flashcards.model.settings.Theme;
 import tn.flashcards.model.stats.StatsPile;
 
 import lombok.Setter;
@@ -24,7 +26,7 @@ public class Data extends SujetObserve {
     protected HashMap<String, StatsPile> statsPile;
     protected ObservableList<Pile> piles;
 
-    public enum Mode {APPRENTISSAGE, EDITION, STATS, PARAM, EDIT_PILE}
+    public enum Mode {APPRENTISSAGE_SELECTION, PARTIE_EN_COURS, EDITION, STATS, PARAM, EDIT_PILE}
     private Mode mode;
 
     private Pile currentTrainingPile;
@@ -32,13 +34,13 @@ public class Data extends SujetObserve {
     private Settings settings ;
 
     private Data() {
-        this.mode = Mode.APPRENTISSAGE;
+        this.mode = Mode.APPRENTISSAGE_SELECTION;
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
-        this.addPile(new Pile("user1", "0", "moi", new ArrayList<Card>(), 0, "tag1"));
-        this.addPile(new Pile("user1", "1", "moi", new ArrayList<Card>(), 0, "tag2"));
-        this.addPile(new Pile("user1", "2", "moi", new ArrayList<Card>(), 0, "tag3"));
+        this.addPile(new Pile("user1", "_0", "moi", new ArrayList<Card>(), 0, "tag1"));
+        this.addPile(new Pile("user1", "_1", "moi", new ArrayList<Card>(), 0, "tag2"));
+        this.addPile(new Pile("user1", "_2", "moi", new ArrayList<Card>(), 0, "tag3"));
 
 
         // TODO : vérifier si peut être importer depuis un fichier
@@ -72,7 +74,6 @@ public class Data extends SujetObserve {
     private void addPile(Pile p) {
         this.piles.add(p) ;
         StatsPile pile = new StatsPile(p.getUniqueId());
-        //pile.setLastOpened(LocalDateTime.now());
         this.statsPile.put(p.getUniqueId(), pile) ;
     }
 

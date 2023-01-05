@@ -23,7 +23,7 @@ public class Pile {
         this.name = "Nom de la pile";
         this.uniqueId = Integer.toString(ID);
         this.creator = "";
-        this.cards = new ArrayList<Card>();
+        this.cards = new ArrayList<>();
         this.nextCardId = 0;
         this.incrID();
     }
