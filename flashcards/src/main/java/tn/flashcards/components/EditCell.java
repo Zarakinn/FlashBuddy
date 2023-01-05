@@ -125,7 +125,7 @@ public class EditCell extends ListCell<Card> {
                     File file = FileHandler.getImageFileChooser().showOpenDialog(w);
                     if (file!=null)
                     {
-                        c.getQuestion().setContent(file.toURI().toString());
+                        c.getQuestion().setContent(file.getAbsolutePath());
                         Data.getInstance().notifierObservateur(); // TODO - nettoyer ca
                     }
                     break;
@@ -172,7 +172,7 @@ public class EditCell extends ListCell<Card> {
                     File file = fc.showOpenDialog(w);
                     if (file!=null)
                     {
-                        c.getReponse().setContent(file.toURI().toString());
+                        c.getReponse().setContent(file.getAbsolutePath());
                         Data.getInstance().notifierObservateur(); // TODO - nettoyer ca
                     }
                     break;
