@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.Stack;
 
 public class FileHandler {
 
@@ -42,7 +41,6 @@ public class FileHandler {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(stack);
         try {
-            //TODO - trouver un vrai nom
             FileWriter fw = new FileWriter(name);
             fw.write(json);
             fw.close();

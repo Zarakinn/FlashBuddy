@@ -64,7 +64,8 @@ public class Data extends SujetObserve {
     }
 
     // Ajouter une pile
-    private void addPile(Pile p) {
+    public void addPile(Pile p) {
+        //TODO - Faire des vérifications, pile n'est pas déka dedans
         this.piles.add(p) ;
         StatsPile pile = new StatsPile(p.getUniqueId());
         this.statsPile.put(p.getUniqueId(), pile) ;

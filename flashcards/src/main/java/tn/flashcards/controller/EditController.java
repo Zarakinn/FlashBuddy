@@ -4,6 +4,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -143,6 +144,14 @@ public class EditController implements Initializable, Observateur {
     @FXML
     public void createPile() {
         Data.getInstance().createPile("Nom", "Auteur");
+    }
+
+    public void importePile() {
+        Pile p = FileHandler.LoadStack(importBtn.getScene().getWindow());
+        if (p !=null)
+        {
+               Data.getInstance().addPile(p);
+        }
     }
 
     @Override
