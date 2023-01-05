@@ -7,19 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import lombok.val;
-import tn.flashcards.Launcher;
 import tn.flashcards.model.Data;
-import tn.flashcards.model.settings.AlgoAffichage;
 import tn.flashcards.model.settings.StrategyChoix;
 import tn.flashcards.model.settings.StrategyChoixProba;
 import tn.flashcards.model.settings.StrategyChoixProbaEgales;
-import tn.flashcards.model.settings.StrategyChoixTemps;
 import tn.flashcards.model.settings.Theme;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import atlantafx.base.theme.NordDark;
