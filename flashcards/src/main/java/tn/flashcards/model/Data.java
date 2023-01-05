@@ -82,6 +82,30 @@ public class Data extends SujetObserve {
         return p;
     }
 
+    public Pile clonePile(Pile p)
+    {
+        Pile clone = new Pile();
+        clone.setName(p.getName());
+        clone.setCreator(p.getCreator());
+        clone.setDesc(p.getDesc());
+        clone.setTags(p.getTags());
+        for (Card card: p.getCards())
+        {
+            clone.addCard(cloneCard(card));
+        }
+        return clone;
+    }
+
+    public Card cloneCard(Card c)
+    {
+        Card clone = new Card(c.getId());
+        QuestionReponse q = c.getQuestion();
+        QuestionReponse r = c.getReponse();
+        clone.setQuestion(new QuestionReponse(q.getType(),q.getContent()));
+        clone.setReponse(new QuestionReponse(r.getType(),r.getContent()));
+        return clone;
+    }
+
     public Card createDefaultCard(String pileId)
     {
         return createCard(pileId,QRType.TEXT,"question",QRType.TEXT,"réponse");
