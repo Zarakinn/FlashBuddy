@@ -4,7 +4,7 @@ import tn.flashcards.model.pile.Card;
 
 public class StrategyChoixProba implements StrategyChoix {
     @Override
-    public Card execute() {
-        return null ;
+    public void execute() {
+
     }
 }
