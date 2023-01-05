@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.Button?>
 
-
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditController">
+<BorderPane fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditController">
    <center>
-      <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="cName" prefWidth="160.0" text="Nom de la pile 🖉" />
           <TableColumn fx:id="cNb" prefWidth="100.0" text="Nb. cartes" />
@@ -29,7 +28,7 @@
    <bottom>
       <StackPane minHeight="60" prefHeight="60.0" prefWidth="970.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <Button minHeight="40" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Créer une pile" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER" onAction="#createPile" />
+            <Button minHeight="40" mnemonicParsing="false" onAction="#createPile" prefHeight="40.0" prefWidth="240.0" text="Créer une pile" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER" />
          </children>
       </StackPane>
    </bottom>

@@ -1,6 +1,5 @@
 package tn.flashcards.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,17 +8,12 @@ import tn.flashcards.model.pile.Card;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
-import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
-import tn.flashcards.model.settings.AlgoAffichage;
 import tn.flashcards.model.settings.Settings;
-import tn.flashcards.model.settings.StrategyChoix;
-import tn.flashcards.model.settings.Theme;
 import tn.flashcards.model.stats.StatsPile;
 
-import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
@@ -29,14 +23,14 @@ public class Data extends SujetObserve {
     protected HashMap<String, StatsPile> statsPile;
     protected ObservableList<Pile> piles;
 
-    public enum Mode {APPRENTISSAGE, EDITION, STATS, PARAM, EDIT_PILE}
+    public enum Mode {APPRENTISSAGE_SELECTION, PARTIE_EN_COURS, EDITION, STATS, PARAM, EDIT_PILE}
     private Mode mode;
 
     private Pile currentPile ;
     private Settings settings ;
 
     private Data() {
-        this.mode = Mode.APPRENTISSAGE;
+        this.mode = Mode.APPRENTISSAGE_SELECTION;
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
