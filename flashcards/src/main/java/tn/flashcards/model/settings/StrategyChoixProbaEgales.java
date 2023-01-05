@@ -9,7 +9,7 @@ import java.util.Random;
 public class StrategyChoixProbaEgales implements StrategyChoix {
     @Override
     public void execute() {
-        ArrayList<Card> cards = Data.getInstance().getCurrentTrainingPile().getCards() ;
+        ArrayList<Card> cards = Data.getInstance().getCurrentPile().getCards() ;
 
         if (cards.size() > 0) {
             var index = new Random().nextInt(cards.size());

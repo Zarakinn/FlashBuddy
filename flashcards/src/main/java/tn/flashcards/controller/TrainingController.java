@@ -13,13 +13,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.*;
 import javafx.util.converter.IntegerStringConverter;
-import org.kordamp.ikonli.feather.Feather;
 import tn.flashcards.components.ActionButtonTableCell;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
-import tn.flashcards.model.pile.Pile;
-import tn.flashcards.model.pile.QRType;
-import tn.flashcards.model.pile.QuestionReponse;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.stats.StatsPile;
 import tn.flashcards.view.QRView;
@@ -77,9 +73,6 @@ public class TrainingController implements Initializable, Observateur {
     private void nextCardView() {
         Data.getInstance().getSettings().getAlgoChoix().execute();
         Card c = Data.getInstance().getCurrentTrainingCard() ;
-        //Card c = new Card(0) ;
-        //c.setReponse(new QuestionReponse(QRType.TEXT, "question"));
-        //c.setQuestion(new QuestionReponse(QRType.TEXT, "reponse"));
 
         this.cardView.getChildren().removeAll(this.cardView.getChildren()) ;
 
@@ -105,8 +98,7 @@ public class TrainingController implements Initializable, Observateur {
         this.pileList.setVisible(false);
         this.trainingView.setVisible(true);
 
-        Pile p = Data.getInstance().getAPile("0") ;
-        Data.getInstance().setCurrentTrainingPile(p);
+        Pile p = Data.getInstance().getCurrentPile() ;
         this.pileName.setText(p.getName());
 
         this.nextCardView();
@@ -117,7 +109,7 @@ public class TrainingController implements Initializable, Observateur {
     public void closeTraining() {
         this.pileList.setVisible(true);
         this.trainingView.setVisible(false);
-        Data.getInstance().setCurrentTrainingPile(null);
+        Data.getInstance().setCurrentPile(null);
     }
 
     @FXML
@@ -180,7 +172,7 @@ public class TrainingController implements Initializable, Observateur {
                 new String[]{SUCCESS, BLUE_GRADIENT_BTN},
                 null,
                 (Pile p) -> {
-                    Data.getInstance().setCurrentTrainingPile(p);
+                    Data.getInstance().setCurrentPile(p);
                     startTraining();
                     return p;
                 }));
