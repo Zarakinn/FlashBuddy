@@ -21,9 +21,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static atlantafx.base.theme.Styles.*;
+import static tn.flashcards.components.ActionButtonTableCell.GRADIENT_BTN;
 
 public class EditController implements Initializable, Observateur {
 
+    @FXML
+    public Button startBtn, importBtn;
     @FXML
     TableColumn<Pile, String> cName, cCreateur, cTags;
     @FXML
@@ -42,10 +45,8 @@ public class EditController implements Initializable, Observateur {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //table.prefHeight(500);
-        //table.prefWidthProperty().bind(container.widthProperty());
-
         createViewTable();
+        //startBtn.getStyleClass().add(GRADIENT_BTN);
         //Data.getIstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).updateLastOpened(LocalDateTime.now().minusDays(10));
         //Systems.out.println(Data.getInstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).getLastOpenedFormated());
     }
@@ -118,11 +119,11 @@ public class EditController implements Initializable, Observateur {
         }
     }*/
 
+    @FXML
     public void saveStack() {
         Pile stack = new Pile(); // Fetch selected
         FileHandler.SaveStackAs(stack, String.valueOf(stack.getName()));
     }
-
 
     public void display() {
 
