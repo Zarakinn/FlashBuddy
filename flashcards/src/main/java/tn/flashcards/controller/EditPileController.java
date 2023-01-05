@@ -22,6 +22,8 @@ public class EditPileController implements Initializable, Observateur {
     @FXML
     TextField name;
     @FXML
+    TextField desc;
+    @FXML
     ListView<Card> view;
 
     public EditPileController() {
@@ -40,8 +42,12 @@ public class EditPileController implements Initializable, Observateur {
         view.setCellFactory(view -> new EditCell(pile)
         );
         name.setText(pile.getName());
+        desc.setText(pile.getDesc());
         name.textProperty().addListener((observable, oldValue, newValue) -> {
             pile.setName(newValue);
+        });
+        desc.textProperty().addListener((observable, oldValue, newValue) -> {
+            pile.setDesc(newValue);
         });
         display();
     }
