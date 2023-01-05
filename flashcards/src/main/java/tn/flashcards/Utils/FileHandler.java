@@ -2,9 +2,9 @@ package tn.flashcards.Utils;
 
 import com.google.gson.GsonBuilder;
 import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 
@@ -47,44 +47,11 @@ public class FileHandler {
             fcPile.setTitle("Sélectionner une pile");
             FileChooser.ExtensionFilter fileExtensions =
                     new FileChooser.ExtensionFilter(
-                            "Pile flashCard", "*.json","*.txt");
+                            "Pile flashCard", "*.zip");
 
             fcPile.getExtensionFilters().add(fileExtensions);
         }
         return fcPile;
-    }
-
-    public static Pile LoadStack(Window window) {
-        File file = FileHandler.getPileFileChooser().showOpenDialog(window);
-        if (file != null) {
-            try {
-                Gson gson = new Gson();
-                Pile stack = gson.fromJson(new FileReader(file), Pile.class);
-                return stack;
-            } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Fichier non valid, veuillez sélectionner un JSON créé par cette application.");
-                alert.show();
-            }
-        }
-        return null;
-    }
-
-    public static void SaveStack(Pile stack) {
-        SaveStackAs(stack, String.valueOf(stack.getName()) + ".json");;
-    }
-
-    public static void SaveStackAs(Pile stack, String name) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(stack);
-        try {
-            FileWriter fw = new FileWriter(name);
-            fw.write(json);
-            fw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Il y a eu une erreur dans l'enregistrement de la pile.");
-            alert.show();
-        }
     }
 
     //region zip
@@ -122,25 +89,16 @@ public class FileHandler {
             }
             else{
                 Path path = Path.of(qr.getContent());
+                qr.setContent("img/" + path.getFileName().toString()); // Modification uniquement sur le clone
                 addDataToZip(outputStream,"img/" + path.getFileName().toString(),data);
-                System.out.println("Filename : " + path.getFileName());
-
-                // TODO - changer dans qr le chemin de l'image pour qu'il soit relatif au zip
-                // qr.setContent("img/" + path.getFileName().toString());
             }
-
         }
     }
 
-    public static void SaveStackInZip(Pile pile)
+    public static void SaveStackInZip(Pile originalPile)
     {
+        Pile pile = Data.getInstance().clonePile(originalPile); // Un clone qui n'est pas ajouté à Data
         try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(pile.getName() + ".zip"))) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String json = gson.toJson(pile);
-            addDataToZip(outputStream,"Pile.json",json.getBytes());
-
-            // TODO - faire une copie pour ques les changements de chemin n'affecte pas l'original
-
             for (Card c: pile.getCards())
             {
                 QuestionReponse q = c.getQuestion();
@@ -149,6 +107,9 @@ public class FileHandler {
                 HandleImageImport(outputStream,q);
                 HandleImageImport(outputStream,r);
             }
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(pile);
+            addDataToZip(outputStream,"Pile.json",json.getBytes());
         } catch (Exception e) {
         }
 
@@ -156,17 +117,12 @@ public class FileHandler {
 
     public static Pile LoadStackFromZip(Window window)
     {
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Zip Files", "*.zip")
-        );
-        File file = fc.showOpenDialog(window);
+        File file = FileHandler.getPileFileChooser().showOpenDialog(window);
         if (file != null) {
             try (ZipInputStream  inputStream= new ZipInputStream(new FileInputStream(file))){
                 Pile stack = null;
                 ZipEntry entry;
                 while ((entry = inputStream.getNextEntry()) != null) {
-                    System.out.println("Entry name : " + entry.getName());
                     if (entry.getName().equals("Pile.json")) {
                         Gson gson = new Gson();
                         stack = gson.fromJson(new InputStreamReader(inputStream), Pile.class);
@@ -178,7 +134,6 @@ public class FileHandler {
                 alert.show();
             }
         }
-        System.out.println("File null");
         return null;
     }
 

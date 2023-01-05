@@ -129,7 +129,6 @@ public class EditController implements Initializable, Observateur {
     }
 
     public void importePile() {
-        //Pile p = FileHandler.LoadStack(importBtn.getScene().getWindow());
         Pile p = FileHandler.LoadStackFromZip(importBtn.getScene().getWindow());
         if (p !=null)
         {

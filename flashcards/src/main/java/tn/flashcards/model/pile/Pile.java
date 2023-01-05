@@ -40,7 +40,7 @@ public class Pile {
         this.creator = "Créateur";
         this.cards = new ArrayList<>();
         this.nextCardId = 0;
-        this.tags = "tag";
+        this.tags = "no tag";
     }
 
     public Card createCard() {
