@@ -1,6 +1,5 @@
 package tn.flashcards.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,17 +8,13 @@ import tn.flashcards.model.pile.Card;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
-import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
-import tn.flashcards.model.settings.AlgoAffichage;
 import tn.flashcards.model.settings.Settings;
-import tn.flashcards.model.settings.StrategyChoix;
-import tn.flashcards.model.settings.Theme;
+import tn.flashcards.model.stats.FullStats;
 import tn.flashcards.model.stats.StatsPile;
 
-import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
@@ -32,7 +27,8 @@ public class Data extends SujetObserve {
     public enum Mode {APPRENTISSAGE, EDITION, STATS, PARAM, EDIT_PILE}
     private Mode mode;
 
-    private Pile currentPile ;
+    private Pile currentTrainingPile;
+    private Card currentTrainingCard ;
     private Settings settings ;
 
     private Data() {
@@ -121,5 +117,10 @@ public class Data extends SujetObserve {
 
     public void deletePile(Pile pile){
         // TODO
+    }
+
+    public void scoreCard(int score) {
+        FullStats fs = new FullStats(score, this.currentTrainingCard.getId()) ;
+        this.getStatsPile().get(this.currentTrainingPile.getUniqueId()).addPlayed(this.currentTrainingCard.getId(), fs);
     }
 }

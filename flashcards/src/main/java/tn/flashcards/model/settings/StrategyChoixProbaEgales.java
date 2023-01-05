@@ -8,14 +8,16 @@ import java.util.Random;
 
 public class StrategyChoixProbaEgales implements StrategyChoix {
     @Override
-    public Card execute() {
-        ArrayList<Card> cards = Data.getInstance().getCurrentPile().getCards() ;
+    public void execute() {
+        ArrayList<Card> cards = Data.getInstance().getCurrentTrainingPile().getCards() ;
 
         if (cards.size() > 0) {
             var index = new Random().nextInt(cards.size());
-            return cards.get(index);
+            Data.getInstance().setCurrentTrainingCard(cards.get(index));
+        }
+        else {
+            Data.getInstance().setCurrentTrainingCard(null);
         }
 
-        return null ;
-        }
+    }
 }
