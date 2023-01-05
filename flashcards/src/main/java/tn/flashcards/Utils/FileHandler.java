@@ -111,6 +111,7 @@ public class FileHandler {
             String json = gson.toJson(pile);
             addDataToZip(outputStream,"Pile.json",json.getBytes());
         } catch (Exception e) {
+            System.out.println("Fail to Save Stack");
         }
 
     }

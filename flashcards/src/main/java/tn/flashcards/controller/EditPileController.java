@@ -36,7 +36,7 @@ public class EditPileController implements Initializable, Observateur {
 
 
         Pile pile = Data.getInstance().getCurrentPile();
-        view.setCellFactory(view -> new EditCell(pile)
+        view.setCellFactory(view -> new EditCell()
         );
         name.setText(pile.getName());
         desc.setText(pile.getDesc());
