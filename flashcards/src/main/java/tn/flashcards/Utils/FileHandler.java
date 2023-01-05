@@ -44,7 +44,7 @@ public class FileHandler {
                     new FileChooser.ExtensionFilter(
                             "Pile flashCard", "*.json","*.txt");
 
-            fcImg.getExtensionFilters().add(fileExtensions);
+            fcPile.getExtensionFilters().add(fileExtensions);
         }
         return fcPile;
     }

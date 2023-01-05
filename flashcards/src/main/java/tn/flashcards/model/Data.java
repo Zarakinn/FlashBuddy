@@ -36,7 +36,6 @@ public class Data extends SujetObserve {
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
-        // TODO : vérifier si peut être importer depuis un fichier
     }
 
     // Singleton
@@ -65,7 +64,7 @@ public class Data extends SujetObserve {
 
     // Ajouter une pile
     public void addPile(Pile p) {
-        //TODO - Faire des vérifications, pile n'est pas déka dedans
+        //TODO - Faire des vérifications, pile n'est pas déja dedans
         this.piles.add(p) ;
         StatsPile pile = new StatsPile(p.getUniqueId());
         this.statsPile.put(p.getUniqueId(), pile) ;

@@ -1,0 +1,32 @@
+{
+  "name": "Blague",
+  "desc": "Description par défaut",
+  "uniqueId": "QMzYVX2dkhlQZl0gcXMB1i_1RpxN4b76",
+  "creator": "Auteur",
+  "cards": [
+    {
+      "id": 0,
+      "question": {
+        "type": "TEXT",
+        "content": "Qu\u0027est ce qui est jaune et qui attend ?"
+      },
+      "reponse": {
+        "type": "TEXT",
+        "content": "Johnatan"
+      }
+    },
+    {
+      "id": 1,
+      "question": {
+        "type": "TEXT",
+        "content": "Qu\u0027est ce qui est gris et n\u0027a pas trouver d\u0027image ?"
+      },
+      "reponse": {
+        "type": "IMAGE",
+        "content": "file:/home/eleve/Images/Capture%20d’écran%20de%202022-01-05%2011-35-20.png"
+      }
+    }
+  ],
+  "nextCardId": 2,
+  "tags": "tag"
+}
