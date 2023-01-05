@@ -108,6 +108,7 @@ package model {
 
         class Pile {
             # String name
+            # String desc
             # String uniqueId
             # String creator
 
