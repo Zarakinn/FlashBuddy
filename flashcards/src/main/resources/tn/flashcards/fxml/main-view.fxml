@@ -25,8 +25,8 @@
                         <ToggleGroup fx:id="pan" />
                      </toggleGroup></RadioButton>
                         <RadioButton fx:id="b2" mnemonicParsing="false" onAction="#setViewEdit" styleClass="toggle-button" text="Edition" toggleGroup="$pan" />
-                        <RadioButton fx:id="b3" mnemonicParsing="false" onAction="#setViewStats" styleClass="toggle-button" text="Statistique" toggleGroup="$pan" />
-                        <RadioButton fx:id="b4" mnemonicParsing="false" onAction="#setViewParameter" styleClass="toggle-button" text="Paramètre" toggleGroup="$pan" />
+                        <RadioButton fx:id="b3" mnemonicParsing="false" onAction="#setViewStats" styleClass="toggle-button" text="Statistiques" toggleGroup="$pan" />
+                        <RadioButton fx:id="b4" mnemonicParsing="false" onAction="#setViewParameter" styleClass="toggle-button" text="Paramètres" toggleGroup="$pan" />
                     </items>
                <cursor>
                   <Cursor fx:constant="HAND" />

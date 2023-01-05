@@ -7,7 +7,7 @@ import tn.flashcards.Launcher;
 public class QRImageView extends QRView {
     public ImageView imgView ;
 
-    public QRImageView(String path) {
+    public QRImageView(String path, double width, double height) {
         super() ;
         this.imgView = new ImageView();
         try {
@@ -20,6 +20,8 @@ public class QRImageView extends QRView {
             imgView.setImage(img);
         }
         imgView.setPreserveRatio(true);
+        imgView.setFitHeight(height);
+        imgView.setFitWidth(width);
         this.getChildren().add(this.imgView);
     }
 }
