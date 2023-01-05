@@ -49,14 +49,14 @@ public class ParameterController implements Initializable, Observateur {
         /* AlgoAffichage */
         algoAffichageChoices = new ArrayList<String>();
         algoAffichageChoices.add("Clic");
-        /*
-        algoAffichageChoices.add("Chrono");
-        */
-        //algoAffichages = new ArrayList<AlgoAffichage>();
-        //algoAffichages.add(AlgoAffichage.CLIC);
-        /*
-        algoAffichages.add(AlgoAffichage.TEMPS);
-         */
+        algoAffichageChoices.add("5 secondes");
+        algoAffichageChoices.add("15 secondes");
+        algoAffichageChoices.add("30 secondes");
+        algoAffichages = new ArrayList<Integer>();
+        algoAffichages.add(-1);
+        algoAffichages.add(5);
+        algoAffichages.add(15);
+        algoAffichages.add(30);
     }
 
     
@@ -97,11 +97,11 @@ public class ParameterController implements Initializable, Observateur {
     @FXML
     ChoiceBox<String> algoAffichageChoiceBox;
     private ArrayList<String> algoAffichageChoices;
-    //private ArrayList<AlgoAffichage> algoAffichages;
+    private ArrayList<Integer> algoAffichages;
 
     private class AlgoAffichageListener implements ChangeListener<Number> {
         public void changed(ObservableValue ov, Number value, Number new_value) {
-            //Data.getInstance().getSettings().setAlgoAffichage(algoAffichages.get(new_value.intValue()));
+            Data.getInstance().getSettings().setTimerAffichage(algoAffichages.get(new_value.intValue()));
         }
     }
 
@@ -128,14 +128,14 @@ public class ParameterController implements Initializable, Observateur {
     @Override
     public void reagir() {
         themeChoiceBox.setValue(themeChoices.get(themes.indexOf(Data.getInstance().getSettings().getTheme())));
-        //algoAffichageChoiceBox.setValue(algoAffichageChoices.get(algoAffichages.indexOf(Data.getInstance().getSettings().getAlgoAffichage())));
+        algoAffichageChoiceBox.setValue(algoAffichageChoices.get(algoAffichages.indexOf(Data.getInstance().getSettings().getTimerAffichage())));
 
         /* à gérer avec des instance of */
         if (Data.getInstance().getSettings().getAlgoChoix() instanceof StrategyChoixProbaEgales) {
             algoChoixChoiceBox.setValue(algoChoixChoices.get(0));
-        } /* else if (Data.getInstance().getSettings().getAlgoChoix() instanceof StrategyChoixProba) {
+        } else if (Data.getInstance().getSettings().getAlgoChoix() instanceof StrategyChoixProba) {
             algoChoixChoiceBox.setValue(algoChoixChoices.get(1));
-        } else if (Data.getInstance().getSettings().getAlgoChoix() instanceof StrategyChoixTemps) {
+        } /* else if (Data.getInstance().getSettings().getAlgoChoix() instanceof StrategyChoixTemps) {
             algoChoixChoiceBox.setValue(algoChoixChoices.get(2));
         }*/
     }
