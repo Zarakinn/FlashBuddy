@@ -156,7 +156,8 @@ public class EditController implements Initializable, Observateur {
 
     @Override
     public void reagir() {
-        // On pourra vérifier si cette vue est Visible avant de la rafraichir s'il y a des problèmes de performances
-        display();
+        if(Data.getInstance().getMode() == Data.Mode.EDITION_SELECTION) {
+            table.refresh();
+        }
     }
 }

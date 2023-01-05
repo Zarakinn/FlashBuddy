@@ -1,6 +1,5 @@
 package tn.flashcards.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -24,7 +23,7 @@ public class Data extends SujetObserve {
     protected HashMap<String, StatsPile> statsPile;
     protected ObservableList<Pile> piles;
 
-    public enum Mode {APPRENTISSAGE_SELECTION, PARTIE_EN_COURS, EDITION, STATS, PARAM, EDIT_PILE}
+    public enum Mode {APPRENTISSAGE_SELECTION, PARTIE_EN_COURS, EDITION_SELECTION, STATS, PARAM, EDIT_PILE}
     private Mode mode;
 
     private Pile currentPile;

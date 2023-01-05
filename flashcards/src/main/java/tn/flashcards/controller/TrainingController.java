@@ -31,15 +31,15 @@ public class TrainingController implements Initializable, Observateur {
 
 
     @FXML
-    private Pane pileList ;
+    private Pane pileList;
     @FXML
-    private BorderPane trainingView ;
+    private BorderPane trainingView;
     @FXML
-    private Label pileName ;
+    private Label pileName;
     @FXML
-    private HBox cardView ;
+    private HBox cardView;
     @FXML
-    private Button showAnsButton ;
+    private Button showAnsButton;
     @FXML
     private HBox scoreButtons;
 
@@ -55,8 +55,7 @@ public class TrainingController implements Initializable, Observateur {
     TableView<Pile> table;
 
 
-    public TrainingController()
-    {
+    public TrainingController() {
 
     }
 
@@ -67,14 +66,16 @@ public class TrainingController implements Initializable, Observateur {
 
     @Override
     public void reagir() {
-
+        if (Data.getInstance().getMode() == Data.Mode.APPRENTISSAGE_SELECTION) {
+            table.refresh();
+        }
     }
 
     private void nextCardView() {
         Data.getInstance().getSettings().getAlgoChoix().execute();
-        Card c = Data.getInstance().getCurrentTrainingCard() ;
+        Card c = Data.getInstance().getCurrentTrainingCard();
 
-        this.cardView.getChildren().removeAll(this.cardView.getChildren()) ;
+        this.cardView.getChildren().removeAll(this.cardView.getChildren());
 
 
         if (c != null) {
@@ -83,8 +84,8 @@ public class TrainingController implements Initializable, Observateur {
 
             q.setPrefWidth(this.cardView.getWidth() / 2 - 20);
             r.setPrefWidth(this.cardView.getWidth() / 2 - 20);
-            q.getStyleClass().add("view") ;
-            r.getStyleClass().add("view") ;
+            q.getStyleClass().add("view");
+            r.getStyleClass().add("view");
 
             this.cardView.getChildren().add(q);
             this.cardView.getChildren().add(r);
@@ -98,7 +99,7 @@ public class TrainingController implements Initializable, Observateur {
         this.pileList.setVisible(false);
         this.trainingView.setVisible(true);
 
-        Pile p = Data.getInstance().getCurrentPile() ;
+        Pile p = Data.getInstance().getCurrentPile();
         this.pileName.setText(p.getName());
 
         this.nextCardView();
@@ -122,7 +123,7 @@ public class TrainingController implements Initializable, Observateur {
     @FXML
     public void scoreCard(ActionEvent e) {
 
-        String button = ((Button) e.getSource()).getText() ;
+        String button = ((Button) e.getSource()).getText();
         int score = switch (button) {
             case "1" -> 1;
             case "2" -> 2;
@@ -143,19 +144,15 @@ public class TrainingController implements Initializable, Observateur {
     public void createViewTable() {
         cName.setCellFactory(TextFieldTableCell.forTableColumn());
         cName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
-        cCreateur.setEditable(false);
 
         cCreateur.setCellFactory(TextFieldTableCell.forTableColumn());
         cCreateur.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCreator()));
-        cCreateur.setEditable(false);
 
         cTags.setCellFactory(TextFieldTableCell.forTableColumn());
         cTags.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getTags()));
-        cCreateur.setEditable(false);
 
         cNb.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         cNb.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getCards().size()));
-        cNb.setEditable(false);
 
         cDate.setCellFactory(TextFieldTableCell.forTableColumn());
         cDate.setCellValueFactory(data -> {
@@ -176,9 +173,8 @@ public class TrainingController implements Initializable, Observateur {
                     startTraining();
                     return p;
                 }));
-        cDate.setEditable(false);
 
         table.setItems(Data.getInstance().getPiles());
-        table.setEditable(true);
+        table.setEditable(false);
     }
 }
