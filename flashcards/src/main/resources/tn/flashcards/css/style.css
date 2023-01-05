@@ -48,3 +48,7 @@
     -fx-font-family: "Reem Kufi";
 }
 
+.timer_ring {
+    -color-progress-indicator-fill: #3b812e;
+}
+
