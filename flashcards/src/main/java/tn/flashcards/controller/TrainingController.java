@@ -36,6 +36,8 @@ public class TrainingController implements Initializable, Observateur {
     @FXML
     private Pane pileList;
     @FXML
+    private VBox errorMsg ;
+    @FXML
     private BorderPane trainingView;
     @FXML
     private Label pileName;
@@ -89,9 +91,14 @@ public class TrainingController implements Initializable, Observateur {
         if (c != null) {
             this.question.getChildren().add(QRViewFactory.createQRView(c.getQuestion())) ;
             this.reponse.getChildren().add(QRViewFactory.createQRView(c.getReponse())) ;
+            this.setQuestionView();
+        }
+        else {
+            this.errorMsg.setVisible(true);
+            this.trainingView.setVisible(false);
         }
 
-        this.setQuestionView();
+
 
     }
 
@@ -155,6 +162,7 @@ public class TrainingController implements Initializable, Observateur {
     public void startTraining() {
         this.pileList.setVisible(false);
         this.trainingView.setVisible(true);
+        this.errorMsg.setVisible(false);
 
         Pile p = Data.getInstance().getCurrentPile();
         this.pileName.setText(p.getName());
@@ -170,6 +178,7 @@ public class TrainingController implements Initializable, Observateur {
     public void closeTraining() {
         this.pileList.setVisible(true);
         this.trainingView.setVisible(false);
+        this.errorMsg.setVisible(false);
         Data.getInstance().setCurrentPile(null);
     }
 

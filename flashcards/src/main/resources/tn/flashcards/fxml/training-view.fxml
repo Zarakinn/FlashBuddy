@@ -24,6 +24,12 @@
             </BorderPane.margin>
          </TableView>
       </Pane>
+
+      <VBox fx:id="errorMsg" visible="false">
+         <Label text="Aucune carte n'est disponible pour cette pile."/>
+         <Button onAction="#closeTraining" text="Revenir à la liste de pile"/>
+      </VBox>
+
       <BorderPane fx:id="trainingView" visible="false">
          <top>
             <BorderPane>
