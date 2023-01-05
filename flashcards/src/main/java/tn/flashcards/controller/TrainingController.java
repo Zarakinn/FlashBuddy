@@ -190,7 +190,7 @@ public class TrainingController implements Initializable, Observateur {
     @FXML
     public void scoreCard(ActionEvent e) {
 
-        String button = ((Button) e.getSource()).getText();
+        String button = ((Button) e.getSource()).getId();
         int score = switch (button) {
             case "1" -> 1;
             case "2" -> 2;
