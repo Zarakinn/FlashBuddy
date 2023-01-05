@@ -100,8 +100,8 @@ public class TrainingController implements Initializable, Observateur {
         this.showAnsButton.setVisible(true);
         this.reponse.setVisible(false);
         
-        //int timer = Data.getInstance().getSettings().getTimerAffichage() ;
-        int timer = 15 ;
+        int timer = Data.getInstance().getSettings().getTimerAffichage() ;
+
         if (timer > 0) {
             this.timerRing.setVisible(true);
             this.timerRing.setStringConverter(new StringConverter<Double>() {
