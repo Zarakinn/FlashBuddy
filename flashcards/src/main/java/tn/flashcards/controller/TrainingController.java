@@ -1,6 +1,8 @@
 package tn.flashcards.controller;
 
 
+import atlantafx.base.controls.RingProgressIndicator;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -12,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.*;
+import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import tn.flashcards.components.ActionButtonTableCell;
 import tn.flashcards.model.Data;
@@ -39,9 +42,15 @@ public class TrainingController implements Initializable, Observateur {
     @FXML
     private HBox cardView ;
     @FXML
+    private Pane question ;
+    @FXML
+    private Pane reponse ;
+    @FXML
     private Button showAnsButton ;
     @FXML
     private HBox scoreButtons;
+    @FXML
+    private RingProgressIndicator timerRing ;
 
     @FXML
     TableColumn<Pile, String> cName, cCreateur, cTags;
@@ -74,23 +83,71 @@ public class TrainingController implements Initializable, Observateur {
         Data.getInstance().getSettings().getAlgoChoix().execute();
         Card c = Data.getInstance().getCurrentTrainingCard() ;
 
-        this.cardView.getChildren().removeAll(this.cardView.getChildren()) ;
-
+        this.question.getChildren().removeAll(this.question.getChildren()) ;
+        this.reponse.getChildren().removeAll(this.reponse.getChildren()) ;
 
         if (c != null) {
-            QRView q = QRViewFactory.createQRView(c.getQuestion());
-            QRView r = QRViewFactory.createQRView(c.getReponse());
-
-            q.setPrefWidth(this.cardView.getWidth() / 2 - 20);
-            r.setPrefWidth(this.cardView.getWidth() / 2 - 20);
-            q.getStyleClass().add("view") ;
-            r.getStyleClass().add("view") ;
-
-            this.cardView.getChildren().add(q);
-            this.cardView.getChildren().add(r);
-
-            this.cardView.getChildren().get(1).setVisible(false);
+            this.question.getChildren().add(QRViewFactory.createQRView(c.getQuestion())) ;
+            this.reponse.getChildren().add(QRViewFactory.createQRView(c.getReponse())) ;
         }
+
+        this.setQuestionView();
+
+    }
+
+    private void setQuestionView() {
+        this.scoreButtons.setVisible(false);
+        this.showAnsButton.setVisible(true);
+        this.reponse.setVisible(false);
+        
+        int timer = Data.getInstance().getSettings().getTimerAffichage() ;
+        if (timer > 0) {
+            this.timerRing.setVisible(true);
+            this.timerRing.setStringConverter(new StringConverter<Double>() {
+                @Override
+                public String toString(Double aDouble) {
+                    Double res = aDouble * timer ;
+                    return Integer.toString(res.intValue()) + "s";
+                }
+
+                @Override
+                public Double fromString(String s) {
+                    String number = s.substring(0, s.length() - 2) ;
+                    return Double.parseDouble(number);
+                }
+            });
+
+            this.timerRing.setProgress(0);
+            var task = new Task() {
+
+                @Override
+                protected Void call() throws Exception {
+                    int steps = timer * 20 ;
+                    for (int i = 0 ; i <= steps ; i++) {
+                        Thread.sleep(timer * 1000 / steps);
+                        updateProgress(i, steps);
+                        updateMessage(i + "s");
+                    }
+                    return null ;
+                }
+            } ;
+
+            task.setOnSucceeded(e -> {
+                this.setReponseView();
+            });
+
+            this.timerRing.progressProperty().bind(task.progressProperty()) ;
+
+            new Thread(task).start();
+        }
+    }
+
+    private void setReponseView() {
+        this.scoreButtons.setVisible(true);
+        this.showAnsButton.setVisible(false);
+        this.reponse.setVisible(true);
+        this.timerRing.setVisible(false);
+        this.timerRing.progressProperty().unbind();
     }
 
     @FXML
@@ -100,6 +157,9 @@ public class TrainingController implements Initializable, Observateur {
 
         Pile p = Data.getInstance().getCurrentPile() ;
         this.pileName.setText(p.getName());
+
+        this.question.setPrefWidth(this.cardView.getWidth() / 2);
+        this.reponse.setPrefWidth(this.cardView.getWidth() / 2);
 
         this.nextCardView();
 
@@ -114,9 +174,7 @@ public class TrainingController implements Initializable, Observateur {
 
     @FXML
     public void affReponse() {
-        this.scoreButtons.setVisible(true);
-        this.showAnsButton.setVisible(false);
-        this.cardView.getChildren().get(1).setVisible(true);
+        setReponseView();
     }
 
     @FXML
