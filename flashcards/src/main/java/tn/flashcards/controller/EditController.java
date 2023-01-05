@@ -114,7 +114,7 @@ public class EditController implements Initializable, Observateur {
         cExport.setCellFactory(ActionButtonTableCell.forTableColumn(
                 "Export", new String[]{BUTTON_ICON, BUTTON_OUTLINED}, Feather.SAVE,
                 (Pile p) -> {
-                    FileHandler.SaveStackAs(p,p.getName() + ".json");
+                    FileHandler.SaveStackInZip(p);
                     return p;
                 }));
         cExport.setEditable(false);
@@ -123,37 +123,20 @@ public class EditController implements Initializable, Observateur {
         table.setEditable(true);
     }
 
-/*    public void importStack()
-    {
-        Pile stack = FileHandler.LoadStack( b.getScene().getWindow());
-        if (stack !=null)
-        {
-            // ajouter à la liste
-            Data.getInstance();
-            //Vérifier qu'on réagit bien
-        }
-    }*/
-
-    @FXML
-    public void saveStack() {
-        Pile stack = new Pile(); // Fetch selected
-        FileHandler.SaveStackAs(stack, stack.getName() + ".json");
-    }
-
-    public void display() {
-        table.setItems(Data.getInstance().getPiles());
-    }
-
     @FXML
     public void createPile() {
         Data.getInstance().createPile("Nom", "Auteur");
     }
 
     public void importePile() {
-        Pile p = FileHandler.LoadStack(importBtn.getScene().getWindow());
+        //Pile p = FileHandler.LoadStack(importBtn.getScene().getWindow());
+        Pile p = FileHandler.LoadStackFromZip(importBtn.getScene().getWindow());
         if (p !=null)
         {
                Data.getInstance().addPile(p);
+        }
+        else {
+            System.out.println("Fail to import");
         }
     }
 
