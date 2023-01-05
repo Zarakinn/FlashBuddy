@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static atlantafx.base.theme.Styles.*;
-import static tn.flashcards.components.ActionButtonTableCell.BLUE_GRADIENT_BTN;
+import static tn.flashcards.components.ActionButtonTableCell.GRADIENT_BTN;
 
 public class TrainingController implements Initializable, Observateur {
 
@@ -169,7 +169,7 @@ public class TrainingController implements Initializable, Observateur {
 
         cJouer.setCellFactory(ActionButtonTableCell.forTableColumn(
                 "Lancer le test",
-                new String[]{SUCCESS, BLUE_GRADIENT_BTN},
+                new String[]{SUCCESS, GRADIENT_BTN},
                 null,
                 (Pile p) -> {
                     Data.getInstance().setCurrentPile(p);
