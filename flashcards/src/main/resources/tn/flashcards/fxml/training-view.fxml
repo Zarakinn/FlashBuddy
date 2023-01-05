@@ -42,7 +42,7 @@
                <StackPane alignment="CENTER">
                   <Pane fx:id="reponse" styleClass="view"/>
                   <AnchorPane>
-                     <RingProgressIndicator AnchorPane.rightAnchor="350" AnchorPane.topAnchor="100" fx:id="timerRing" prefHeight="250" visible="false"/>
+                     <RingProgressIndicator styleClass="timer_ring" AnchorPane.rightAnchor="350" AnchorPane.topAnchor="100" fx:id="timerRing" prefHeight="250" visible="false"/>
                   </AnchorPane>
                </StackPane>
             </HBox>
