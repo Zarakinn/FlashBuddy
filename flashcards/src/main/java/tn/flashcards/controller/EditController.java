@@ -2,39 +2,31 @@ package tn.flashcards.controller;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 import org.kordamp.ikonli.feather.Feather;
-import org.kordamp.ikonli.javafx.FontIcon;
 import tn.flashcards.Utils.FileHandler;
 import tn.flashcards.components.ActionButtonTableCell;
 import tn.flashcards.model.Data;
-import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
-import tn.flashcards.model.stats.DateFormat;
 import tn.flashcards.model.stats.StatsPile;
 
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import static atlantafx.base.theme.Styles.*;
+import static tn.flashcards.components.ActionButtonTableCell.GRADIENT_BTN;
 
 public class EditController implements Initializable, Observateur {
 
+    @FXML
+    public Button startBtn, importBtn;
     @FXML
     TableColumn<Pile, String> cName, cCreateur, cTags;
     @FXML
@@ -53,10 +45,8 @@ public class EditController implements Initializable, Observateur {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //table.prefHeight(500);
-        //table.prefWidthProperty().bind(container.widthProperty());
-
         createViewTable();
+        //startBtn.getStyleClass().add(GRADIENT_BTN);
         //Data.getIstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).updateLastOpened(LocalDateTime.now().minusDays(10));
         //Systems.out.println(Data.getInstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).getLastOpenedFormated());
     }
@@ -129,11 +119,11 @@ public class EditController implements Initializable, Observateur {
         }
     }*/
 
+    @FXML
     public void saveStack() {
         Pile stack = new Pile(); // Fetch selected
         FileHandler.SaveStackAs(stack, String.valueOf(stack.getName()));
     }
-
 
     public void display() {
 
