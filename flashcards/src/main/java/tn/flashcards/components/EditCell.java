@@ -52,9 +52,11 @@ public class EditCell extends ListCell<Card> {
                     {
                         case TEXT:
                             c.getQuestion().setType(QRType.TEXT);
+                            Data.getInstance().notifierObservateur(); // C'est très laid
                             break;
                         case IMAGE:
                             c.getQuestion().setType(QRType.IMAGE);
+                            Data.getInstance().notifierObservateur(); // C'est très laid
                             break;
                         default:
                             break;
@@ -110,6 +112,7 @@ public class EditCell extends ListCell<Card> {
                         String value = nameField.getText();
                         c.getQuestion().setContent(value);
                         formStage.close();
+                        Data.getInstance().notifierObservateur(); // TODO - nettoyer ca
                     });
 
                     Scene formScene = new Scene(form, 300, 200);
@@ -123,6 +126,7 @@ public class EditCell extends ListCell<Card> {
                     if (file!=null)
                     {
                         c.getQuestion().setContent(file.toURI().toString());
+                        Data.getInstance().notifierObservateur(); // TODO - nettoyer ca
                     }
                     break;
                 default:
@@ -154,6 +158,7 @@ public class EditCell extends ListCell<Card> {
                     submitButton.setOnAction( submited-> {
                         String value = nameField.getText();
                         c.getReponse().setContent(value);
+                        Data.getInstance().notifierObservateur(); // TODO - nettoyer ca
                         formStage.close();
                     });
 
@@ -168,6 +173,7 @@ public class EditCell extends ListCell<Card> {
                     if (file!=null)
                     {
                         c.getReponse().setContent(file.toURI().toString());
+                        Data.getInstance().notifierObservateur(); // TODO - nettoyer ca
                     }
                     break;
                 default:

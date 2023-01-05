@@ -36,8 +36,6 @@ public class Data extends SujetObserve {
         this.statsPile = new HashMap<String, StatsPile>();
         this.piles = FXCollections.observableArrayList();
         this.settings = new Settings();
-
-
         // TODO : vérifier si peut être importer depuis un fichier
     }
 
