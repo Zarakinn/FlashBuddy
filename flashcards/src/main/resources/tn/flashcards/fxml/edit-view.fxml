@@ -9,18 +9,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditController">
+<BorderPane fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditController">
    <center>
       <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="cName" prefWidth="160.0" text="Nom de la pile 🖉" />
-          <TableColumn fx:id="cNb" prefWidth="100.0" text="Nb. cartes" />
-            <TableColumn fx:id="cTags" prefWidth="120.0" text="Tags 🖉" />
-            <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="120.0" text="Créateur" />
-            <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="153.0" text="Dernière utilisation" />
-            <TableColumn fx:id="cExport" editable="false" prefWidth="60.0" sortable="false" />
-            <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="60.0" sortable="false" />
-            <TableColumn fx:id="cDelete" editable="false" minWidth="0.0" prefWidth="50.0" sortable="false" />
+          <TableColumn fx:id="cName" prefWidth="170.0" text="Nom🖉" />
+          <TableColumn fx:id="cNb" prefWidth="60.0" text="Nb." />
+            <TableColumn fx:id="cTags" prefWidth="120.0" text="Tag🖉" />
+            <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="170.0" text="Créateur" />
+            <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="150.0" text="Modification" />
+            <TableColumn fx:id="cExport" editable="false" prefWidth="45.0" sortable="false" />
+            <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="45.0" sortable="false" />
+            <TableColumn fx:id="cDelete" editable="false" minWidth="0.0" prefWidth="45.0" sortable="false" />
+            <TableColumn fx:id="cDesc" editable="false" minWidth="0.0" prefWidth="163.0" sortable="false" text="Description" />
         </columns>
          <BorderPane.margin>
             <Insets />
