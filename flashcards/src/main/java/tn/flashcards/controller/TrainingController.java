@@ -84,8 +84,8 @@ public class TrainingController implements Initializable, Observateur {
             q.getStyleClass().add("view") ;
             r.getStyleClass().add("view") ;
 
-            this.cardView.getChildren().add(r);
             this.cardView.getChildren().add(q);
+            this.cardView.getChildren().add(r);
 
             this.cardView.getChildren().get(1).setVisible(false);
         }

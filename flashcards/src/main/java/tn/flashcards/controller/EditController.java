@@ -106,6 +106,14 @@ public class EditController implements Initializable, Observateur {
                 }));
         cDate.setEditable(false);
 
+        cExport.setCellFactory(ActionButtonTableCell.forTableColumn(
+                "Export", new String[]{BUTTON_ICON, BUTTON_OUTLINED}, Feather.SAVE,
+                (Pile p) -> {
+                    FileHandler.SaveStackAs(p,p.getName());
+                    return p;
+                }));
+        cExport.setEditable(false);
+
         table.setItems(Data.getInstance().getPiles());
         table.setEditable(true);
     }
@@ -123,7 +131,7 @@ public class EditController implements Initializable, Observateur {
 
     public void saveStack() {
         Pile stack = new Pile(); // Fetch selected
-        FileHandler.SaveStackAs(stack, String.valueOf(stack.hashCode())); // changer en stack.name quand dispo
+        FileHandler.SaveStackAs(stack, String.valueOf(stack.getName()));
     }
 
 

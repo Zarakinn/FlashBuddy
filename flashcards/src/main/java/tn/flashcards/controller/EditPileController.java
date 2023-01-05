@@ -2,6 +2,7 @@ package tn.flashcards.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -58,5 +59,10 @@ public class EditPileController implements Initializable, Observateur {
     @Override
     public void reagir() {
         display();
+    }
+
+    @FXML
+    public void Retour() {
+        Data.getInstance().setMode(Data.Mode.EDITION);
     }
 }
