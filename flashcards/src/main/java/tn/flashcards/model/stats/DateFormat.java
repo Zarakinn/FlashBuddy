@@ -10,4 +10,8 @@ public class DateFormat {
     public static DateTimeFormatter getDayFormater() {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd");
     }
+
+    public static DateTimeFormatter getMinuteFormatter() {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm");
+    }
 }
