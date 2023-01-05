@@ -9,12 +9,12 @@ import lombok.Setter;
 @Getter
 public class Settings {
     protected StrategyChoix algoChoix;
-    protected AlgoAffichage algoAffichage;
+    protected int timerAffichage ;
     protected Theme theme;
 
     public Settings() {
         this.algoChoix = new StrategyChoixProbaEgales();
-        this.algoAffichage = AlgoAffichage.CLIC;
+        this.timerAffichage = -1 ;
         this.theme = Theme.FONCE;
     }
 }
