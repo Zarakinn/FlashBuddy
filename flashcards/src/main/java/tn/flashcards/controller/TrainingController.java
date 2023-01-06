@@ -173,7 +173,7 @@ public class TrainingController implements Initializable, Observateur {
         this.trainingView.setVisible(true);
         this.errorMsg.setVisible(false);
 
-        Pile p = Data.getInstance().getCurrentPile();
+        Pile p = Data.getInstance().getCurrentTrainingPile();
         this.pileName.setText(p.getName());
 
         this.question.setPrefWidth(this.cardView.getWidth() / 2);
@@ -188,7 +188,7 @@ public class TrainingController implements Initializable, Observateur {
         this.pileList.setVisible(true);
         this.trainingView.setVisible(false);
         this.errorMsg.setVisible(false);
-        Data.getInstance().setCurrentPile(null);
+        Data.getInstance().setCurrentTrainingPile(null);
         //FileHandler.saveStats();
     }
 
@@ -246,7 +246,7 @@ public class TrainingController implements Initializable, Observateur {
                 new String[]{SUCCESS, GRADIENT_BTN},
                 null,
                 (Pile p) -> {
-                    Data.getInstance().setCurrentPile(p);
+                    Data.getInstance().setCurrentTrainingPile(p);
                     startTraining();
                     return p;
                 }));
