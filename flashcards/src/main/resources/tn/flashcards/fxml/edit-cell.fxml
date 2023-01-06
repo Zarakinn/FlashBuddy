@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="200.0" maxWidth="-Infinity" minHeight="200.0" minWidth="-Infinity" prefHeight="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditCardCellController">
+<HBox maxHeight="200.0" maxWidth="-Infinity" minHeight="200.0" minWidth="-Infinity" prefHeight="200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.EditCardCellController">
    <padding>
       <Insets bottom="10.0" />
    </padding>
@@ -37,27 +46,27 @@
             </Label>
             <StackPane fx:id="QPane" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="22.0">
                <children>
-                  <AnchorPane fx:id="q_txt_pane" maxWidth="400.0" StackPane.alignment="CENTER">
+                  <AnchorPane fx:id="q_txt_pane" maxWidth="400.0" visible="false" StackPane.alignment="CENTER">
                      <children>
-                        <TextArea fx:id="q_txt_area" maxWidth="400.0" onKeyTyped="#q_textarea" prefHeight="140.0" prefWidth="315.0" promptText="Saisir la question" styleClass="qr_area" stylesheets="@../css/style.css" wrapText="true" AnchorPane.rightAnchor="22.0">
+                        <TextArea fx:id="q_txt_area" maxWidth="-Infinity" onKeyTyped="#q_textarea" prefHeight="140.0" prefWidth="275.0" promptText="Saisir la question" styleClass="qr_area" stylesheets="@../css/style.css" wrapText="true">
                            <font>
                               <Font size="17.0" />
                            </font></TextArea>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="q_img_pane" visible="false" StackPane.alignment="CENTER">
+                  <AnchorPane fx:id="q_img_pane" StackPane.alignment="CENTER">
                      <children>
-                        <ImageView fx:id="q_img" fitHeight="175.0" fitWidth="175.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="q_img" fitHeight="175.0" fitWidth="175.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
                            <image>
                               <Image url="@../img/notfound.jpeg" />
                            </image></ImageView>
-                        <Button mnemonicParsing="false" onAction="#q_parcourir" prefHeight="38.0" prefWidth="91.0" text="Parcourir" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="64.0" />
+                        <Button mnemonicParsing="false" onAction="#q_parcourir" prefHeight="34.0" prefWidth="91.0" text="Parcourir" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
                      </children>
                   </AnchorPane>
                </children></StackPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="10.0" minWidth="400.0" prefHeight="200.0">
+      <AnchorPane layoutX="10.0" layoutY="10.0" minWidth="400.0" prefHeight="200.0" HBox.hgrow="SOMETIMES">
          <children>
             <VBox alignment="CENTER" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="67.0">
                <children>
@@ -82,26 +91,35 @@
                </font></Label>
             <StackPane fx:id="RPane" layoutX="114.0" layoutY="39.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="22.0">
                <children>
-                  <AnchorPane fx:id="r_txt_pane" maxWidth="400.0" StackPane.alignment="CENTER">
+                  <AnchorPane fx:id="r_txt_pane" maxWidth="400.0" visible="false" StackPane.alignment="CENTER">
                      <children>
-                        <TextArea fx:id="r_txt_area" maxWidth="400.0" onKeyTyped="#r_textarea" prefHeight="140.0" prefWidth="315.0" promptText="Saisir la réponse" styleClass="qr_area" stylesheets="@../css/style.css" wrapText="true">
+                        <TextArea fx:id="r_txt_area" maxWidth="-Infinity" onKeyTyped="#r_textarea" prefHeight="140.0" prefWidth="275.0" promptText="Saisir la réponse" styleClass="qr_area" stylesheets="@../css/style.css" wrapText="true">
                            <font>
                               <Font name="Verdana" size="17.0" />
                            </font></TextArea>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="r_img_pane" visible="false" StackPane.alignment="CENTER">
+                  <AnchorPane fx:id="r_img_pane" StackPane.alignment="CENTER">
                      <children>
-                        <ImageView fx:id="r_img" fitHeight="175.0" fitWidth="175.0" layoutX="28.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="r_img" fitHeight="175.0" fitWidth="175.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
                            <image>
                               <Image url="@../img/notfound.jpeg" />
                            </image></ImageView>
-                        <Button mnemonicParsing="false" onAction="#r_parcourir" prefHeight="34.0" prefWidth="91.0" text="Parcourir" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="64.0" />
+                        <Button mnemonicParsing="false" onAction="#r_parcourir" prefHeight="34.0" prefWidth="91.0" text="Parcourir" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64.0" />
                      </children>
                   </AnchorPane>
                </children>
             </StackPane>
          </children>
       </AnchorPane>
+      <BorderPane HBox.hgrow="ALWAYS">
+         <center>
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="38.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets right="13.0" />
+               </BorderPane.margin>
+            </Button>
+         </center>
+      </BorderPane>
    </children>
 </HBox>

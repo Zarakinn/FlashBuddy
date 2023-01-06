@@ -34,8 +34,8 @@ public class Pile {
     private String tags;
 
     public Pile() {
-        this.name = "Nom de la pile";
-        this.desc = "Description par défaut";
+        this.name = "";
+        this.desc = "";
         this.uniqueId = Pile.genUniqueId();
         this.creator = "Créateur";
         this.cards = new ArrayList<>();

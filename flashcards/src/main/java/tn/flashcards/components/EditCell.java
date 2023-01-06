@@ -35,7 +35,7 @@ public class EditCell extends ListCell<Card> implements Observateur {
         if (empty || carte == null) {
             setGraphic(null);
         } else {
-            controller.setVueCarte((Card) carte);
+            controller.setVueCarte(carte);
             setGraphic(root);
         }
     }

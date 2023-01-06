@@ -108,7 +108,7 @@ public class Data extends SujetObserve {
 
     public Card createDefaultCard(String pileId)
     {
-        return createCard(pileId,QRType.TEXT,"question",QRType.TEXT,"réponse");
+        return createCard(pileId,QRType.TEXT,"",QRType.TEXT,"");
     }
 
     public Card createCard(String pileId, QRType qType, String question, QRType rType, String reponse) {
