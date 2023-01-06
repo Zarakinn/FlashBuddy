@@ -27,7 +27,7 @@ package "VisualFactory" #ffecb8 {
     class QRViewFactory
     note right: Pattern Factory
     class QRViewFactory {
-        +Pane createQRView(Card card)
+        + static QRView createQRView(Card card)
     }
 
     abstract QRView extends javafx.scene.layout.Pane {}
@@ -42,6 +42,7 @@ package "VisualFactory" #ffecb8 {
         # ImageView img
 
         + QRImageView(String url)
+        + void setSize(double height, double width)
     }
 
     class MyBarChart extends javafx.scene.chart.BarChart {
@@ -51,8 +52,58 @@ package "VisualFactory" #ffecb8 {
     class MyPieChart extends javafx.scene.chart.PieChart {
         MyPieChart(int[] donnees)
     }
+
+    
 }
 
+/' ******* ********** **********
+********** COMPONENTS
+********** ********** ********'/
+
+package "Components" #ffecb8 {
+    class ActionButtonTableCell extends javafx.scene.control.TableCell {
+        - final Button ActionButton
+        + static final String GRADIENT_BTN
+
+        + S getCurrentItem()
+        + static forTableColumn()
+        + void updtaeItem(Button item, boolean empty)
+    }
+
+    class EditCell extends javafx.scene.control.ListCell {
+        + void updateItem(Card c, boolean empty)
+    }
+}
+
+/' ******* ********** **********
+********** UTILS
+********** ********** ********'/
+
+package "Utils" #dcecc7 {
+
+    class Calculs {
+        + static int[] camembert(Pile p)
+        + static int[] camembert()
+        + static int[] tenLastDays(Pile p)
+        - static boolean isSameDay(LocalDateTime d1, LocalDateTime d2)
+        - static boolean isLessThanNMinutesBefore(LocalDateTime d1, LocalDateTime d2, int n)
+    }
+    class FileHandler{
+        + static FileChooser getImageFileChooser()
+        + static FileChooser getPileFileChooser()
+        + static void addDataToZip(ZipOutputStream out, String fileName, byte[] data)
+        + static byte[] imageToData(String fileName)
+        + static void handleImageExport(ZipOutputStream out, QuestionReponse qr)
+        + static void saveStackInZip(Pile p)
+        + static Image loadImageFromZip(String path)
+        + static Pile LoadStackFromZip(Window w)
+    }
+
+    class DateFormat {
+        + static DateTimeFormatter getDateTimeFormatter()
+        + static DateTimeFormatter getDayFormater()
+    }
+}
 
 /' ******* ********** **********
 ********** CONTROLLER
@@ -83,15 +134,30 @@ package "model" #f6a6b2 {
         - Data instance
         - Data()
         + static Data getInstance()
-        + Settings getSettings()
-        + ObservableList<Pile> getPiles()
         + Pile getAPile(String id)
         - void addPile(Pile p)
-        + void createPile(String name, String creator)
-        + void createCard(String pileId, QRType qType, String question, QRType rType, String reponse)
+        + Pile createPile(r)
+        + Pile clonePile(Pile p)
+        + Card cloneCard(Card c)
+        + Card createDefaultCard(String pileId)
+        + Card createCard(String pileId, QRType qType, String question, QRType rType, String reponse)
+        + void deleteCard(Pile p, Card c)
+        + void deletePile(Pile p)
+        + void scoreCard(int score)
     }
     class Data
     note right: Pattern Singleton
+
+    enum Mode {
+        APPRENTISSAGE_SELECTION
+        PARTIE_EN_COURS
+        EDITION_SELECTION
+        STATS
+        PARAM
+        EDIT_PILE
+    }
+
+    
 
     package pile {
 
@@ -100,8 +166,8 @@ package "model" #f6a6b2 {
             # String desc
             # String uniqueId
             # String creator
-
-            '+ void nextCard()'
+            # String tags
+            # int nextCardId
 
             + void addCard()
         }
@@ -114,64 +180,69 @@ package "model" #f6a6b2 {
             # String content
         }
 
-        enum QRType {}
+        enum QRType {
+            TEXT 
+            IMAGE
+        }
     }
 
     package stats {
         class StatsPile {
             # String pileId
-            # Int noJeuxPile
-            # Int noJeuxCarte
-            # Date lastOpened
+            # int noJeuxPile
+            # int noJeuxCarte
+            # LocalDateTime lastOpened
+
+            + void incrNoJeuxPile()
+            + void incrNoJeuxCarte()
+            + String getLastOpenedFormatted()
+            + void updateLastOpened()
+            + void addPlayed(int cardId, FullStats played)
+            + LastStats getPlayed(int cardId)
         }
 
         class LastStats {
-            # Date playDate
-            # Int difficulty
+            # LocalDateTime playDate
+            # int difficulty
+
+            + String getPlayDateFormatted()
         }
 
         class FullStats extends LastStats {
-            # Int cardId
+            # int cardId
+
+            + LastStats copyAsLastStats()
         }
 
-        class DateFormat {
-            + static DateTimeFormatter getDateTimeFormatter()
-        }
+        
 
 
     }
 
     package settings {
 
-        class Settings {}
+        class Settings {
+            # int timerAffichage
+            # String auteurParDefaut
+        }
 
         interface StrategyChoix
-        note right: Pattern Strategy
+        note left: Pattern Strategy
         interface StrategyChoix {
-            + Card execute()
+            + void execute()
         }
 
         class StrategyChoixProba implements StrategyChoix{
-            + Card execute()
+            + void execute()
         }
 
-        class StrategyChoixTemps implements StrategyChoix{
-            + Card execute()
-        }
-
-        class StrategyChoixTProbaEgales implements StrategyChoix{
-            + Card execute()
-        }
-
-        enum AlgoAffichage {
-            TEMPS
-            CLIC
+        class StrategyChoixProbaEgales implements StrategyChoix{
+            + void execute()
         }
 
         enum Theme {
             CLAIR
             FONCE
-            CONTRASTE
         }
     }
 
@@ -189,35 +260,40 @@ Launcher -->"1" style.css
 vue.fxml -->"1" Controller
 
 ' CM
-SujetObserve *-->"*" Observateur
+SujetObserve *-->"..*" Observateur
 
 
 ' CONTROLLER
 Controller --> QRViewFactory
 Controller --> MyBarChart
 Controller --> MyPieChart
+Controller --> ActionButtonTableCell
+Controller --> EditCell
 
 ' MODEL
 Pile *--"..*" Card
-Card *--"2" QuestionRéponse
+Card *-->"2" QuestionRéponse
 QuestionRéponse -->"1" QRType
 
 Data *-->"..*" Pile
-Data *-->"1" Settings
+Data -->"1" Settings
 Data *-->"..* [HashMap]" StatsPile
+Data -->"1" Mode
 
-Settings -->"1" StrategyChoix
-Settings -->"1" AlgoAffichage
 Settings -->"1" Theme
+Settings -->"1" StrategyChoix
 
-StatsPile -->"..* [HashMap]" LastStats
-StatsPile -->"..*" FullStats
+StatsPile *-->"..* [HashMap]" LastStats
+StatsPile *-->"..*" FullStats
 
 ' HIDDEN
-FullStats -d[hidden]-> DateFormat
 javafx.fxml.Initializable -d[hidden]-> Observateur
 MyBarChart -l[hidden]-> QRView
 MyPieChart -l[hidden]-> MyBarChart
 javafx.scene.layout -l[hidden]-> javafx.scene.chart.BarChart
+QRImageView -d[hidden]-> DateFormat
+QRImageView -r[hidden]-> EditCell
+
+
 
 @enduml
