@@ -16,6 +16,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.*;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import tn.flashcards.VisualFactory.QRImageView;
+import tn.flashcards.VisualFactory.QRView;
 import tn.flashcards.components.ActionButtonTableCell;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
@@ -119,9 +121,28 @@ public class TrainingController implements Initializable, Observateur {
         }
         Data.getInstance().getSettings().getAlgoChoix().execute();
         Card c = Data.getInstance().getCurrentTrainingCard();
-        
-        this.question.getChildren().add(QRViewFactory.createQRView(c.getQuestion()));
-        this.reponse.getChildren().add(QRViewFactory.createQRView(c.getReponse()));
+
+        QRView q = QRViewFactory.createQRView(c.getQuestion()) ;
+        QRView r = QRViewFactory.createQRView(c.getReponse()) ;
+
+        if (q instanceof QRImageView qi) {
+            System.out.println("q");
+            qi.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
+            this.question.getChildren().setAll(qi);
+        }
+        else {
+            this.question.getChildren().setAll(q);
+        }
+
+        if (r instanceof QRImageView ri) {
+            System.out.println("r");
+            ri.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
+            this.reponse.getChildren().setAll(ri);
+        }
+        else {
+            this.reponse.getChildren().setAll(r);
+        }
+
         this.setQuestionView();
     }
 
@@ -202,6 +223,8 @@ public class TrainingController implements Initializable, Observateur {
         this.reponse.setPrefWidth(this.cardView.getWidth() / 2);
 
         this.nextCardView();
+
+
     }
 
     @FXML
