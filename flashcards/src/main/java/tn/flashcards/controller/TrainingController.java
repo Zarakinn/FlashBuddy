@@ -259,8 +259,7 @@ public class TrainingController implements Initializable, Observateur {
         };
 
         // Si un petit malin supprime le deck pendant la partie
-        if (Data.getInstance().getCurrentPile() == null ||
-                Data.getInstance().getCurrentTrainingCard() == null) {
+        if (Data.getInstance().getCurrentTrainingCard() == null) {
             setMode(ModeTraining.NO_CARTE);
             return;
         }
