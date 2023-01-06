@@ -176,6 +176,10 @@ public class TrainingController implements Initializable, Observateur {
         Pile p = Data.getInstance().getCurrentTrainingPile();
         this.pileName.setText(p.getName());
 
+        // Incrémente le nombre de fois qu'on a ouvert cette pile
+        Data.getInstance().getStatsPile().get(p.getUniqueId()).incrNoJeuxPile();
+        Data.getInstance().getStatsPile().get(p.getUniqueId()).updateLastOpened();
+
         this.question.setPrefWidth(this.cardView.getWidth() / 2);
         this.reponse.setPrefWidth(this.cardView.getWidth() / 2);
 
