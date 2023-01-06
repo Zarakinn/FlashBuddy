@@ -79,11 +79,16 @@ public class Calculs {
         int j = 0;
         FullStats fs = sp.getFullStats().get(j);
         for (int i = 9; i >= 0; i--) {
-            while (j < sp.getFullStats().size() && isSameDay(d, fs.getPlayDate())) {
+            while (isSameDay(d, fs.getPlayDate())) {
 
                 res[i]++;
 
                 j++;
+                if (j < sp.getFullStats().size()) {
+                    fs = sp.getFullStats().get(j);
+                } else {
+                    break;
+                }
             }
             d = d.minusDays(1);
         }
@@ -149,7 +154,7 @@ public class Calculs {
         String s1 = d1.format(DateFormat.getDayFormater());
         String s2 = d2.format(DateFormat.getDayFormater());
 
-        return (s1 == s2);
+        return (s1.equals(s2));
     }
 
     /**
