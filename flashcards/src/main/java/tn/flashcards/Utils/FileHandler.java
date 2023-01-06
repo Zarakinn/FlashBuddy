@@ -2,6 +2,7 @@ package tn.flashcards.Utils;
 
 import com.google.gson.GsonBuilder;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import tn.flashcards.model.Data;
@@ -77,7 +78,7 @@ public class FileHandler {
         return null;
     }
 
-    public static void HandleImageImport(ZipOutputStream outputStream, QuestionReponse qr)
+    public static void HandleImageExport(ZipOutputStream outputStream, QuestionReponse qr)
     {
         if (qr.getType() == QRType.IMAGE)
         {
@@ -104,8 +105,8 @@ public class FileHandler {
                 QuestionReponse q = c.getQuestion();
                 QuestionReponse r = c.getReponse();
 
-                HandleImageImport(outputStream,q);
-                HandleImageImport(outputStream,r);
+                HandleImageExport(outputStream,q);
+                HandleImageExport(outputStream,r);
             }
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(pile);
@@ -114,6 +115,39 @@ public class FileHandler {
             System.out.println("Fail to Save Stack");
         }
 
+    }
+
+    public static Image loadImageFromZip(String path)
+    {
+        int index = path.indexOf("/", path.indexOf(".zip") + ".zip".length());
+        String zipPath = path.substring(0, index);
+        String imagePath = path.substring(index+1);
+        File file = new File(zipPath);
+        try ( ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));){
+            ZipEntry entry = inputStream.getNextEntry();
+
+            while (entry != null) {
+                if (entry.getName().equals(imagePath)) {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+                    byte[] buffer = new byte[1024];
+
+                    int len;
+                    while ((len = inputStream.read(buffer)) > 0) {
+                        baos.write(buffer, 0, len);
+                    }
+                    InputStream is = new ByteArrayInputStream(baos.toByteArray());
+                    Image image = new Image(is);
+                    return image;
+                }
+                entry = inputStream.getNextEntry();
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static Pile LoadStackFromZip(Window window)
@@ -127,6 +161,20 @@ public class FileHandler {
                     if (entry.getName().equals("Pile.json")) {
                         Gson gson = new Gson();
                         stack = gson.fromJson(new InputStreamReader(inputStream), Pile.class);
+                    }
+                }
+                for (Card c:stack.getCards())
+                {
+                    QuestionReponse q = c.getQuestion();
+                    QuestionReponse r = c.getReponse();
+
+                    if (q.getType() == QRType.IMAGE)
+                    {
+                        q.setContent(file.getAbsolutePath() + "/" + q.getContent());
+                    }
+                    if (r.getType() == QRType.IMAGE)
+                    {
+                        r.setContent(file.getAbsolutePath() + "/" + r.getContent());
                     }
                 }
                 return stack;

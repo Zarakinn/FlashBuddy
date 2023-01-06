@@ -3,6 +3,7 @@ package tn.flashcards.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tn.flashcards.Launcher;
+import tn.flashcards.Utils.FileHandler;
 
 import java.io.File;
 
@@ -13,11 +14,21 @@ public class QRImageView extends QRView {
         super() ;
         this.imgView = new ImageView();
         try {
-            File file = new File(path);
-            Image img = new Image(file.toURI().toString());
-            if (img.isError())
+            Image img;
+            if (path.contains(".zip"))
             {
-                throw new Exception();
+                img = FileHandler.loadImageFromZip(path);
+                if (img == null)
+                    throw new Exception();
+            }
+            else
+            {
+                File file = new File(path);
+                img = new Image(file.toURI().toString());
+                if (img.isError())
+                {
+                    throw new Exception();
+                }
             }
             imgView.setImage(img);
         }
