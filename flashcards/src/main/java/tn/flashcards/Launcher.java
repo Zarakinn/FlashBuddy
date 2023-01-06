@@ -45,7 +45,7 @@ public class Launcher extends Application {
         Scene scene = new Scene(root, 1000, 700);
         scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource("css/style.css")).toURI().toString());
 
-        Image icon = new Image(Launcher.class.getResource("img/icon.ico").toURI().toString());
+        Image icon = new Image(Launcher.class.getResource("img/icon.png").toURI().toString());
         stage.getIcons().add(icon);
         stage.show();
 
