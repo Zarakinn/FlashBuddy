@@ -18,12 +18,12 @@ public class Calculs {
      * Il prend une pile et renvoie un tableau de 6 entiers : le nombre de cartes
      * avec chaque difficulté
      * (indice 0-4) et les cartes non jouées (indice 5).
-     * 
+     *
      * @param p la pile pour laquelle vous voulez obtenir le camembert
      * @return Un tableau d'entiers.
      */
     public static int[] camembert(Pile p) {
-        int[] res = { 0, 0, 0, 0, 0, 0 };
+        int[] res = {0, 0, 0, 0, 0, 0};
 
         HashMap<Integer, LastStats> ls = Data.getInstance().getStatsPile().get(p.getUniqueId()).getLastStats();
         ArrayList<Card> cards = p.getCards();
@@ -45,12 +45,12 @@ public class Calculs {
      * IRenvoie un tableau de 6 entiers : le nombre de cartes
      * avec chaque difficulté
      * (indice 0-4) et les cartes non jouées (indice 5).
-     * 
+     *
      * @param p la pile pour laquelle vous voulez obtenir le camembert
      * @return Un tableau d'entiers.
      */
     public static int[] camembert() {
-        int[] res = { 0, 0, 0, 0, 0, 0 };
+        int[] res = {0, 0, 0, 0, 0, 0};
         int[] loc;
 
         for (Pile p : Data.getInstance().getPiles()) {
@@ -67,11 +67,11 @@ public class Calculs {
      * Etant donné une pile de cartes, renvoie un tableau de 10 entiers,
      * représentant le nombre de parties
      * pour chacun des dix derniers jours.
-     * 
+     *
      * @param p un objet Pile
      */
     public static int[] tenLastDays(Pile p) {
-        int[] res = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        int[] res = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         LocalDateTime d = LocalDateTime.now();
         StatsPile sp = Data.getInstance().getStatsPile().get(p.getUniqueId());
@@ -103,7 +103,7 @@ public class Calculs {
     /**
      * Il prend une pile de cartes et renvoie un tableau de 5 listes de même taille
      * contenant le nombre d'évaluation à telle difficulté par tranche de 20 minutes
-     * 
+     *
      * @param p la pile dont vous voulez obtenir les statistiques
      * @return Un tableau de tableaux de listes d'entiers.
      */
@@ -148,7 +148,7 @@ public class Calculs {
 
     /**
      * Renvoie vrai si les deux dates sont le même jour
-     * 
+     *
      * @param d1 La première date à comparer.
      * @param d2 La date à comparer.
      * @return Une valeur booléenne.
@@ -163,7 +163,7 @@ public class Calculs {
 
     /**
      * Si d1 est au plus N minutes avant d2, retourne vrai.
-     * 
+     *
      * @param d1 La date à comparer
      * @param d2 L'heure actuelle
      * @param N  Le nombre de minutes avant l'heure actuelle.

@@ -7,11 +7,10 @@ public class QRViewFactory {
 
     public static QRView createQRView(QuestionReponse qr) {
         if (qr.getType() == QRType.TEXT) {
-            return new QRTextView(qr.getContent()) ;
+            return new QRTextView(qr.getContent());
+        } else if (qr.getType() == QRType.IMAGE) {
+            return new QRImageView(qr.getContent());
         }
-        else if (qr.getType() == QRType.IMAGE) {
-            return new QRImageView(qr.getContent()) ;
-        }
-        return null ;
+        return null;
     }
 }

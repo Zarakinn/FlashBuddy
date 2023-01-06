@@ -16,8 +16,8 @@ public class MyBarChart extends BarChart<String, Number> {
     public MyBarChart(int[] donnees) {
         super(new CategoryAxis(), new NumberAxis());
 
-        String[] legends = { "9 jours", "8 jours", "7 jours", "6 jours", "5 jours", "4 jours", "3 jours", "2 jours",
-                "Hier", "Aujourd'hui" };
+        String[] legends = {"9 jours", "8 jours", "7 jours", "6 jours", "5 jours", "4 jours", "3 jours", "2 jours",
+                "Hier", "Aujourd'hui"};
 
         this.getXAxis().setLabel("Date");
         this.getYAxis().setLabel("Nombre de parties");

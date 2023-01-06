@@ -15,9 +15,9 @@ public class MyPieChart extends PieChart {
 
         ObservableList<PieChart.Data> pieChartData;
 
-        if (donnees[0]+donnees[1]+donnees[2]+donnees[3]+donnees[4]+donnees[5] == 0) {
+        if (donnees[0] + donnees[1] + donnees[2] + donnees[3] + donnees[4] + donnees[5] == 0) {
             pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Non jouées", 1));
+                    new PieChart.Data("Non jouées", 1));
         } else {
             pieChartData = FXCollections.observableArrayList(
                     new PieChart.Data("Evident", donnees[0]),
