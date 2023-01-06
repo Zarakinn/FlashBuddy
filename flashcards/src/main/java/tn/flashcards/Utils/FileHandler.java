@@ -155,10 +155,6 @@ public class FileHandler {
 
     public static void HandleImageExport(ZipOutputStream outputStream, QuestionReponse qr)
     {
-        if (qr.getType() == QRType.IMAGE)
-        {
-            System.out.println("Content : " + qr.getContent());
-    public static void HandleImageExport(ZipOutputStream outputStream, QuestionReponse qr) {
         if (qr.getType() == QRType.IMAGE) {
             byte[] data = FileHandler.imageToData(Path.of(qr.getContent()).toString());
             if (data == null) {
@@ -185,7 +181,7 @@ public class FileHandler {
             else
             {break;}
         }
-        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(pile.getName() + ".zip"))) {
+        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(outputname + ".zip"))) {
             for (Card c : pile.getCards()) {
                 QuestionReponse q = c.getQuestion();
                 QuestionReponse r = c.getReponse();
