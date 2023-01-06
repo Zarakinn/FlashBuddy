@@ -18,7 +18,7 @@ public class FullStats extends LastStats {
     public LastStats copyAsLastStats() {
         return new LastStats(playDate, difficulty);
     }
-    
+
     public int getCardId() {
         return this.cardId;
     }

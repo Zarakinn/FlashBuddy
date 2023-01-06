@@ -45,6 +45,7 @@
     _-fx-opacity: 0.70;
     -fx-cursor: hand;
     -fx-padding: 5px 10px 5px 10px;
+    -fx-text-fill: white;
 }
 
 .btn_font {

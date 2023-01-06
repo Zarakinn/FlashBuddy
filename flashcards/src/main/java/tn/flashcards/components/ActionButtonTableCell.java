@@ -18,7 +18,7 @@ public class ActionButtonTableCell<S> extends TableCell<S, Button> {
     public ActionButtonTableCell(String label, String[] styles, Feather fontIcon, Function<S, S> function) {
         this.getStyleClass().add("action-button-table-cell");
 
-        if(fontIcon != null) {
+        if (fontIcon != null) {
             actionButton = new Button("", new FontIcon(fontIcon));
         } else {
             actionButton = new Button(label);
