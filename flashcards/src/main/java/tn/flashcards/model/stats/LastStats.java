@@ -10,12 +10,20 @@ public class LastStats {
 
     public LastStats(int difficulty) {
         this.playDate = LocalDateTime.now();
-        this.difficulty = difficulty;
+        if (difficulty >= 0 && difficulty < 5) {
+            this.difficulty = difficulty;
+        } else {
+            this.difficulty = 2;
+        }
     }
 
     public LastStats(LocalDateTime playDate, int difficulty) {
         this.playDate = playDate;
-        this.difficulty = difficulty;
+        if (difficulty >= 0 && difficulty < 5) {
+            this.difficulty = difficulty;
+        } else {
+            this.difficulty = 2;
+        }
     }
 
     public int getDifficulty() {
