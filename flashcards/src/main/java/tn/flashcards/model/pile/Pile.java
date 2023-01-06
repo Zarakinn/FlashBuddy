@@ -43,16 +43,6 @@ public class Pile {
         this.tags = "no tag";
     }
 
-    public Card createCard() {
-        this.cards.add(new Card(this.nextCardId));
-        this.nextCardId++;
-        return this.cards.get(this.cards.size() - 1);
-    }
-
-    public Card getCard(int i) {
-        return this.cards.get(i);
-    }
-
     public void addCard(Card c) {
         this.cards.add(c);
         this.nextCardId++;

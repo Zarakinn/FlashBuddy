@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import tn.flashcards.Utils.FileHandler;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.QRType;
+import tn.flashcards.view.QRViewFactory;
 
 import java.io.File;
 
@@ -52,12 +53,14 @@ public class EditCardCellController {
         if (qType == QRType.TEXT) {
             q_txt_area.setText(carte.getQuestion().getContent());
         } else {
-            q_img.setImage(new Image(carte.getQuestion().getContent()));
+            // C'est très très très très moche ...
+            q_img.setImage(((ImageView)(QRViewFactory.createQRView(carte.getQuestion()).getChildren().get(0))).getImage());
         }
         if (rType == QRType.TEXT) {
             r_txt_area.setText(carte.getReponse().getContent());
         } else {
-            r_img.setImage(new Image(carte.getReponse().getContent()));
+            // C'est vraiment super méga laid ...
+            r_img.setImage(((ImageView)(QRViewFactory.createQRView(carte.getReponse()).getChildren().get(0))).getImage());
         }
     }
 

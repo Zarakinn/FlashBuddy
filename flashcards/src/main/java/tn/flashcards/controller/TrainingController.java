@@ -21,7 +21,6 @@ import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.stats.StatsPile;
-import tn.flashcards.view.QRView;
 import tn.flashcards.view.QRViewFactory;
 
 import java.net.URL;
@@ -31,7 +30,6 @@ import static atlantafx.base.theme.Styles.*;
 import static tn.flashcards.components.ActionButtonTableCell.GRADIENT_BTN;
 
 public class TrainingController implements Initializable, Observateur {
-
 
     @FXML
     private Pane pileList;
@@ -97,9 +95,6 @@ public class TrainingController implements Initializable, Observateur {
             this.errorMsg.setVisible(true);
             this.trainingView.setVisible(false);
         }
-
-
-
     }
 
     private void setQuestionView() {

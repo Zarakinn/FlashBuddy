@@ -103,6 +103,7 @@ public class Calculs {
 
         int n = 20;
 
+        //TODO - ????
         for (ArrayList<Integer> arrayList : res) {
             arrayList = new ArrayList<Integer>();
         }

@@ -17,23 +17,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 import org.kordamp.ikonli.feather.Feather;
-import org.kordamp.ikonli.javafx.FontIcon;
 import tn.flashcards.Utils.FileHandler;
 import tn.flashcards.components.ActionButtonTableCell;
 import tn.flashcards.model.Data;
-import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
-import tn.flashcards.model.stats.DateFormat;
 import tn.flashcards.model.stats.StatsPile;
 
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import static atlantafx.base.theme.Styles.*;
-import static tn.flashcards.components.ActionButtonTableCell.GRADIENT_BTN;
 
 public class EditController implements Initializable, Observateur {
 
@@ -58,9 +51,6 @@ public class EditController implements Initializable, Observateur {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createViewTable();
-        //startBtn.getStyleClass().add(GRADIENT_BTN);
-        //Data.getIstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).updateLastOpened(LocalDateTime.now().minusDays(10));
-        //Systems.out.println(Data.getInstance().getStatsPile().get(Data.getInstance().getPiles().get(0).getUniqueId()).getLastOpenedFormated());
     }
 
     public void createViewTable() {

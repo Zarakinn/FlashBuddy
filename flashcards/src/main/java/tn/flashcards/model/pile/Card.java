@@ -28,9 +28,4 @@ public class Card {
     public void setReponse(QuestionReponse qr) {
         this.reponse = qr;
     }
-
-    public Card copyWithId(int nextCardId) {
-        // TODO
-        return null;
-    }
 }
