@@ -72,7 +72,7 @@
                     <StackPane alignment="CENTER">
                         <Pane fx:id="reponse" styleClass="view" />
                         <AnchorPane>
-                            <RingProgressIndicator fx:id="timerRing" prefHeight="250" styleClass="timer_ring" AnchorPane.rightAnchor="350" AnchorPane.topAnchor="100" />
+                            <RingProgressIndicator fx:id="timerRing" prefHeight="250" styleClass="timer_ring" visible="false" AnchorPane.rightAnchor="350" AnchorPane.topAnchor="100" />
                         </AnchorPane>
                     </StackPane>
                 </HBox>
@@ -80,7 +80,7 @@
 
             <bottom>
                 <StackPane alignment="CENTER" styleClass="score_btb">
-                    <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse" />
+                    <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse" prefWidth="875.0" />
                     <HBox fx:id="scoreButtons" alignment="CENTER" spacing="10.0" styleClass="param">
                         <Button id="0" onAction="#scoreCard" style="text-align: center" text="Evident" prefWidth="175.0" />
                         <Button id="1" onAction="#scoreCard" style="text-align: center" text="Facile" prefWidth="175.0" />
