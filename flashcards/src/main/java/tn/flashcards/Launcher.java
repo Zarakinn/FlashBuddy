@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import tn.flashcards.controller.*;
 import tn.flashcards.model.Data;
@@ -43,11 +44,14 @@ public class Launcher extends Application {
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root, 1000, 700);
         scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource("css/style.css")).toURI().toString());
+
+        Image icon = new Image(Launcher.class.getResource("img/icon.ico").toURI().toString());
+        stage.getIcons().add(icon);
+        stage.show();
+
         stage.setScene(scene);
         stage.setTitle("FlashBuddy");
         stage.show();
-
-
 
 
         Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
