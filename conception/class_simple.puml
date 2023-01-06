@@ -227,7 +227,7 @@ package "model" #f6a6b2 {
         }
 
         interface StrategyChoix
-        note left: Pattern Strategy
+        note right: Pattern Strategy
         interface StrategyChoix {
             + void execute()
         }
