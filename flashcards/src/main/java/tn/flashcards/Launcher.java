@@ -5,11 +5,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import tn.flashcards.controller.*;
 import tn.flashcards.model.Data;
-import tn.flashcards.model.pile.Pile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -48,7 +46,6 @@ public class Launcher extends Application {
         stage.setScene(scene);
         stage.show();
 
-        var t = new TabPane();
         Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
         model.notifierObservateur();
     }
