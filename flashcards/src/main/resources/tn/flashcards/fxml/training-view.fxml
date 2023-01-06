@@ -80,12 +80,12 @@
                     <Pane fx:id="question" styleClass="view">
                   <HBox.margin>
                      <Insets />
-                  </HBox.margin>
-                  <padding>
-                     <Insets top="10.0" />
-                  </padding></Pane>
+                  </HBox.margin></Pane>
                     <StackPane alignment="CENTER">
-                        <Pane fx:id="reponse" styleClass="view" />
+                        <Pane fx:id="reponse" styleClass="view">
+                     <StackPane.margin>
+                        <Insets top="10.0" />
+                     </StackPane.margin></Pane>
                         <AnchorPane>
                             <RingProgressIndicator fx:id="timerRing" prefHeight="250" styleClass="timer_ring" visible="false" AnchorPane.rightAnchor="350" AnchorPane.topAnchor="100" />
                         </AnchorPane>
