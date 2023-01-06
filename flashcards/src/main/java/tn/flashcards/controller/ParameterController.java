@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.settings.StrategyChoix;
 import tn.flashcards.model.settings.StrategyChoixProba;
@@ -61,7 +62,7 @@ public class ParameterController implements Initializable, Observateur {
     }
 
     @FXML
-    private TextArea auteurArea ;
+    private TextField auteurArea ;
 
     @FXML
     public void setDefaultAuthor() {
