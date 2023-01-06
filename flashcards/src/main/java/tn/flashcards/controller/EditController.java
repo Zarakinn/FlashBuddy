@@ -87,7 +87,7 @@ public class EditController implements Initializable, Observateur {
                 "", new String[]{BUTTON_ICON, BUTTON_OUTLINED, DANGER},
                 Feather.TRASH,
                 (Pile p) -> {
-                    table.getItems().remove(p);
+                    Data.getInstance().deletePile(p);
                     return p;
                 }));
 
