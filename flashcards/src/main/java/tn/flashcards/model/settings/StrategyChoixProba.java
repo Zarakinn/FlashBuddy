@@ -22,13 +22,13 @@ public class StrategyChoixProba implements StrategyChoix {
     public void execute() {
         boolean cardChosen = false ;
 
-        ArrayList<Card> cards = Data.getInstance().getCurrentPile().getCards();
-        String currentPileId = Data.getInstance().getCurrentPile().getUniqueId();
+        ArrayList<Card> cards = Data.getInstance().getCurrentTrainingPile().getCards();
+        String currentPileId = Data.getInstance().getCurrentTrainingPile().getUniqueId();
         double s = 0;
         ArrayList<Double> difficulties = new ArrayList<Double>();
 
         Card c;
-        for (int i = cards.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < cards.size(); i++) {
             c = cards.get(i);
             LastStats ls = Data.getInstance().getStatsPile().get(currentPileId).getLastStats().get(c.getId());
             int difficulty;
@@ -41,20 +41,28 @@ public class StrategyChoixProba implements StrategyChoix {
             s = s + probas[difficulty];
         }
 
-        double p = Math.random() * s;
-
-        double localSum = 0;
-        for (int i = 0; i < difficulties.size(); i++) {
-            localSum = localSum + difficulties.get(i);
-            if (localSum > p) {
-                Data.getInstance().setCurrentTrainingCard(cards.get(i));
-                cardChosen = true ;
-                break ;
+        if (s < 0.1 /* est nul */) {
+            /* Les cartes ne sont pas jouables (toutes évidentes) */
+            StrategyChoix sc = new StrategyChoixProbaEgales();
+            sc.execute();
+        } else {
+            /* Les cartes sont jouables */
+            double p = Math.random() * s;
+    
+            double localSum = 0;
+            for (int i = 0; i < difficulties.size(); i++) {
+                localSum = localSum + difficulties.get(i);
+                if (localSum > p) {
+                    Data.getInstance().setCurrentTrainingCard(cards.get(i));
+                    cardChosen = true ;
+                    break ;
+                }
+            }
+    
+            if (!cardChosen) {
+                Data.getInstance().setCurrentTrainingCard(null);
             }
         }
 
-        if (!cardChosen) {
-            Data.getInstance().setCurrentTrainingCard(null);
-        }
     }
 }

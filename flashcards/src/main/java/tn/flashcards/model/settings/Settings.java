@@ -14,7 +14,7 @@ public class Settings {
     protected String auteur ;
 
     public Settings() {
-        this.algoChoix = new StrategyChoixProbaEgales();
+        this.algoChoix = new StrategyChoixProba();
         this.timerAffichage = -1 ;
         this.theme = Theme.FONCE;
         this.auteur = "Auteur inconnu" ;
