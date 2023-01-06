@@ -134,7 +134,7 @@ public class EditCardCellController {
     public void q_parcourir() {
         File f = FileHandler.getImageFileChooser().showOpenDialog(r_img.getScene().getWindow());
         if (f != null) {
-            card.getReponse().setContent(f.getAbsolutePath());
+            card.getQuestion().setContent(f.getAbsolutePath());
             q_img.setImage(new Image(f.getAbsolutePath()));
         }
     }
