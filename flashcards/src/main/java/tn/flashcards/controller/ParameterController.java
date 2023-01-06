@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.settings.StrategyChoix;
 import tn.flashcards.model.settings.StrategyChoixProba;
@@ -59,12 +61,20 @@ public class ParameterController implements Initializable, Observateur {
         algoAffichages.add(30);
     }
 
+    @FXML
+    private TextField auteurArea ;
+
+    @FXML
+    public void setDefaultAuthor() {
+        Data.getInstance().getSettings().setAuteur(this.auteurArea.getText());
+    }
     
     @FXML
     ChoiceBox<String> themeChoiceBox;
     private ArrayList<String> themeChoices;
     private ArrayList<Theme> themes;
     private ArrayList<String> sheets;
+
 
     private class themeListener implements ChangeListener<Number> {
         public void changed(ObservableValue ov, Number value, Number new_value) {
@@ -127,6 +137,7 @@ public class ParameterController implements Initializable, Observateur {
 
     @Override
     public void reagir() {
+        auteurArea.setText(Data.getInstance().getSettings().getAuteur());
         themeChoiceBox.setValue(themeChoices.get(themes.indexOf(Data.getInstance().getSettings().getTheme())));
         algoAffichageChoiceBox.setValue(algoAffichageChoices.get(algoAffichages.indexOf(Data.getInstance().getSettings().getTimerAffichage())));
 

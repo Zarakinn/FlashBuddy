@@ -63,7 +63,7 @@ public class EditController implements Initializable, Observateur {
 
         cCreateur.setCellFactory(TextFieldTableCell.forTableColumn());
         cCreateur.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCreator()));
-        cCreateur.setEditable(false);
+        cCreateur.setOnEditCommit(event -> event.getRowValue().setCreator(event.getNewValue()));
 
         cTags.setCellFactory(TextFieldTableCell.forTableColumn());
         cTags.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getTags()));
@@ -115,7 +115,7 @@ public class EditController implements Initializable, Observateur {
 
     @FXML
     public void createPile() {
-        Data.getInstance().createPile("", "");
+        Data.getInstance().createPile();
     }
 
     public void importePile() {
