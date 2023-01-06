@@ -122,14 +122,29 @@ public class Data extends SujetObserve {
 
     public void deleteCard(Pile pile, Card card)
     {
+        // Suppression de la pile
         pile.getCards().remove(card);
+
+        // Suppression des stats
+        StatsPile sp = this.getStatsPile().get(pile.getUniqueId());
+        sp.getLastStats().remove(card.getId());
+        int i = 0;
+        while (i < sp.getFullStats().size()) {
+            if (sp.getFullStats().get(i).getCardId() == card.getId()) {
+                sp.getFullStats().remove(i);
+            } else {
+                i ++;
+            }
+        }
+
+        // Obs
         notifierObservateur();
     }
 
     public void setMode(Mode mode) {
         this.mode = mode;
         if (mode == Mode.STATS) {
-            
+
         }
         this.notifierObservateur();
     }

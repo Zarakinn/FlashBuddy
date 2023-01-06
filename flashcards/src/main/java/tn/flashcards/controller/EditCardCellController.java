@@ -147,6 +147,7 @@ public class EditCardCellController {
         card.getReponse().setContent(r_txt_area.getText());
     }
 
+    @FXML
     public void delete() {
         Data.getInstance().deleteCard(Data.getInstance().getCurrentPile(), card);
     }
