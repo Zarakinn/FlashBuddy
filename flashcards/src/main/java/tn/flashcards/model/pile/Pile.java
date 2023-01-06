@@ -41,7 +41,7 @@ public class Pile {
         this.creator = Data.getInstance().getSettings().getAuteur();
         this.cards = new ArrayList<>();
         this.nextCardId = 0;
-        this.tags = "no tag";
+        this.tags = "";
     }
 
     public void addCard(Card c) {
