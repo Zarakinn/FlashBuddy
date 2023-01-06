@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import org.kordamp.ikonli.feather.Feather;
 import org.kordamp.ikonli.javafx.FontIcon;
+import tn.flashcards.model.pile.Pile;
 
 import java.util.function.Function;
 
