@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import tn.flashcards.components.EditCell;
-import tn.flashcards.components.EditCellV2;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
@@ -39,7 +37,7 @@ public class EditPileController implements Initializable, Observateur {
 
         Pile pile = Data.getInstance().getCurrentPile();
         //view.setCellFactory(view -> new EditCell(pile));
-        view.setCellFactory(view -> new EditCellV2());
+        view.setCellFactory(view -> new EditCell());
 
         name.setText(pile.getName());
         desc.setText(pile.getDesc());
@@ -48,7 +46,6 @@ public class EditPileController implements Initializable, Observateur {
     }
 
     public void display() {
-        System.out.println("load: " + Data.getInstance().getCurrentPile().getName());
         name.setText(Data.getInstance().getCurrentPile().getName());
         desc.setText(Data.getInstance().getCurrentPile().getDesc());
         ObservableList<Card> oCards = FXCollections.observableList(Data.getInstance().getCurrentPile().getCards());
