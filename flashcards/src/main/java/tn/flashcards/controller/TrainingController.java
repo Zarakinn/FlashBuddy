@@ -63,6 +63,8 @@ public class TrainingController implements Initializable, Observateur {
     @FXML
     TableView<Pile> table;
 
+    private Task task ;
+
 
     public TrainingController() {
 
@@ -71,6 +73,12 @@ public class TrainingController implements Initializable, Observateur {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createViewTable();
+        this.task = new Task() {
+            @Override
+            protected Void call() throws Exception {
+                return null ;
+            }
+        } ;
     }
 
     @Override
@@ -121,13 +129,18 @@ public class TrainingController implements Initializable, Observateur {
             });
 
             this.timerRing.setProgress(0);
-            var task = new Task() {
+            this.task = new Task() {
 
                 @Override
                 protected Void call() throws Exception {
                     int steps = timer * 20 ;
                     for (int i = 0 ; i <= steps ; i++) {
-                        Thread.sleep(timer * 1000 / steps);
+
+                        if (isCancelled()) {
+                            break;
+                        }
+
+                        Thread.sleep(timer * 1000L / steps);
                         updateProgress(i, steps);
                         updateMessage(i + "s");
                     }
@@ -135,13 +148,13 @@ public class TrainingController implements Initializable, Observateur {
                 }
             } ;
 
-            task.setOnSucceeded(e -> {
+            this.task.setOnSucceeded(e -> {
                 this.setReponseView();
             });
 
-            this.timerRing.progressProperty().bind(task.progressProperty()) ;
+            this.timerRing.progressProperty().bind(this.task.progressProperty()) ;
 
-            new Thread(task).start();
+            new Thread(this.task).start();
         }
     }
 
@@ -151,6 +164,7 @@ public class TrainingController implements Initializable, Observateur {
         this.reponse.setVisible(true);
         this.timerRing.setVisible(false);
         this.timerRing.progressProperty().unbind();
+        this.task.cancel(true) ;
     }
 
     @FXML
