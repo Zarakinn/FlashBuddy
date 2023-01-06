@@ -15,7 +15,7 @@
     <top>
         <HBox prefHeight="65.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
             <children>
-                <Label contentDisplay="BOTTOM" text="Flashcards">
+                <Label contentDisplay="BOTTOM" text="FlashBuddy">
                 </Label>
                 <Spacer />
                 <ToolBar AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
