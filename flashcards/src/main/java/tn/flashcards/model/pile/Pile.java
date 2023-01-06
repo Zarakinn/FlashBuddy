@@ -3,6 +3,7 @@ package tn.flashcards.model.pile;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import tn.flashcards.model.Data;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,10 +35,10 @@ public class Pile {
     private String tags;
 
     public Pile() {
-        this.name = "";
+        this.name = "Pile sans nom";
         this.desc = "";
         this.uniqueId = Pile.genUniqueId();
-        this.creator = "Créateur";
+        this.creator = Data.getInstance().getSettings().getAuteur();
         this.cards = new ArrayList<>();
         this.nextCardId = 0;
         this.tags = "no tag";
