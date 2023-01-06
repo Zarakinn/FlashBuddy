@@ -137,8 +137,8 @@ public class TrainingController implements Initializable, Observateur {
             this.timerRing.setStringConverter(new StringConverter<Double>() {
                 @Override
                 public String toString(Double aDouble) {
-                    Double res = aDouble * timer;
-                    return Integer.toString(res.intValue()) + "s";
+                    double res = aDouble * timer;
+                    return Integer.toString((int) res) + "s";
                 }
 
                 @Override
@@ -148,6 +148,7 @@ public class TrainingController implements Initializable, Observateur {
                 }
             });
 
+            this.timerRing.progressProperty().unbind();
             this.timerRing.setProgress(0);
             this.task = new Task() {
 
@@ -208,7 +209,6 @@ public class TrainingController implements Initializable, Observateur {
     public void closeTraining() {
         Data.getInstance().setCurrentTrainingPile(null);
         setMode(ModeTraining.SELECTION);
-        //FileHandler.saveStats();
     }
 
     @FXML
@@ -229,11 +229,10 @@ public class TrainingController implements Initializable, Observateur {
         };
 
         Data.getInstance().scoreCard(score);
-
-        this.nextCardView();
-
         this.scoreButtons.setVisible(false);
         this.showAnsButton.setVisible(true);
+
+        this.nextCardView();
     }
 
     public void createViewTable() {
