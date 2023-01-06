@@ -21,7 +21,7 @@
             <TableColumn fx:id="cExport" editable="false" prefWidth="45.0" sortable="false" />
             <TableColumn fx:id="cEdit" editable="false" minWidth="0.0" prefWidth="45.0" sortable="false" />
             <TableColumn fx:id="cDelete" editable="false" minWidth="0.0" prefWidth="45.0" sortable="false" />
-            <TableColumn fx:id="cDesc" editable="false" minWidth="0.0" prefWidth="163.0" sortable="false" text="Description" />
+            <TableColumn fx:id="cDesc" editable="false" minWidth="0.0" prefWidth="162.0" sortable="false" text="Description" />
         </columns>
          <BorderPane.margin>
             <Insets />
