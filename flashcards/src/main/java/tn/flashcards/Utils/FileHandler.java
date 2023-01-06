@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
@@ -115,14 +116,49 @@ public class FileHandler {
     }
 
     private static byte[] imageToData(String fileName) {
-        try (FileInputStream inputStream = new FileInputStream(fileName)) {
-            byte[] data = new byte[inputStream.available()];
-            inputStream.read(data);
-            return data;
-        } catch (Exception e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors de la conversion de l'image en bytes pour le zip.");
-            alert.show();
+        if (fileName.contains(".zip")){
+
+            int index = fileName.indexOf("/", fileName.indexOf(".zip") + ".zip".length());
+            String zipPath = fileName.substring(0, index);
+            String imagePath = fileName.substring(index+1);
+            File file = new File(zipPath);
+
+            try ( ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));){
+                ZipEntry entry = inputStream.getNextEntry();
+
+                while (entry != null) {
+                    if (entry.getName().equals(imagePath)) {
+
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = inputStream.read(buffer)) > 0) {
+                            outputStream.write(buffer, 0, length);
+                        }
+                        byte[] imageData = outputStream.toByteArray();
+                        outputStream.close();
+                        return imageData;
+                    }
+                    entry = inputStream.getNextEntry();
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors du chargement d'une image depuis le zip");
+                alert.show();
+            }
+        }
+        else {
+            try (FileInputStream inputStream = new FileInputStream(fileName)) {
+                byte[] data = new byte[inputStream.available()];
+                inputStream.read(data);
+                return data;
+            } catch (Exception e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors de la conversion de l'image en bytes pour le zip.");
+                alert.show();
+            }
         }
         return null;
     }
