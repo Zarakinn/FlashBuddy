@@ -22,8 +22,8 @@ public class StrategyChoixProba implements StrategyChoix {
     public void execute() {
         boolean cardChosen = false ;
 
-        ArrayList<Card> cards = Data.getInstance().getCurrentPile().getCards();
-        String currentPileId = Data.getInstance().getCurrentPile().getUniqueId();
+        ArrayList<Card> cards = Data.getInstance().getCurrentTrainingPile().getCards();
+        String currentPileId = Data.getInstance().getCurrentTrainingPile().getUniqueId();
         double s = 0;
         ArrayList<Double> difficulties = new ArrayList<Double>();
 
