@@ -34,22 +34,18 @@ public class EditPileController implements Initializable, Observateur {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        Pile pile = Data.getInstance().getCurrentPile();
-        //view.setCellFactory(view -> new EditCell(pile));
         view.setCellFactory(view -> new EditCell());
-
-        name.setText(pile.getName());
-        desc.setText(pile.getDesc());
-
         display();
     }
 
     public void display() {
-        name.setText(Data.getInstance().getCurrentPile().getName());
-        desc.setText(Data.getInstance().getCurrentPile().getDesc());
-        ObservableList<Card> oCards = FXCollections.observableList(Data.getInstance().getCurrentPile().getCards());
-        view.setItems(oCards);
+        Pile p = Data.getInstance().getCurrentPile();
+        if (p != null) {
+            name.setText(p.getName());
+            desc.setText(p.getDesc());
+            ObservableList<Card> oCards = FXCollections.observableList(p.getCards());
+            view.setItems(oCards);
+        }
     }
 
     @FXML
