@@ -58,6 +58,7 @@ public class StatsPile {
     public void addPlayed(Integer cardId, FullStats played) {
         this.lastStats.put(cardId, played.copyAsLastStats());
         this.fullStats.add(played);
+        this.incrNoJeuxCarte();
     }
 
     // LastStats
