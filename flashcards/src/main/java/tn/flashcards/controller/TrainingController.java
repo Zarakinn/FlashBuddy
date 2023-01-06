@@ -112,8 +112,8 @@ public class TrainingController implements Initializable, Observateur {
         this.question.getChildren().removeAll(this.question.getChildren());
         this.reponse.getChildren().removeAll(this.reponse.getChildren());
 
-        if (Data.getInstance().getCurrentPile() == null
-                || Data.getInstance().getCurrentPile().getCards().size() == 0) {
+        if (Data.getInstance().getCurrentTrainingPile() == null
+                || Data.getInstance().getCurrentTrainingPile().getCards().size() == 0) {
             setMode(ModeTraining.NO_CARTE);
             return;
         }
