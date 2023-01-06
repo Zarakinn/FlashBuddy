@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import tn.flashcards.model.Data;
+import tn.flashcards.model.Data.Mode;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.Utils.Calculs;
 import tn.flashcards.VisualFactory.MyBarChart;
@@ -19,6 +20,11 @@ import java.net.URL;
 import java.util.*;
 
 public class StatsController implements Initializable, Observateur {
+    /*
+     * Cette vue NE doit PAS modifier le modèle.
+     * (elle ne doit pas provoquer son propre reagir())
+     */
+
     @FXML
     private Label labelActivty;
     //TODO - supprimer ce champs ?
@@ -45,16 +51,21 @@ public class StatsController implements Initializable, Observateur {
 
     @Override
     public void reagir() {
-        ObservableList<Pile> piles = Data.getInstance().getPiles() ;
+        if (Data.getInstance().getMode() == Mode.STATS) {
 
-        ObservableList<String> list = FXCollections.observableArrayList() ;
-
-        list.add("Générales") ;
-        for (Pile p:piles) {
-            list.add(p.getName()) ;
+            ObservableList<Pile> piles = Data.getInstance().getPiles() ;
+    
+            ObservableList<String> list = FXCollections.observableArrayList() ;
+    
+            list.add("Générales") ;
+            for (Pile p:piles) {
+                list.add(p.getName()) ;
+            }
+    
+            lv.setItems(list);
+            lv.getSelectionModel().select(0);
+            printStats(null);
         }
-
-        lv.setItems(list);
     }
 
     @FXML
