@@ -19,12 +19,12 @@
             <center>
                 <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
                     <columns>
-                        <TableColumn fx:id="cName" prefWidth="160.0" text="Pile" />
-                        <TableColumn fx:id="cNb" prefWidth="100.0" text="Nb. cartes" />
-                        <TableColumn fx:id="cTags" prefWidth="120.0" text="Tags" />
-                        <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="120.0" text="Créateur" />
-                        <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="153.0" text="Dernière utilisation" />
-                        <TableColumn fx:id="cJouer" editable="false" minWidth="200.0" prefWidth="-1.0" sortable="false" />
+                        <TableColumn fx:id="cName" editable="false" prefWidth="170.0" text="Nom" />
+                        <TableColumn fx:id="cNb" editable="false" prefWidth="70.0" text="Nb." />
+                        <TableColumn fx:id="cTags" editable="false" prefWidth="120.0" text="Tag" />
+                        <TableColumn fx:id="cCreateur" editable="false" minWidth="0.0" prefWidth="170.0" text="Créateur" />
+                        <TableColumn fx:id="cDate" editable="false" minWidth="0.0" prefWidth="150.0" text="Modification" />
+                        <TableColumn fx:id="cJouer" editable="false" minWidth="200.0" prefWidth="257.0" sortable="false" />
                     </columns>
                     <BorderPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
