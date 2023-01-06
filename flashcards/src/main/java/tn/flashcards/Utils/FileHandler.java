@@ -8,14 +8,17 @@ import javafx.stage.Window;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
-
+import tn.flashcards.model.stats.*;
 
 import com.google.gson.Gson;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -62,13 +65,36 @@ public class FileHandler {
 
     public static void saveStats()
     {
+        /*
+        ---------------------------------------------------
+
+            Cette fonction ne fonctionne pas, j'ai beau essayé, il est difficile de séréalizer stats et le temps presse.
+
+        -------------------------------------------------
+        */
         try {
-            File file = new File("Stats.json");
-            FileWriter writer = writer = new FileWriter(file);
-            Gson gson = new Gson();
-            gson.toJson(Data.getInstance().getStatsPile(), writer);
-            writer.flush();
+            File directory = new File("Stats");
+            if (! directory.exists())
+                directory.mkdir();
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            HashMap<String,StatsPile> stats = Data.getInstance().getStatsPile();
+
+            for (HashMap.Entry<String, StatsPile> entry : stats.entrySet()) {
+                String key = entry.getKey();
+                StatsPile value = entry.getValue();
+
+                File file = new File("Stats/"+ key +".json");
+                FileWriter writer = new FileWriter(file);
+                Gson gson = new Gson();
+                String json = gson.toJson(value);
+                writer.write(json);
+                writer.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Fail to save stats");
         }
     }
