@@ -82,12 +82,11 @@
                 <StackPane alignment="CENTER" styleClass="score_btb">
                     <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse" />
                     <HBox fx:id="scoreButtons" alignment="CENTER" spacing="10.0" styleClass="param">
-                        <Button id="0" onAction="#scoreCard" style="text-align: center" text="0" />
-                        <Button id="1" onAction="#scoreCard" style="text-align: center" text="1" />
-                        <Button id="2" onAction="#scoreCard" style="text-align: center" text="2" />
-                        <Button id="3" onAction="#scoreCard" style="text-align: center" text="3" />
-                        <Button id="4" onAction="#scoreCard" style="text-align: center" text="4" />
-                        <Button id="5" onAction="#scoreCard" style="text-align: center" text="5" />
+                        <Button id="0" onAction="#scoreCard" style="text-align: center" text="Evident" prefWidth="175.0" />
+                        <Button id="1" onAction="#scoreCard" style="text-align: center" text="Facile" prefWidth="175.0" />
+                        <Button id="2" onAction="#scoreCard" style="text-align: center" text="Moyen" prefWidth="175.0" />
+                        <Button id="3" onAction="#scoreCard" style="text-align: center" text="Difficile" prefWidth="175.0" />
+                        <Button id="4" onAction="#scoreCard" style="text-align: center" text="Impossible" prefWidth="175.0" />
                     </HBox>
                 </StackPane>
             </bottom>
