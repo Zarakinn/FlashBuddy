@@ -3,15 +3,33 @@ package tn.flashcards.view;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import tn.flashcards.Launcher;
+import tn.flashcards.Utils.FileHandler;
+
+import java.io.File;
 
 public class QRImageView extends QRView {
     public ImageView imgView ;
 
-    public QRImageView(String path, double width, double height) {
+    public QRImageView(String path) {
         super() ;
         this.imgView = new ImageView();
         try {
-            Image img = new Image(path);
+            Image img;
+            if (path.contains(".zip"))
+            {
+                img = FileHandler.loadImageFromZip(path);
+                if (img == null)
+                    throw new Exception();
+            }
+            else
+            {
+                File file = new File(path);
+                img = new Image(file.toURI().toString());
+                if (img.isError())
+                {
+                    throw new Exception();
+                }
+            }
             imgView.setImage(img);
         }
         catch (Exception e)
@@ -19,9 +37,9 @@ public class QRImageView extends QRView {
             Image img = new Image(Launcher.class.getResource("/tn/flashcards/img/notfound.jpeg").toString());
             imgView.setImage(img);
         }
-        imgView.setPreserveRatio(true);
-        imgView.setFitHeight(height);
-        imgView.setFitWidth(width);
-        this.getChildren().add(this.imgView);
+        finally {
+            imgView.setPreserveRatio(true);
+            this.getChildren().add(this.imgView);
+        }
     }
 }

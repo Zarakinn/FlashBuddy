@@ -132,10 +132,6 @@ public class Data extends SujetObserve {
         this.notifierObservateur();
     }
 
-    public void deletePile(Pile pile){
-        // TODO
-    }
-
     public void scoreCard(int score) {
         FullStats fs = new FullStats(score, this.currentTrainingCard.getId()) ;
         this.getStatsPile().get(this.currentPile.getUniqueId()).addPlayed(this.currentTrainingCard.getId(), fs);
