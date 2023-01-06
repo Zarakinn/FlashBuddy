@@ -1,71 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
 <?import atlantafx.base.controls.RingProgressIndicator?>
-<StackPane styleClass="view" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
-   <children>
-      <Pane fx:id="pileList">
-         <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
-            <columns>
-               <TableColumn fx:id="cName" prefWidth="160.0" text="Pile" />
-               <TableColumn fx:id="cNb" prefWidth="100.0" text="Nb. cartes" />
-               <TableColumn fx:id="cTags" prefWidth="120.0" text="Tags" />
-               <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="120.0" text="Créateur" />
-               <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="153.0" text="Dernière utilisation" />
-               <TableColumn fx:id="cJouer" editable="false" prefWidth="200.0" sortable="false" />
-            </columns>
-            <BorderPane.margin>
-               <Insets />
-            </BorderPane.margin>
-         </TableView>
-      </Pane>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-      <VBox fx:id="errorMsg" visible="false">
-         <Label text="Aucune carte n'est disponible pour cette pile."/>
-         <Button onAction="#closeTraining" text="Revenir à la liste de pile"/>
-      </VBox>
+<StackPane prefHeight="650.0" prefWidth="1000.0" styleClass="view" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
+    <children>
+        <BorderPane fx:id="pileList" visible="false">
+            <center>
+                <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="cName" prefWidth="160.0" text="Pile" />
+                        <TableColumn fx:id="cNb" prefWidth="100.0" text="Nb. cartes" />
+                        <TableColumn fx:id="cTags" prefWidth="120.0" text="Tags" />
+                        <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="120.0" text="Créateur" />
+                        <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="153.0" text="Dernière utilisation" />
+                        <TableColumn fx:id="cJouer" editable="false" minWidth="200.0" prefWidth="-1.0" sortable="false" />
+                    </columns>
+                    <BorderPane.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </BorderPane.margin>
+                </TableView>
+            </center>
+        </BorderPane>
+      <StackPane fx:id="aucune_carte_pan" prefHeight="150.0" prefWidth="200.0" visible="false">
+         <children>
+               <Label text="Aucune carte n'est disponible pour cette pile." StackPane.alignment="CENTER">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </Label>
+            <Label contentDisplay="CENTER" styleClass="qr_area" text="Pile Sans nom" StackPane.alignment="TOP_LEFT">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="6.0" right="6.0" top="2.0" />
+               </padding>
+               <StackPane.margin>
+                  <Insets left="50.0" top="28.0" />
+               </StackPane.margin>
+            </Label>
+              <Button onAction="#closeTraining" prefHeight="38.0" prefWidth="200.0" styleClass="gradient_btn" text="Revenir à la liste de pile" translateY="51.0" StackPane.alignment="CENTER" />
+         </children>
+      </StackPane>
 
-      <BorderPane fx:id="trainingView" visible="false">
-         <top>
-            <BorderPane>
-               <left>
-                  <Label fx:id="pileName" styleClass="view; label"/>
-               </left>
-               <right>
-                  <Button fx:id="closeTraining" onAction="#closeTraining" styleClass="view" alignment="BASELINE_RIGHT" text="Terminer l'apprentissage"/>
-               </right>
-            </BorderPane>
-         </top>
+        <BorderPane fx:id="trainingView">
+            <top>
+                <BorderPane>
+                    <left>
+                        <Label fx:id="pileName" styleClass="view; label" />
+                    </left>
+                    <right>
+                        <Button fx:id="closeTraining" alignment="BASELINE_RIGHT" onAction="#closeTraining" styleClass="view" text="Terminer l'apprentissage" />
+                    </right>
+                </BorderPane>
+            </top>
 
-         <center>
-            <HBox fx:id="cardView">
-               <Pane fx:id="question" styleClass="view"/>
-               <StackPane alignment="CENTER">
-                  <Pane fx:id="reponse" styleClass="view"/>
-                  <AnchorPane>
-                     <RingProgressIndicator styleClass="timer_ring" AnchorPane.rightAnchor="350" AnchorPane.topAnchor="100" fx:id="timerRing" prefHeight="250" visible="false"/>
-                  </AnchorPane>
-               </StackPane>
-            </HBox>
-         </center>
+            <center>
+                <HBox fx:id="cardView" focusTraversable="true" BorderPane.alignment="CENTER">
+                    <Pane fx:id="question" styleClass="view" />
+                    <StackPane alignment="CENTER">
+                        <Pane fx:id="reponse" styleClass="view" />
+                        <AnchorPane>
+                            <RingProgressIndicator fx:id="timerRing" prefHeight="250" styleClass="timer_ring" AnchorPane.rightAnchor="350" AnchorPane.topAnchor="100" />
+                        </AnchorPane>
+                    </StackPane>
+                </HBox>
+            </center>
 
-         <bottom>
-            <StackPane alignment="CENTER">
-               <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse"/>
-               <HBox fx:id="scoreButtons" styleClass="view" visible="false" alignment="CENTER">
-                  <Button onAction="#scoreCard" id="0" text="0" style="text-align: center"/>
-                  <Button onAction="#scoreCard" id="1" text="1" style="text-align: center"/>
-                  <Button onAction="#scoreCard" id="2" text="2" style="text-align: center"/>
-                  <Button onAction="#scoreCard" id="3" text="3" style="text-align: center"/>
-                  <Button onAction="#scoreCard" id="4" text="4" style="text-align: center"/>
-                  <Button onAction="#scoreCard" id="5" text="5" style="text-align: center"/>
-               </HBox>
-            </StackPane>
-         </bottom>
+            <bottom>
+                <StackPane alignment="CENTER" styleClass="score_btb">
+                    <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse" />
+                    <HBox fx:id="scoreButtons" alignment="CENTER" spacing="10.0" styleClass="param">
+                        <Button id="0" onAction="#scoreCard" style="text-align: center" text="0" />
+                        <Button id="1" onAction="#scoreCard" style="text-align: center" text="1" />
+                        <Button id="2" onAction="#scoreCard" style="text-align: center" text="2" />
+                        <Button id="3" onAction="#scoreCard" style="text-align: center" text="3" />
+                        <Button id="4" onAction="#scoreCard" style="text-align: center" text="4" />
+                        <Button id="5" onAction="#scoreCard" style="text-align: center" text="5" />
+                    </HBox>
+                </StackPane>
+            </bottom>
 
-      </BorderPane>
-   </children>
+        </BorderPane>
+    </children>
 </StackPane>

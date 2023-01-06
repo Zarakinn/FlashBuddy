@@ -32,25 +32,19 @@ import static tn.flashcards.components.ActionButtonTableCell.GRADIENT_BTN;
 public class TrainingController implements Initializable, Observateur {
 
     @FXML
-    private Pane pileList;
-    @FXML
-    private VBox errorMsg ;
+    private VBox errorMsg;
     @FXML
     private BorderPane trainingView;
     @FXML
     private Label pileName;
     @FXML
-    private HBox cardView;
+    private Pane question, reponse, pileList, aucune_carte_pan;
     @FXML
-    private Pane question ;
+    private Button showAnsButton;
     @FXML
-    private Pane reponse ;
+    private HBox scoreButtons, cardView;
     @FXML
-    private Button showAnsButton ;
-    @FXML
-    private HBox scoreButtons;
-    @FXML
-    private RingProgressIndicator timerRing ;
+    private RingProgressIndicator timerRing;
 
     @FXML
     TableColumn<Pile, String> cName, cCreateur, cTags;
@@ -63,11 +57,36 @@ public class TrainingController implements Initializable, Observateur {
     @FXML
     TableView<Pile> table;
 
-    private Task task ;
+    private Task task;
 
+    public enum ModeTraining {SELECTION, NO_CARTE, JOUER}
+
+    private ModeTraining mode = ModeTraining.SELECTION;
 
     public TrainingController() {
 
+    }
+
+    public void setMode(ModeTraining mode) {
+        this.mode = mode;
+        pileList.setVisible(false);
+        aucune_carte_pan.setVisible(false);
+        trainingView.setVisible(false);
+
+        switch (mode) {
+            case SELECTION -> {
+                pileList.setVisible(true);
+
+            }
+            case NO_CARTE -> {
+                aucune_carte_pan.setVisible(true);
+
+            }
+            case JOUER -> {
+                trainingView.setVisible(true);
+                startTraining();
+            }
+        }
     }
 
     @Override
@@ -76,9 +95,10 @@ public class TrainingController implements Initializable, Observateur {
         this.task = new Task() {
             @Override
             protected Void call() throws Exception {
-                return null ;
+                return null;
             }
-        } ;
+        };
+        setMode(ModeTraining.SELECTION);
     }
 
     @Override
@@ -89,41 +109,41 @@ public class TrainingController implements Initializable, Observateur {
     }
 
     private void nextCardView() {
+        this.question.getChildren().removeAll(this.question.getChildren());
+        this.reponse.getChildren().removeAll(this.reponse.getChildren());
+
+        if (Data.getInstance().getCurrentPile() == null
+                || Data.getInstance().getCurrentPile().getCards().size() == 0) {
+            setMode(ModeTraining.NO_CARTE);
+            return;
+        }
         Data.getInstance().getSettings().getAlgoChoix().execute();
         Card c = Data.getInstance().getCurrentTrainingCard();
-
-        this.question.getChildren().removeAll(this.question.getChildren()) ;
-        this.reponse.getChildren().removeAll(this.reponse.getChildren()) ;
-        if (c != null) {
-            this.question.getChildren().add(QRViewFactory.createQRView(c.getQuestion())) ;
-            this.reponse.getChildren().add(QRViewFactory.createQRView(c.getReponse())) ;
-            this.setQuestionView();
-        }
-        else {
-            this.errorMsg.setVisible(true);
-            this.trainingView.setVisible(false);
-        }
+        
+        this.question.getChildren().add(QRViewFactory.createQRView(c.getQuestion()));
+        this.reponse.getChildren().add(QRViewFactory.createQRView(c.getReponse()));
+        this.setQuestionView();
     }
 
     private void setQuestionView() {
         this.scoreButtons.setVisible(false);
         this.showAnsButton.setVisible(true);
         this.reponse.setVisible(false);
-        
-        int timer = Data.getInstance().getSettings().getTimerAffichage() ;
+
+        int timer = Data.getInstance().getSettings().getTimerAffichage();
 
         if (timer > 0) {
             this.timerRing.setVisible(true);
             this.timerRing.setStringConverter(new StringConverter<Double>() {
                 @Override
                 public String toString(Double aDouble) {
-                    Double res = aDouble * timer ;
+                    Double res = aDouble * timer;
                     return Integer.toString(res.intValue()) + "s";
                 }
 
                 @Override
                 public Double fromString(String s) {
-                    String number = s.substring(0, s.length() - 2) ;
+                    String number = s.substring(0, s.length() - 2);
                     return Double.parseDouble(number);
                 }
             });
@@ -133,8 +153,8 @@ public class TrainingController implements Initializable, Observateur {
 
                 @Override
                 protected Void call() throws Exception {
-                    int steps = timer * 20 ;
-                    for (int i = 0 ; i <= steps ; i++) {
+                    int steps = timer * 20;
+                    for (int i = 0; i <= steps; i++) {
 
                         if (isCancelled()) {
                             break;
@@ -144,15 +164,15 @@ public class TrainingController implements Initializable, Observateur {
                         updateProgress(i, steps);
                         updateMessage(i + "s");
                     }
-                    return null ;
+                    return null;
                 }
-            } ;
+            };
 
             this.task.setOnSucceeded(e -> {
                 this.setReponseView();
             });
 
-            this.timerRing.progressProperty().bind(this.task.progressProperty()) ;
+            this.timerRing.progressProperty().bind(this.task.progressProperty());
 
             new Thread(this.task).start();
         }
@@ -164,17 +184,15 @@ public class TrainingController implements Initializable, Observateur {
         this.reponse.setVisible(true);
         this.timerRing.setVisible(false);
         this.timerRing.progressProperty().unbind();
-        this.task.cancel(true) ;
+        this.task.cancel(true);
     }
 
     @FXML
     public void startTraining() {
-        this.pileList.setVisible(false);
-        this.trainingView.setVisible(true);
-        this.errorMsg.setVisible(false);
-
         Pile p = Data.getInstance().getCurrentTrainingPile();
-        this.pileName.setText(p.getName());
+        if (p.getCards().size() == 0) {
+            setMode(ModeTraining.NO_CARTE);
+        }
 
         // Incrémente le nombre de fois qu'on a ouvert cette pile
         Data.getInstance().getStatsPile().get(p.getUniqueId()).incrNoJeuxPile();
@@ -184,15 +202,12 @@ public class TrainingController implements Initializable, Observateur {
         this.reponse.setPrefWidth(this.cardView.getWidth() / 2);
 
         this.nextCardView();
-
     }
 
     @FXML
     public void closeTraining() {
-        this.pileList.setVisible(true);
-        this.trainingView.setVisible(false);
-        this.errorMsg.setVisible(false);
         Data.getInstance().setCurrentTrainingPile(null);
+        setMode(ModeTraining.SELECTION);
         //FileHandler.saveStats();
     }
 
@@ -243,14 +258,13 @@ public class TrainingController implements Initializable, Observateur {
             return new ReadOnlyStringWrapper(pile.getLastOpenedFormated());
         });
 
-
         cJouer.setCellFactory(ActionButtonTableCell.forTableColumn(
                 "Lancer le test",
                 new String[]{SUCCESS, GRADIENT_BTN},
                 null,
                 (Pile p) -> {
                     Data.getInstance().setCurrentTrainingPile(p);
-                    startTraining();
+                    setMode(ModeTraining.JOUER);
                     return p;
                 }));
 
