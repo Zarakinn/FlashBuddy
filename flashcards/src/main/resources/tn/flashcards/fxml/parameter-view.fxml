@@ -7,6 +7,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
 <StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.ParameterController">
    <children>
       <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
@@ -18,14 +20,21 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="param" text="Thème" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="param"  text="Choix des cartes" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="param"  text="Affichage des réponses" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <ChoiceBox fx:id="themeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-            <ChoiceBox fx:id="algoChoixChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <ChoiceBox fx:id="algoAffichageChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="param" text="Nom d'auteur par défaut" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="param" text="Thème" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="param"  text="Choix des cartes" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="200.0" styleClass="param"  text="Affichage des réponses" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+             <BorderPane style="width: 150; height: 30;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                 <center>
+                     <TextArea fx:id="auteurArea" onKeyTyped="#setDefaultAuthor" style="width: 150; height: 30;" promptText="Saisir votre nom d'auteur" wrapText="true"/>
+                 </center>
+             </BorderPane>
+             <ChoiceBox fx:id="themeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <ChoiceBox fx:id="algoChoixChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <ChoiceBox fx:id="algoAffichageChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>
