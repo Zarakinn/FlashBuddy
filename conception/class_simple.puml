@@ -288,11 +288,12 @@ StatsPile *-->"..*" FullStats
 
 ' HIDDEN
 javafx.fxml.Initializable -d[hidden]-> Observateur
-MyBarChart -l[hidden]-> QRView
+MyBarChart -r[hidden]-> QRView
 MyPieChart -l[hidden]-> MyBarChart
 javafx.scene.layout -l[hidden]-> javafx.scene.chart.BarChart
 QRImageView -d[hidden]-> DateFormat
 QRImageView -r[hidden]-> EditCell
+javafx.scene.layout.Pane -u[hidden]-> javafx.scene.chart.BarChart
 
 
 
