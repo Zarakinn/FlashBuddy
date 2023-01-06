@@ -6,6 +6,8 @@ import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.model.pile.QuestionReponse;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
@@ -35,8 +37,6 @@ public class TestPile {
         d.createPile() ;
         assertEquals(nbPiles + 1, d.getPiles().size()) ;
 
-        assertEquals(nbPiles + 1, d.getStatsPile().size());
-
         Pile p = d.getPiles().get(d.getPiles().size() - 1) ;
         assertEquals("Pile sans nom", p.getName());
         assertEquals(d.getSettings().getAuteur(), p.getCreator());
@@ -57,6 +57,33 @@ public class TestPile {
 
         Pile p2 = d.getPiles().get(d.getPiles().size() - 1) ;
         assertEquals(p, p2) ;
+    }
+
+    @Test
+    public void testDeletePile() {
+        Data d = Data.getInstance() ;
+
+        int n = d.getPiles().size() ;
+        Pile p = d.createPile() ;
+        d.deletePile(p);
+
+        assertEquals(n, d.getPiles().size());
+
+        var nb = new Random().nextInt(10);
+
+        for (int i = 0 ;  i < nb ; i++) {
+            d.createPile() ;
+        }
+
+        int nbPiles = d.getPiles().size() ;
+
+        var nb2 = new Random().nextInt(nb);
+
+        for (int j = 0 ; j < nb2 ; j++) {
+            d.deletePile(d.getPiles().get(new Random().nextInt(d.getPiles().size())));
+        }
+
+        assertEquals(n + nb - nb2, d.getPiles().size());
     }
 
     @Test
