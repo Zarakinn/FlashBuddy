@@ -5,11 +5,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import tn.flashcards.controller.*;
 import tn.flashcards.model.Data;
-import tn.flashcards.model.pile.Pile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,8 +18,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
         // Création modèle
-        Data.getInstance();
-        Pile p = Data.getInstance().createPile("temp", "Valentin");
+        Data model = Data.getInstance();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Launcher.class.getResource("fxml/main-view.fxml"));
@@ -34,11 +31,7 @@ public class Launcher extends Application {
                 new MainController(),
                 new EditPileController());
 
-        Pile p2 = Data.getInstance().createPile("temp","Valentin");
-        Data.getInstance().setCurrentPile(p2);
-
         // Ajout des vues au modèle
-        Data model = Data.getInstance();
         controllers.forEach(model::ajouterObservateur);
 
         fxmlLoader.setControllerFactory(ic ->
@@ -53,7 +46,6 @@ public class Launcher extends Application {
         stage.setScene(scene);
         stage.show();
 
-        var t = new TabPane();
         Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
         model.notifierObservateur();
     }

@@ -6,7 +6,6 @@ public class QuestionReponse {
     private QRType type ;
     private String content ;
 
-
     public QuestionReponse(QRType t, String c) {
         this.type = t ;
         this.content = c ;

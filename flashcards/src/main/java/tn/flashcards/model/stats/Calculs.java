@@ -33,7 +33,7 @@ public class Calculs {
                 res[ls_thisCard.getDifficulty()]++;
             }
         }
-        
+
         return res;
     }
 
@@ -80,12 +80,58 @@ public class Calculs {
         FullStats fs = sp.getFullStats().get(j);
         for (int i = 9; i >= 0; i--) {
             while (j < sp.getFullStats().size() && isSameDay(d, fs.getPlayDate())) {
-                
-                res[i] ++;
-                
+
+                res[i]++;
+
                 j++;
             }
             d = d.minusDays(1);
+        }
+
+        return res;
+    }
+
+    /**
+     * Il prend une pile de cartes et renvoie un tableau de 5 listes de même taille
+     * contenant le nombre d'évaluation à telle difficulté par tranche de 20 minutes
+     * 
+     * @param p la pile dont vous voulez obtenir les statistiques
+     * @return Un tableau de tableaux de listes d'entiers.
+     */
+    public static ArrayList<Integer>[] cumuledStats(Pile p) {
+        ArrayList<Integer>[] res = new ArrayList[5];
+
+        int n = 20;
+
+        //TODO - ????
+        for (ArrayList<Integer> arrayList : res) {
+            arrayList = new ArrayList<Integer>();
+        }
+
+        LocalDateTime d = LocalDateTime.now();
+        StatsPile sp = Data.getInstance().getStatsPile().get(p.getUniqueId());
+
+        if (sp.getFullStats().size() == 0) {
+            return res;
+        }
+
+        int j = 0;
+        FullStats fs = sp.getFullStats().get(j);
+        while (j < sp.getFullStats().size()) {
+            while (isLessThenNMinutesBefore(fs.getPlayDate(), d, n)) {
+
+                if (fs.getDifficulty() >= 0 && fs.getDifficulty() < 5) {
+                    res[fs.getDifficulty()].set(0, res[fs.getDifficulty()].get(0) + 1);
+                }
+
+                j++;
+            }
+            d = d.minusMinutes(n);
+            if (j >= sp.getFullStats().size())
+                break;
+            for (ArrayList<Integer> arrayList : res) {
+                arrayList.add(0);
+            }
         }
 
         return res;
@@ -105,4 +151,20 @@ public class Calculs {
 
         return (s1 == s2);
     }
+
+    /**
+     * Si d1 est au plus N minutes avant d2, retourne vrai.
+     * 
+     * @param d1 La date à comparer
+     * @param d2 L'heure actuelle
+     * @param N  Le nombre de minutes avant l'heure actuelle.
+     */
+    private static boolean isLessThenNMinutesBefore(LocalDateTime d1, LocalDateTime d2, int N) {
+
+        long e1 = d1.toEpochSecond(null);
+        long e2 = d2.toEpochSecond(null);
+
+        return (e1 + 60 * N <= e2);
+    }
+
 }

@@ -30,43 +30,28 @@ public class MainController implements Initializable, Observateur {
                 radioButton -> {
                     radioButton.getStyleClass().remove("radio-button");
                 });
-        b2.setSelected(true);
+        b1.setSelected(true);
         onglets = Arrays.asList(edit, parameter, stats, training, editpile);
-        //setEditPile();
     }
 
     @FXML
     public void setViewEdit() {
-        //setView(edit);
         Data.getInstance().setMode(Data.Mode.EDITION_SELECTION);
     }
 
     @FXML
     public void setViewParameter() {
-        //setView(parameter);
         Data.getInstance().setMode(Data.Mode.PARAM);
     }
 
     @FXML
     public void setViewStats() {
-        //setView(stats);
         Data.getInstance().setMode(Data.Mode.STATS);
     }
 
     @FXML
     public void setViewTraining() {
-        //setView(training);
         Data.getInstance().setMode(Data.Mode.APPRENTISSAGE_SELECTION);
-    }
-
-    public void setEditPile() {
-        //setView(editpile);
-    }
-
-    public void setView(Pane pane) {
-        //for (Pane p : onglets) {
-        //    p.setVisible(p == pane);
-        //}
     }
 
     @Override
