@@ -9,28 +9,45 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import org.kordamp.ikonli.feather.Feather;
+import org.kordamp.ikonli.javafx.FontIcon;
 import tn.flashcards.Utils.FileHandler;
+import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.QRType;
 import tn.flashcards.view.QRViewFactory;
 
 import java.io.File;
 
+import static atlantafx.base.theme.Styles.*;
+
 public class EditCardCellController {
     public Card card;
 
-    @FXML public Pane QPane, RPane;
-    @FXML public ToggleGroup RGroup, QGroup;
-    @FXML public TextArea r_txt_area, q_txt_area;
-    @FXML public AnchorPane q_txt_pane, q_img_pane, r_txt_pane, r_img_pane;
-    @FXML public ImageView q_img, r_img;
-    @FXML public RadioButton q_txt_btn, q_img_btn, r_txt_btn, r_img_btn;
+    @FXML
+    public Pane QPane, RPane;
+    @FXML
+    public ToggleGroup RGroup, QGroup;
+    @FXML
+    public TextArea r_txt_area, q_txt_area;
+    @FXML
+    public AnchorPane q_txt_pane, q_img_pane, r_txt_pane, r_img_pane;
+    @FXML
+    public ImageView q_img, r_img;
+    @FXML
+    public RadioButton q_txt_btn, q_img_btn, r_txt_btn, r_img_btn;
+    @FXML
+    public Button deleteBtn;
 
 
     @FXML
     public void initialize() {
         unblur(r_txt_area);
         unblur(q_txt_area);
+        FontIcon fontIcon = new FontIcon(Feather.TRASH);
+        fontIcon.setIconSize(35);
+        deleteBtn.setGraphic(fontIcon);
+        deleteBtn.getStyleClass().addAll(BUTTON_ICON, BUTTON_OUTLINED, DANGER);
     }
 
     public void setVueCarte(Card carte) {
@@ -130,5 +147,9 @@ public class EditCardCellController {
     @FXML
     public void r_textarea() {
         card.getReponse().setContent(r_txt_area.getText());
+    }
+
+    public void delete() {
+        Data.getInstance().deleteCard(Data.getInstance().getCurrentPile(), card);
     }
 }
