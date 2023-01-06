@@ -9,14 +9,14 @@ import lombok.Setter;
 @Getter
 public class Settings {
     protected StrategyChoix algoChoix;
-    protected int timerAffichage ;
+    protected int timerAffichage;
     protected Theme theme;
-    protected String auteur ;
+    protected String auteur;
 
     public Settings() {
         this.algoChoix = new StrategyChoixProba();
-        this.timerAffichage = -1 ;
+        this.timerAffichage = -1;
         this.theme = Theme.FONCE;
-        this.auteur = "Auteur inconnu" ;
+        this.auteur = "Auteur inconnu";
     }
 }

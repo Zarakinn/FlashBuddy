@@ -8,7 +8,7 @@ import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.stats.LastStats;
 
 public class StrategyChoixProba implements StrategyChoix {
-    private static double probas[] = { 0.0, 0.5, 1.0, 1.5, 2.0 };
+    private static double probas[] = {0.0, 0.5, 1.0, 1.5, 2.0};
 
     public static void setProbas(int i, double v) {
         probas[i] = v;
@@ -20,7 +20,7 @@ public class StrategyChoixProba implements StrategyChoix {
 
     @Override
     public void execute() {
-        boolean cardChosen = false ;
+        boolean cardChosen = false;
 
         ArrayList<Card> cards = Data.getInstance().getCurrentTrainingPile().getCards();
         String currentPileId = Data.getInstance().getCurrentTrainingPile().getUniqueId();
@@ -48,17 +48,17 @@ public class StrategyChoixProba implements StrategyChoix {
         } else {
             /* Les cartes sont jouables */
             double p = Math.random() * s;
-    
+
             double localSum = 0;
             for (int i = 0; i < difficulties.size(); i++) {
                 localSum = localSum + difficulties.get(i);
                 if (localSum > p) {
                     Data.getInstance().setCurrentTrainingCard(cards.get(i));
-                    cardChosen = true ;
-                    break ;
+                    cardChosen = true;
+                    break;
                 }
             }
-    
+
             if (!cardChosen) {
                 Data.getInstance().setCurrentTrainingCard(null);
             }

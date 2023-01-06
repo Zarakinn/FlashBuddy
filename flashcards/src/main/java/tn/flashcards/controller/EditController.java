@@ -2,19 +2,13 @@ package tn.flashcards.controller;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 import org.kordamp.ikonli.feather.Feather;
 import tn.flashcards.Utils.FileHandler;
@@ -120,18 +114,16 @@ public class EditController implements Initializable, Observateur {
 
     public void importePile() {
         Pile p = FileHandler.LoadStackFromZip(importBtn.getScene().getWindow());
-        if (p !=null)
-        {
-               Data.getInstance().addPile(p);
-        }
-        else {
+        if (p != null) {
+            Data.getInstance().addPile(p);
+        } else {
             System.out.println("Fail to import");
         }
     }
 
     @Override
     public void reagir() {
-        if(Data.getInstance().getMode() == Data.Mode.EDITION_SELECTION) {
+        if (Data.getInstance().getMode() == Data.Mode.EDITION_SELECTION) {
             table.setItems(Data.getInstance().getPiles());
             table.refresh();
         }

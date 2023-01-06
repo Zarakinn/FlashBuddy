@@ -18,6 +18,7 @@ public class Card {
     public QuestionReponse getQuestion() {
         return this.question;
     }
+
     public void setQuestion(QuestionReponse qr) {
         this.question = qr;
     }
@@ -25,6 +26,7 @@ public class Card {
     public QuestionReponse getReponse() {
         return this.reponse;
     }
+
     public void setReponse(QuestionReponse qr) {
         this.reponse = qr;
     }

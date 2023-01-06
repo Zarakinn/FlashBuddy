@@ -122,15 +122,14 @@ public class TrainingController implements Initializable, Observateur {
         Data.getInstance().getSettings().getAlgoChoix().execute();
         Card c = Data.getInstance().getCurrentTrainingCard();
 
-        QRView q = QRViewFactory.createQRView(c.getQuestion()) ;
-        QRView r = QRViewFactory.createQRView(c.getReponse()) ;
+        QRView q = QRViewFactory.createQRView(c.getQuestion());
+        QRView r = QRViewFactory.createQRView(c.getReponse());
 
         if (q instanceof QRImageView qi) {
             System.out.println("q");
             qi.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
             this.question.getChildren().setAll(qi);
-        }
-        else {
+        } else {
             this.question.getChildren().setAll(q);
         }
 
@@ -138,8 +137,7 @@ public class TrainingController implements Initializable, Observateur {
             System.out.println("r");
             ri.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
             this.reponse.getChildren().setAll(ri);
-        }
-        else {
+        } else {
             this.reponse.getChildren().setAll(r);
         }
 
@@ -253,7 +251,7 @@ public class TrainingController implements Initializable, Observateur {
         };
 
         // Si un petit malin supprime le deck pendant la partie
-        if(Data.getInstance().getCurrentPile() == null ||
+        if (Data.getInstance().getCurrentPile() == null ||
                 Data.getInstance().getCurrentTrainingCard() == null) {
             setMode(ModeTraining.NO_CARTE);
             return;

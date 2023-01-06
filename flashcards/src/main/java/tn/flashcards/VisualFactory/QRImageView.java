@@ -8,43 +8,38 @@ import tn.flashcards.Utils.FileHandler;
 import java.io.File;
 
 public class QRImageView extends QRView {
-    public ImageView imgView ;
+    public ImageView imgView;
 
     public QRImageView(String path) {
-        super() ;
+        super();
         this.imgView = new ImageView();
         try {
             Image img;
-            if (path.contains(".zip"))
-            {
+            if (path.contains(".zip")) {
                 img = FileHandler.loadImageFromZip(path);
                 if (img == null)
                     throw new Exception();
-            }
-            else
-            {
+            } else {
                 File file = new File(path);
                 img = new Image(file.toURI().toString());
-                if (img.isError())
-                {
+                if (img.isError()) {
                     throw new Exception();
                 }
             }
             imgView.setImage(img);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Image img = new Image(Launcher.class.getResource("/tn/flashcards/img/notfound.jpeg").toString());
             imgView.setImage(img);
-        }
-        finally {
+        } finally {
             imgView.setPreserveRatio(true);
             this.getChildren().add(this.imgView);
         }
     }
 
     public void setSize(double mH, double mW) {
-        this.imgView.setFitHeight(mH); ;
-        this.imgView.setFitWidth(mW); ;
+        this.imgView.setFitHeight(mH);
+        ;
+        this.imgView.setFitWidth(mW);
+        ;
     }
 }

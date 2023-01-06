@@ -68,12 +68,12 @@ public class EditCardCellController {
         if (qType == QRType.TEXT) {
             q_txt_area.setText(carte.getQuestion().getContent());
         } else {
-            q_img.setImage(((ImageView)(QRViewFactory.createQRView(carte.getQuestion()).getChildren().get(0))).getImage());
+            q_img.setImage(((ImageView) (QRViewFactory.createQRView(carte.getQuestion()).getChildren().get(0))).getImage());
         }
         if (rType == QRType.TEXT) {
             r_txt_area.setText(carte.getReponse().getContent());
         } else {
-            r_img.setImage(((ImageView)(QRViewFactory.createQRView(carte.getReponse()).getChildren().get(0))).getImage());
+            r_img.setImage(((ImageView) (QRViewFactory.createQRView(carte.getReponse()).getChildren().get(0))).getImage());
         }
     }
 
