@@ -27,6 +27,7 @@ public class Data extends SujetObserve {
     private Mode mode;
 
     private Pile currentPile;
+    private Pile currentTrainingPile ;
     private Card currentTrainingCard ;
     private Settings settings ;
 
@@ -132,6 +133,6 @@ public class Data extends SujetObserve {
 
     public void scoreCard(int score) {
         FullStats fs = new FullStats(score, this.currentTrainingCard.getId()) ;
-        this.getStatsPile().get(this.currentPile.getUniqueId()).addPlayed(this.currentTrainingCard.getId(), fs);
+        this.getStatsPile().get(this.currentTrainingPile.getUniqueId()).addPlayed(this.currentTrainingCard.getId(), fs);
     }
 }
