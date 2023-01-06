@@ -17,6 +17,8 @@
 
 ▶️ Double cliquer sur le fatjar dans le dossier racine
 
+Une pile est disponible pour tester l'application à l'adresse suivante : https://drive.google.com/file/d/1wzGIJ0KSpzcUO2OJtanszYdl4KkEs96Z/view?usp=share_link
+
 ## Comment utiliser maven :
 
 ---

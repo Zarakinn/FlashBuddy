@@ -45,6 +45,7 @@
     _-fx-opacity: 0.70;
     -fx-cursor: hand;
     -fx-padding: 5px 10px 5px 10px;
+    -fx-text-fill: white;
 }
 
 .btn_font {
@@ -88,8 +89,8 @@
     -fx-border-width: 2px;
 }
 
-.list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected,
-.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected{
+.no-selection-color-list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected,
+.no-selection-color-list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected{
     -color-cell-fg: -color-bg-default;
     -color-cell-bg-selected: -color-bg-default;
     -color-cell-fg-selected: -color-bg-default;

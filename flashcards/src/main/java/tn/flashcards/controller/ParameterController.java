@@ -62,13 +62,13 @@ public class ParameterController implements Initializable, Observateur {
     }
 
     @FXML
-    private TextField auteurArea ;
+    private TextField auteurArea;
 
     @FXML
     public void setDefaultAuthor() {
         Data.getInstance().getSettings().setAuteur(this.auteurArea.getText());
     }
-    
+
     @FXML
     ChoiceBox<String> themeChoiceBox;
     private ArrayList<String> themeChoices;
@@ -131,7 +131,7 @@ public class ParameterController implements Initializable, Observateur {
 
         algoAffichageChoiceBox.setItems(FXCollections.observableArrayList(algoAffichageChoices));
         algoAffichageChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new AlgoAffichageListener());
-        
+
         this.reagir();
     }
 

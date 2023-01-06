@@ -16,6 +16,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.*;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import tn.flashcards.VisualFactory.QRImageView;
+import tn.flashcards.VisualFactory.QRView;
 import tn.flashcards.components.ActionButtonTableCell;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
@@ -31,6 +33,7 @@ import static tn.flashcards.components.ActionButtonTableCell.GRADIENT_BTN;
 
 public class TrainingController implements Initializable, Observateur {
 
+    public Label nom_pile_no_carte;
     @FXML
     private VBox errorMsg;
     @FXML
@@ -80,7 +83,6 @@ public class TrainingController implements Initializable, Observateur {
             }
             case NO_CARTE -> {
                 aucune_carte_pan.setVisible(true);
-
             }
             case JOUER -> {
                 trainingView.setVisible(true);
@@ -119,9 +121,26 @@ public class TrainingController implements Initializable, Observateur {
         }
         Data.getInstance().getSettings().getAlgoChoix().execute();
         Card c = Data.getInstance().getCurrentTrainingCard();
-        
-        this.question.getChildren().add(QRViewFactory.createQRView(c.getQuestion()));
-        this.reponse.getChildren().add(QRViewFactory.createQRView(c.getReponse()));
+
+        QRView q = QRViewFactory.createQRView(c.getQuestion());
+        QRView r = QRViewFactory.createQRView(c.getReponse());
+
+        if (q instanceof QRImageView qi) {
+            System.out.println("q");
+            qi.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
+            this.question.getChildren().setAll(qi);
+        } else {
+            this.question.getChildren().setAll(q);
+        }
+
+        if (r instanceof QRImageView ri) {
+            System.out.println("r");
+            ri.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
+            this.reponse.getChildren().setAll(ri);
+        } else {
+            this.reponse.getChildren().setAll(r);
+        }
+
         this.setQuestionView();
     }
 
@@ -199,10 +218,13 @@ public class TrainingController implements Initializable, Observateur {
         Data.getInstance().getStatsPile().get(p.getUniqueId()).incrNoJeuxPile();
         Data.getInstance().getStatsPile().get(p.getUniqueId()).updateLastOpened();
 
+        this.pileName.setText(p.getName());
         this.question.setPrefWidth(this.cardView.getWidth() / 2);
         this.reponse.setPrefWidth(this.cardView.getWidth() / 2);
 
         this.nextCardView();
+
+
     }
 
     @FXML
@@ -227,6 +249,13 @@ public class TrainingController implements Initializable, Observateur {
             case "4" -> 4;
             default -> 0;
         };
+
+        // Si un petit malin supprime le deck pendant la partie
+        if (Data.getInstance().getCurrentPile() == null ||
+                Data.getInstance().getCurrentTrainingCard() == null) {
+            setMode(ModeTraining.NO_CARTE);
+            return;
+        }
 
         Data.getInstance().scoreCard(score);
         this.scoreButtons.setVisible(false);

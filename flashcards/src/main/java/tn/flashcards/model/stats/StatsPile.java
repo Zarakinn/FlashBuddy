@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@Getter @Setter
+@Getter
+@Setter
 public class StatsPile {
     protected String pileId;
     protected int noJeuxPile;
@@ -31,25 +32,29 @@ public class StatsPile {
     public int getNoJeuxPile() {
         return this.noJeuxPile;
     }
+
     public void incrNoJeuxPile() {
-        this.noJeuxPile ++;
+        this.noJeuxPile++;
     }
 
     // NoJeuxCarte
     public int getNoJeuxCarte() {
         return this.noJeuxCarte;
     }
+
     public void incrNoJeuxCarte() {
-        this.noJeuxCarte ++;
+        this.noJeuxCarte++;
     }
 
     // LastOpened
     public String getLastOpenedFormated() {
         return this.lastOpened.format(DateFormat.getDateTimeFormatter());
     }
+
     public void updateLastOpened() {
         this.lastOpened = LocalDateTime.now();
     }
+
     public void updateLastOpened(LocalDateTime lastOpened) {
         this.lastOpened = lastOpened;
     }

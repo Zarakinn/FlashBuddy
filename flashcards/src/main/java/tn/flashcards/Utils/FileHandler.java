@@ -29,25 +29,21 @@ public class FileHandler {
     private static FileChooser fcImg;
     private static FileChooser fcPile;
 
-    public static FileChooser getImageFileChooser()
-    {
-        if (fcImg == null)
-        {
+    public static FileChooser getImageFileChooser() {
+        if (fcImg == null) {
             fcImg = new FileChooser();
             fcImg.setTitle("Sélectionner une image");
             FileChooser.ExtensionFilter fileExtensions =
                     new FileChooser.ExtensionFilter(
-                            "Image", "*.png","*.jpeg","*.bmp","*.tiff","*.ico");
+                            "Image", "*.png", "*.jpeg", "*.bmp", "*.tiff", "*.ico");
 
             fcImg.getExtensionFilters().add(fileExtensions);
         }
         return fcImg;
     }
 
-    public static FileChooser getPileFileChooser()
-    {
-        if (fcPile == null)
-        {
+    public static FileChooser getPileFileChooser() {
+        if (fcPile == null) {
             fcPile = new FileChooser();
             fcPile.setTitle("Sélectionner une pile");
             FileChooser.ExtensionFilter fileExtensions =
@@ -59,13 +55,11 @@ public class FileHandler {
         return fcPile;
     }
 
-    public static void loadStats()
-    {
+    public static void loadStats() {
 
     }
 
-    public static void saveStats()
-    {
+    public static void saveStats() {
         /*
         ---------------------------------------------------
 
@@ -75,19 +69,19 @@ public class FileHandler {
         */
         try {
             File directory = new File("Stats");
-            if (! directory.exists())
+            if (!directory.exists())
                 directory.mkdir();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         try {
-            HashMap<String,StatsPile> stats = Data.getInstance().getStatsPile();
+            HashMap<String, StatsPile> stats = Data.getInstance().getStatsPile();
 
             for (HashMap.Entry<String, StatsPile> entry : stats.entrySet()) {
                 String key = entry.getKey();
                 StatsPile value = entry.getValue();
 
-                File file = new File("Stats/"+ key +".json");
+                File file = new File("Stats/" + key + ".json");
                 FileWriter writer = new FileWriter(file);
                 Gson gson = new Gson();
                 String json = gson.toJson(value);
@@ -119,11 +113,12 @@ public class FileHandler {
         if (fileName.contains(".zip")){
             int index = fileName.indexOf("/", fileName.indexOf(".zip") + ".zip".length());
             String zipPath = fileName.substring(0, index);
-            String imagePath = fileName.substring(index+1);
+            String imagePath = fileName.substring(index + 1);
             File file = new File(zipPath);
 
-            try ( ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));){
+            try (ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));) {
                 ZipEntry entry = inputStream.getNextEntry();
+
                 while (entry != null) {
                     if (entry.getName().equals(imagePath)) {
 
@@ -139,15 +134,12 @@ public class FileHandler {
                     }
                     entry = inputStream.getNextEntry();
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors du chargement d'une image depuis le zip");
                 alert.show();
             }
-        }
-        else {
+        } else {
             try (FileInputStream inputStream = new FileInputStream(fileName)) {
                 byte[] data = new byte[inputStream.available()];
                 inputStream.read(data);
@@ -166,22 +158,21 @@ public class FileHandler {
         if (qr.getType() == QRType.IMAGE)
         {
             System.out.println("Content : " + qr.getContent());
+    public static void HandleImageExport(ZipOutputStream outputStream, QuestionReponse qr) {
+        if (qr.getType() == QRType.IMAGE) {
             byte[] data = FileHandler.imageToData(Path.of(qr.getContent()).toString());
-            if (data == null)
-            {
+            if (data == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Il y a eu une erreur dans l'enregistrement de la pile, lors de l'import de l'image " + qr.getContent());
                 alert.show();
-            }
-            else{
+            } else {
                 Path path = Path.of(qr.getContent());
                 qr.setContent("img/" + path.getFileName().toString()); // Modification uniquement sur le clone
-                addDataToZip(outputStream,"img/" + path.getFileName().toString(),data);
+                addDataToZip(outputStream, "img/" + path.getFileName().toString(), data);
             }
         }
     }
 
-    public static void SaveStackInZip(Pile originalPile)
-    {
+    public static void SaveStackInZip(Pile originalPile) {
         Pile pile = Data.getInstance().clonePile(originalPile); // Un clone qui n'est pas ajouté à Data
 
         String outputname = pile.getName();
@@ -194,20 +185,17 @@ public class FileHandler {
             else
             {break;}
         }
-
-
-        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(outputname + ".zip"))) {
-            for (Card c: pile.getCards())
-            {
+        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(pile.getName() + ".zip"))) {
+            for (Card c : pile.getCards()) {
                 QuestionReponse q = c.getQuestion();
                 QuestionReponse r = c.getReponse();
 
-                HandleImageExport(outputStream,q);
-                HandleImageExport(outputStream,r);
+                HandleImageExport(outputStream, q);
+                HandleImageExport(outputStream, r);
             }
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(pile);
-            addDataToZip(outputStream,"Pile.json",json.getBytes());
+            addDataToZip(outputStream, "Pile.json", json.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur dans l'enregistrement de la pile au format zip.");
@@ -216,13 +204,12 @@ public class FileHandler {
 
     }
 
-    public static Image loadImageFromZip(String path)
-    {
+    public static Image loadImageFromZip(String path) {
         int index = path.indexOf("/", path.indexOf(".zip") + ".zip".length());
         String zipPath = path.substring(0, index);
-        String imagePath = path.substring(index+1);
+        String imagePath = path.substring(index + 1);
         File file = new File(zipPath);
-        try ( ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));){
+        try (ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));) {
             ZipEntry entry = inputStream.getNextEntry();
 
             while (entry != null) {
@@ -241,9 +228,7 @@ public class FileHandler {
                 }
                 entry = inputStream.getNextEntry();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors du chargement d'une image depuis le zip");
             alert.show();
@@ -251,11 +236,10 @@ public class FileHandler {
         return null;
     }
 
-    public static Pile LoadStackFromZip(Window window)
-    {
+    public static Pile LoadStackFromZip(Window window) {
         File file = FileHandler.getPileFileChooser().showOpenDialog(window);
         if (file != null) {
-            try (ZipInputStream  inputStream= new ZipInputStream(new FileInputStream(file))){
+            try (ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file))) {
                 Pile stack = null;
                 ZipEntry entry;
                 while ((entry = inputStream.getNextEntry()) != null) {
@@ -264,17 +248,14 @@ public class FileHandler {
                         stack = gson.fromJson(new InputStreamReader(inputStream), Pile.class);
                     }
                 }
-                for (Card c:stack.getCards())
-                {
+                for (Card c : stack.getCards()) {
                     QuestionReponse q = c.getQuestion();
                     QuestionReponse r = c.getReponse();
 
-                    if (q.getType() == QRType.IMAGE)
-                    {
+                    if (q.getType() == QRType.IMAGE) {
                         q.setContent(file.getAbsolutePath() + "/" + q.getContent());
                     }
-                    if (r.getType() == QRType.IMAGE)
-                    {
+                    if (r.getType() == QRType.IMAGE) {
                         r.setContent(file.getAbsolutePath() + "/" + r.getContent());
                     }
                 }

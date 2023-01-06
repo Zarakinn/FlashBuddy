@@ -3,12 +3,12 @@ package tn.flashcards.model.pile;
 public class QuestionReponse {
 
 
-    private QRType type ;
-    private String content ;
+    private QRType type;
+    private String content;
 
     public QuestionReponse(QRType t, String c) {
-        this.type = t ;
-        this.content = c ;
+        this.type = t;
+        this.content = c;
     }
 
     public QRType getType() {

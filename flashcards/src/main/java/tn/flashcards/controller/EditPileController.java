@@ -25,7 +25,7 @@ public class EditPileController implements Initializable, Observateur {
 
     public EditPileController() {
         Pile pile = Data.getInstance().getCurrentPile();
-        if(pile != null) {
+        if (pile != null) {
             Data.getInstance().createCard(pile.getUniqueId(), QRType.TEXT, "la première question", QRType.TEXT, "la première réponse");
             Data.getInstance().createCard(pile.getUniqueId(), QRType.TEXT, "la deuxième question", QRType.TEXT, "la deuxième réponse");
         }
@@ -54,7 +54,7 @@ public class EditPileController implements Initializable, Observateur {
 
     @Override
     public void reagir() {
-        if(Data.getInstance().getMode() == Data.Mode.EDIT_PILE) {
+        if (Data.getInstance().getMode() == Data.Mode.EDIT_PILE) {
             display();
         }
     }
