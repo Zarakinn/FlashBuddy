@@ -108,6 +108,9 @@ public class FileHandler {
             outputStream.write(data);
             outputStream.closeEntry();
         } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors de l'insertion de bytes dans le zip.");
+            alert.show();
         }
     }
 
@@ -118,6 +121,8 @@ public class FileHandler {
             return data;
         } catch (Exception e) {
             e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors de la conversion de l'image en bytes pour le zip.");
+            alert.show();
         }
         return null;
     }
@@ -156,7 +161,9 @@ public class FileHandler {
             String json = gson.toJson(pile);
             addDataToZip(outputStream,"Pile.json",json.getBytes());
         } catch (Exception e) {
-            System.out.println("Fail to Save Stack");
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur dans l'enregistrement de la pile au format zip.");
+            alert.show();
         }
 
     }
@@ -190,6 +197,8 @@ public class FileHandler {
         catch (Exception e)
         {
             e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Erreur lors du chargement d'une image depuis le zip");
+            alert.show();
         }
         return null;
     }
