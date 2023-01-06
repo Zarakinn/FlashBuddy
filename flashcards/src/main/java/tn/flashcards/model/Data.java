@@ -152,11 +152,13 @@ public class Data extends SujetObserve {
     public void deletePile(Pile pile) {
         // Suppression de la pile
         this.getPiles().remove(pile);
+        if(this.getCurrentPile() == pile) {
+            this.setCurrentPile(null);
+        }
 
         // Suppression des stats
         this.getStatsPile().remove(pile.getUniqueId());
 
-        // Obs
         notifierObservateur();
     }
 

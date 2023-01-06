@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="650.0" prefWidth="1000.0" styleClass="view" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
+<StackPane prefHeight="650.0" prefWidth="1000.0" styleClass="view" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.flashcards.controller.TrainingController">
     <children>
         <BorderPane fx:id="pileList" visible="false">
             <center>
@@ -39,7 +39,7 @@
                   <Insets />
                </StackPane.margin>
             </Label>
-            <Label contentDisplay="CENTER" styleClass="qr_area" text="Pile Sans nom" StackPane.alignment="TOP_LEFT">
+            <Label fx:id="nom_pile_no_carte" contentDisplay="CENTER" styleClass="qr_area" text="Pile Sans nom" visible="false" StackPane.alignment="TOP_LEFT">
                <font>
                   <Font size="16.0" />
                </font>
@@ -58,7 +58,16 @@
             <top>
                 <BorderPane>
                     <left>
-                        <Label fx:id="pileName" styleClass="view; label" />
+                        <Label fx:id="pileName" styleClass="qr_area" text="#Pile_name">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets bottom="2.0" left="9.0" right="10.0" top="2.0" />
+                     </padding></Label>
                     </left>
                     <right>
                         <Button fx:id="closeTraining" alignment="BASELINE_RIGHT" onAction="#closeTraining" styleClass="view" text="Terminer l'apprentissage" />
@@ -80,13 +89,13 @@
 
             <bottom>
                 <StackPane alignment="CENTER" styleClass="score_btb">
-                    <Button fx:id="showAnsButton" onAction="#affReponse" styleClass="view" text="Afficher la réponse" prefWidth="875.0" />
+                    <Button fx:id="showAnsButton" onAction="#affReponse" prefWidth="875.0" styleClass="view" text="Afficher la réponse" />
                     <HBox fx:id="scoreButtons" alignment="CENTER" spacing="10.0" styleClass="param">
-                        <Button id="0" onAction="#scoreCard" style="text-align: center" text="Evident" prefWidth="175.0" />
-                        <Button id="1" onAction="#scoreCard" style="text-align: center" text="Facile" prefWidth="175.0" />
-                        <Button id="2" onAction="#scoreCard" style="text-align: center" text="Moyen" prefWidth="175.0" />
-                        <Button id="3" onAction="#scoreCard" style="text-align: center" text="Difficile" prefWidth="175.0" />
-                        <Button id="4" onAction="#scoreCard" style="text-align: center" text="Impossible" prefWidth="175.0" />
+                        <Button id="0" onAction="#scoreCard" prefWidth="175.0" style="text-align: center" text="Evident" />
+                        <Button id="1" onAction="#scoreCard" prefWidth="175.0" style="text-align: center" text="Facile" />
+                        <Button id="2" onAction="#scoreCard" prefWidth="175.0" style="text-align: center" text="Moyen" />
+                        <Button id="3" onAction="#scoreCard" prefWidth="175.0" style="text-align: center" text="Difficile" />
+                        <Button id="4" onAction="#scoreCard" prefWidth="175.0" style="text-align: center" text="Impossible" />
                     </HBox>
                 </StackPane>
             </bottom>
