@@ -1,4 +1,4 @@
-package tn.flashcards.view;
+package tn.flashcards.VisualFactory;
 
 import java.util.ArrayList;
 

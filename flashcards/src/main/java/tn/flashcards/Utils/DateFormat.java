@@ -1,4 +1,4 @@
-package tn.flashcards.model.stats;
+package tn.flashcards.Utils;
 
 import java.time.format.DateTimeFormatter;
 

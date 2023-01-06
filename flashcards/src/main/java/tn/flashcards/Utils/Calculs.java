@@ -1,13 +1,17 @@
-package tn.flashcards.model.stats;
+package tn.flashcards.Utils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import tn.flashcards.Utils.DateFormat;
 import tn.flashcards.model.pile.Card;
 
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Pile;
+import tn.flashcards.model.stats.FullStats;
+import tn.flashcards.model.stats.LastStats;
+import tn.flashcards.model.stats.StatsPile;
 
 public class Calculs {
     /**

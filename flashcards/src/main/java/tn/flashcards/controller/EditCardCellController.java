@@ -1,12 +1,10 @@
 package tn.flashcards.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.kordamp.ikonli.feather.Feather;
@@ -15,7 +13,7 @@ import tn.flashcards.Utils.FileHandler;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.QRType;
-import tn.flashcards.view.QRViewFactory;
+import tn.flashcards.VisualFactory.QRViewFactory;
 
 import java.io.File;
 

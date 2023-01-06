@@ -2,6 +2,7 @@ package tn.flashcards.model.stats;
 
 import lombok.Getter;
 import lombok.Setter;
+import tn.flashcards.Utils.DateFormat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

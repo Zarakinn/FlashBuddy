@@ -55,6 +55,24 @@ public class FileHandler {
         return fcPile;
     }
 
+    public static void loadStats()
+    {
+
+    }
+
+    public static void saveStats()
+    {
+        try {
+            File file = new File("Stats.json");
+            FileWriter writer = writer = new FileWriter(file);
+            Gson gson = new Gson();
+            gson.toJson(Data.getInstance().getStatsPile(), writer);
+            writer.flush();
+        } catch (Exception e) {
+            System.out.println("Fail to save stats");
+        }
+    }
+
     //region zip
 
     private static void addDataToZip(ZipOutputStream outputStream, String fileName, byte[] data) {
@@ -185,7 +203,6 @@ public class FileHandler {
         }
         return null;
     }
-
 
     //endregion
 }

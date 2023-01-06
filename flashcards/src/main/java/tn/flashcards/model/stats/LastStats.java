@@ -1,5 +1,7 @@
 package tn.flashcards.model.stats;
 
+import tn.flashcards.Utils.DateFormat;
+
 import java.time.LocalDateTime;
 
 public class LastStats {
