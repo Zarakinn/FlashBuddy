@@ -1,3 +1,7 @@
+.root{
+    -fx-font-family: "Webdings";
+}
+
 .header {
     -fx-background-color: #3b812e;
     -fx-padding: 3px 15px 3px 13px;
@@ -93,3 +97,6 @@
     -color-cell-fg-selected-focused: -color-bg-default;
 }
 
+.score_btb {
+
+}
