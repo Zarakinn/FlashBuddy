@@ -117,7 +117,6 @@ public class FileHandler {
 
     private static byte[] imageToData(String fileName) {
         if (fileName.contains(".zip")){
-
             int index = fileName.indexOf("/", fileName.indexOf(".zip") + ".zip".length());
             String zipPath = fileName.substring(0, index);
             String imagePath = fileName.substring(index+1);
@@ -125,7 +124,6 @@ public class FileHandler {
 
             try ( ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));){
                 ZipEntry entry = inputStream.getNextEntry();
-
                 while (entry != null) {
                     if (entry.getName().equals(imagePath)) {
 
@@ -167,6 +165,7 @@ public class FileHandler {
     {
         if (qr.getType() == QRType.IMAGE)
         {
+            System.out.println("Content : " + qr.getContent());
             byte[] data = FileHandler.imageToData(Path.of(qr.getContent()).toString());
             if (data == null)
             {
@@ -184,7 +183,20 @@ public class FileHandler {
     public static void SaveStackInZip(Pile originalPile)
     {
         Pile pile = Data.getInstance().clonePile(originalPile); // Un clone qui n'est pas ajouté à Data
-        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(pile.getName() + ".zip"))) {
+
+        String outputname = pile.getName();
+        while (true)
+        {
+            File f = new File(outputname + ".zip");
+            if(f.exists() && !f.isDirectory()) {
+                outputname += "(bis)";
+            }
+            else
+            {break;}
+        }
+
+
+        try (ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream(outputname + ".zip"))) {
             for (Card c: pile.getCards())
             {
                 QuestionReponse q = c.getQuestion();
