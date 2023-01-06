@@ -38,8 +38,6 @@ public class QRImageView extends QRView {
 
     public void setSize(double mH, double mW) {
         this.imgView.setFitHeight(mH);
-        ;
         this.imgView.setFitWidth(mW);
-        ;
     }
 }

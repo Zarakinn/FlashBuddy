@@ -77,7 +77,13 @@
 
             <center>
                 <HBox fx:id="cardView" focusTraversable="true" BorderPane.alignment="CENTER">
-                    <Pane fx:id="question" styleClass="view" />
+                    <Pane fx:id="question" styleClass="view">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets top="10.0" />
+                  </padding></Pane>
                     <StackPane alignment="CENTER">
                         <Pane fx:id="reponse" styleClass="view" />
                         <AnchorPane>

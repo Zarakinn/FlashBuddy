@@ -116,7 +116,7 @@ public class FileHandler {
             String imagePath = fileName.substring(index + 1);
             File file = new File(zipPath);
 
-            try (ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));) {
+            try (ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file))) {
                 ZipEntry entry = inputStream.getNextEntry();
 
                 while (entry != null) {
@@ -205,7 +205,7 @@ public class FileHandler {
         String zipPath = path.substring(0, index);
         String imagePath = path.substring(index + 1);
         File file = new File(zipPath);
-        try (ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file));) {
+        try (ZipInputStream inputStream = new ZipInputStream(new FileInputStream(file))) {
             ZipEntry entry = inputStream.getNextEntry();
 
             while (entry != null) {
