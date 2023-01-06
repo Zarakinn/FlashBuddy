@@ -21,7 +21,7 @@ import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.pile.Pile;
 import tn.flashcards.model.stats.StatsPile;
-import tn.flashcards.view.QRViewFactory;
+import tn.flashcards.VisualFactory.QRViewFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -189,6 +189,7 @@ public class TrainingController implements Initializable, Observateur {
         this.trainingView.setVisible(false);
         this.errorMsg.setVisible(false);
         Data.getInstance().setCurrentPile(null);
+        //FileHandler.saveStats();
     }
 
     @FXML

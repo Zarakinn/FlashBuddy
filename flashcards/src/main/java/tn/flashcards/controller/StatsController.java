@@ -11,9 +11,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import tn.flashcards.model.Data;
 import tn.flashcards.model.pile.Pile;
-import tn.flashcards.model.stats.Calculs;
-import tn.flashcards.view.MyBarChart;
-import tn.flashcards.view.MyPieChart;
+import tn.flashcards.Utils.Calculs;
+import tn.flashcards.VisualFactory.MyBarChart;
+import tn.flashcards.VisualFactory.MyPieChart;
 
 import java.net.URL;
 import java.util.*;
