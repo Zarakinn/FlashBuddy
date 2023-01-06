@@ -41,20 +41,16 @@ public class EditPileController implements Initializable, Observateur {
         //view.setCellFactory(view -> new EditCell(pile));
         view.setCellFactory(view -> new EditCellV2());
 
-
         name.setText(pile.getName());
         desc.setText(pile.getDesc());
-        name.textProperty().addListener((observable, oldValue, newValue) -> {
-            pile.setName(newValue);
-        });
-        desc.textProperty().addListener((observable, oldValue, newValue) -> {
-            pile.setDesc(newValue);
-        });
+
         display();
     }
 
     public void display() {
+        System.out.println("load: " + Data.getInstance().getCurrentPile().getName());
         name.setText(Data.getInstance().getCurrentPile().getName());
+        desc.setText(Data.getInstance().getCurrentPile().getDesc());
         ObservableList<Card> oCards = FXCollections.observableList(Data.getInstance().getCurrentPile().getCards());
         view.setItems(oCards);
     }
@@ -76,7 +72,11 @@ public class EditPileController implements Initializable, Observateur {
         Data.getInstance().setMode(Data.Mode.EDITION_SELECTION);
     }
 
-    public void setTitre(KeyEvent keyEvent) {
-        // TODO
+    public void setTitre() {
+        Data.getInstance().getCurrentPile().setName(name.getText());
+    }
+
+    public void setDesc() {
+        Data.getInstance().getCurrentPile().setDesc(desc.getText());
     }
 }

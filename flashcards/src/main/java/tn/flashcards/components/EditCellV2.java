@@ -13,7 +13,6 @@ public class EditCellV2 extends ListCell<Card> implements Observateur {
     private final Parent root;
     private final EditCardCellController controller;
 
-
     public EditCellV2() {
         super();
         FXMLLoader loader = new FXMLLoader(Launcher.class.getResource("fxml/edit-cell.fxml"));

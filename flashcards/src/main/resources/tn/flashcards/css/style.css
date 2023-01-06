@@ -34,11 +34,11 @@
 
 /*-color-success-emphasis*/
 .gradient_btn {
-    -color-button-bg:       linear-gradient(to bottom right, #3b812e, #306b25);
+    -color-button-bg:       linear-gradient(to bottom right, #3b812e, #256b28);
     -color-button-bg-hover:   -color-button-bg;
     -color-button-bg-focused: -color-button-bg;
     -color-button-bg-pressed: -color-button-bg;
-    -fx-opacity: 0.70;
+    _-fx-opacity: 0.70;
     -fx-cursor: hand;
     -fx-padding: 5px 10px 5px 10px;
 }
@@ -77,4 +77,10 @@
 
 .popover > .border { -fx-stroke-width: 1; }
 
+.qr_area {
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #3b812e;
+    -fx-border-width: 2px;
+}
 

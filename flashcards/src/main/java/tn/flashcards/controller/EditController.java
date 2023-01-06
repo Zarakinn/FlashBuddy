@@ -142,6 +142,7 @@ public class EditController implements Initializable, Observateur {
     @Override
     public void reagir() {
         if(Data.getInstance().getMode() == Data.Mode.EDITION_SELECTION) {
+            table.setItems(Data.getInstance().getPiles());
             table.refresh();
         }
     }
