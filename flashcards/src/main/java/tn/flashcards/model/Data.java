@@ -128,6 +128,9 @@ public class Data extends SujetObserve {
 
     public void setMode(Mode mode) {
         this.mode = mode;
+        if (mode == Mode.STATS) {
+            
+        }
         this.notifierObservateur();
     }
 
