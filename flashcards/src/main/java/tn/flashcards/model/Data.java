@@ -73,10 +73,8 @@ public class Data extends SujetObserve {
     METHODES COMPLEXES POUR MODIFIER LE MODELE
      */
 
-    public Pile createPile(String name, String creator) {
+    public Pile createPile() {
         Pile p = new Pile() ;
-        p.setName(name);
-        p.setCreator(creator);
         this.addPile(p) ;
         this.notifierObservateur() ;
         return p;

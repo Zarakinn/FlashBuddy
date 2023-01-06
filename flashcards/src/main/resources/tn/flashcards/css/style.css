@@ -84,3 +84,12 @@
     -fx-border-width: 2px;
 }
 
+.list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected,
+.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected{
+    -color-cell-fg: -color-bg-default;
+    -color-cell-bg-selected: -color-bg-default;
+    -color-cell-fg-selected: -color-bg-default;
+    -color-cell-bg-selected-focused: -color-bg-default;
+    -color-cell-fg-selected-focused: -color-bg-default;
+}
+
