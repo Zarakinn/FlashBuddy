@@ -14,7 +14,7 @@
       <TableView fx:id="table" styleClass="tableStack" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="cName" prefWidth="170.0" text="Nom 🖉" />
-          <TableColumn fx:id="cNb" prefWidth="60.0" text="Nb." />
+          <TableColumn fx:id="cNb" prefWidth="70.0" text="Nb." />
             <TableColumn fx:id="cTags" prefWidth="120.0" text="Tag 🖉" />
             <TableColumn fx:id="cCreateur" minWidth="0.0" prefWidth="170.0" text="Créateur 🖉" />
             <TableColumn fx:id="cDate" minWidth="0.0" prefWidth="150.0" text="Modification" />
