@@ -71,9 +71,9 @@ public class ParameterController implements Initializable, Observateur {
 
     @FXML
     ChoiceBox<String> themeChoiceBox;
-    private ArrayList<String> themeChoices;
-    private ArrayList<Theme> themes;
-    private ArrayList<String> sheets;
+    private final ArrayList<String> themeChoices;
+    private final ArrayList<Theme> themes;
+    private final ArrayList<String> sheets;
 
 
     private class themeListener implements ChangeListener<Number> {
@@ -90,8 +90,8 @@ public class ParameterController implements Initializable, Observateur {
      */
     @FXML
     ChoiceBox<String> algoChoixChoiceBox;
-    private ArrayList<String> algoChoixChoices;
-    private ArrayList<StrategyChoix> algoChoixs;
+    private final ArrayList<String> algoChoixChoices;
+    private final ArrayList<StrategyChoix> algoChoixs;
 
     private class AlgoChoixListener implements ChangeListener<Number> {
         public void changed(ObservableValue ov, Number value, Number new_value) {
@@ -106,8 +106,8 @@ public class ParameterController implements Initializable, Observateur {
      */
     @FXML
     ChoiceBox<String> algoAffichageChoiceBox;
-    private ArrayList<String> algoAffichageChoices;
-    private ArrayList<Integer> algoAffichages;
+    private final ArrayList<String> algoAffichageChoices;
+    private final ArrayList<Integer> algoAffichages;
 
     private class AlgoAffichageListener implements ChangeListener<Number> {
         public void changed(ObservableValue ov, Number value, Number new_value) {

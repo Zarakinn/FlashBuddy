@@ -125,20 +125,28 @@ public class TrainingController implements Initializable, Observateur {
         QRView q = QRViewFactory.createQRView(c.getQuestion());
         QRView r = QRViewFactory.createQRView(c.getReponse());
 
+        var inside = q.getChildren().get(0);
+
         if (q instanceof QRImageView qi) {
-            System.out.println("q");
             qi.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
             this.question.getChildren().setAll(qi);
-        } else {
+        } else if (inside instanceof Label label) {
+            label.setWrapText(true);
+            label.setMaxWidth(this.cardView.getWidth() / 2 - 40);
+            label.setPadding(new javafx.geometry.Insets(10));
             this.question.getChildren().setAll(q);
         }
 
+        var inside2 = r.getChildren().get(0);
+
         if (r instanceof QRImageView ri) {
-            System.out.println("r");
             ri.setSize(this.cardView.getHeight() - 15, this.cardView.getWidth() / 2 - 15);
             this.reponse.getChildren().setAll(ri);
-        } else {
+        } else if (inside2 instanceof Label label){
             this.reponse.getChildren().setAll(r);
+            label.setWrapText(true);
+            label.setMaxWidth(this.cardView.getWidth() / 2 - 40);
+            label.setPadding(new javafx.geometry.Insets(10));
         }
 
         this.setQuestionView();
@@ -157,7 +165,7 @@ public class TrainingController implements Initializable, Observateur {
                 @Override
                 public String toString(Double aDouble) {
                     double res = aDouble * timer;
-                    return Integer.toString((int) res) + "s";
+                    return (int) res + "s";
                 }
 
                 @Override

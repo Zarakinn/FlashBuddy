@@ -8,7 +8,7 @@ import tn.flashcards.model.pile.Card;
 import tn.flashcards.model.stats.LastStats;
 
 public class StrategyChoixProba implements StrategyChoix {
-    private static double probas[] = {0.0, 0.5, 1.0, 1.5, 2.0};
+    private static final double[] probas = {0.0, 0.5, 1.0, 1.5, 2.0};
 
     public static void setProbas(int i, double v) {
         probas[i] = v;

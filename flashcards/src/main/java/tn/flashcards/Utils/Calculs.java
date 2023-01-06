@@ -173,7 +173,7 @@ public class Calculs {
         long e1 = d1.toEpochSecond(null);
         long e2 = d2.toEpochSecond(null);
 
-        return (e1 + 60 * N <= e2);
+        return (e1 + 60L * N <= e2);
     }
 
 }
