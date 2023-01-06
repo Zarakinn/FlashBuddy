@@ -64,7 +64,15 @@ public class Data extends SujetObserve {
 
     // Ajouter une pile
     public void addPile(Pile p) {
-        //TODO - Faire des vérifications, pile n'est pas déja dedans
+        for (Pile pile : piles)
+        {
+            if (p.getUniqueId() == pile.getUniqueId())
+            {
+                p.setUniqueId(Pile.genUniqueId());
+                break;
+            }
+        }
+        
         this.piles.add(p) ;
         StatsPile pile = new StatsPile(p.getUniqueId());
         this.statsPile.put(p.getUniqueId(), pile) ;
