@@ -14,31 +14,18 @@ class Launcher extends javafx.application.Application {
 ********** ********** ********'/
 package "resources.tn.flashcards" #ffecb8 {
     package fxml {
-        object main_view.fxml {
-        }
-
-        object edit_view.fxml {
-        }
-
-        object parameter_view.fxml {
-        }
-
-        object stats_view.fxml {
-        }
-
-        object training_view.fxml {
-        }
+        object vue.fxml
     }
 
     package css {
-        object style.css {
-        }
+        object style.css
     }
-
 }
 
 package "VisualFactory" #ffecb8 {
 
+    class QRViewFactory
+    note right: Pattern Factory
     class QRViewFactory {
         +Pane createQRView(Card card)
     }
@@ -76,23 +63,7 @@ package "controller" #90d2d8 {
         + void reagir()
     }
 
-    class MainController implements javafx.fxml.Initializable, Observateur {
-        +void initialize(URL location, ResourceBundle resources)
-    }
-
-    class EditController implements javafx.fxml.Initializable, Observateur {
-        +void initialize(URL location, ResourceBundle resources)
-    }
-
-    class ParameterController implements javafx.fxml.Initializable, Observateur {
-        +void initialize(URL location, ResourceBundle resources)
-    }
-
-    class StatsController implements javafx.fxml.Initializable, Observateur {
-        +void initialize(URL location, ResourceBundle resources)
-    }
-
-    class TrainingController implements javafx.fxml.Initializable, Observateur {
+    class Controller implements javafx.fxml.Initializable, Observateur {
         +void initialize(URL location, ResourceBundle resources)
     }
 
@@ -175,7 +146,7 @@ package "model" #f6a6b2 {
         class Settings {}
 
         interface StrategyChoix
-        note left: Pattern Strategy
+        note right: Pattern Strategy
         interface StrategyChoix {
             + Card execute()
         }
@@ -211,29 +182,20 @@ package "model" #f6a6b2 {
 ********** ********** ********'/
 
 ' GLOBAL
-Launcher -->"1" main_view.fxml
+Launcher -->"1" vue.fxml
 Launcher -->"1" style.css
 
 ' VC
-main_view.fxml -->"1" MainController
-edit_view.fxml -->"1" EditController
-parameter_view.fxml -->"1" ParameterController
-training_view.fxml -->"1" TrainingController
-stats_view.fxml -->"1" StatsController
+vue.fxml -->"1" Controller
 
 ' CM
 SujetObserve *-->"*" Observateur
 
 
 ' CONTROLLER
-MainController -u-> EditController
-MainController -u-> ParameterController
-MainController -u-> StatsController
-MainController -u-> TrainingController
-
-TrainingController -u-> QRViewFactory
-StatsController -u-> MyBarChart
-StatsController -u-> MyPieChart
+Controller --> QRViewFactory
+Controller --> MyBarChart
+Controller --> MyPieChart
 
 ' MODEL
 Pile *--"..*" Card
@@ -250,5 +212,12 @@ Settings -->"1" Theme
 
 StatsPile -->"..* [HashMap]" LastStats
 StatsPile -->"..*" FullStats
+
+' HIDDEN
+FullStats -d[hidden]-> DateFormat
+javafx.fxml.Initializable -d[hidden]-> Observateur
+MyBarChart -l[hidden]-> QRView
+MyPieChart -l[hidden]-> MyBarChart
+javafx.scene.layout -l[hidden]-> javafx.scene.chart.BarChart
 
 @enduml
