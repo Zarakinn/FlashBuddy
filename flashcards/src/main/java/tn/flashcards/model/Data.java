@@ -141,6 +141,17 @@ public class Data extends SujetObserve {
         notifierObservateur();
     }
 
+    public void deletePile(Pile pile) {
+        // Suppression de la pile
+        this.getPiles().remove(pile);
+
+        // Suppression des stats
+        this.getStatsPile().remove(pile.getUniqueId());
+
+        // Obs
+        notifierObservateur();
+    }
+
     public void setMode(Mode mode) {
         this.mode = mode;
         if (mode == Mode.STATS) {
