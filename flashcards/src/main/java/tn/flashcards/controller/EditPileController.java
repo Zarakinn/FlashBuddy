@@ -33,7 +33,6 @@ public class EditPileController implements Initializable, Observateur {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         view.setCellFactory(view -> new EditCell());
         display();
     }
