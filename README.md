@@ -28,7 +28,7 @@ Maven s'occupe de tout ! Si vous aimez vraiment le travail manuel, vous trouvere
 
 ▶️ Double cliquer sur le fatjar dans le dossier racine
 
-Une pile est disponible pour tester l'application à l'adresse suivante : https://drive.google.com/file/d/1XGKdXPhnFriDjxxYV2lBWlwp9bic4QeT/view?usp=sharing
+Des piles sont disponibles pour tester l'application [ici](https://drive.google.com/file/d/1XGKdXPhnFriDjxxYV2lBWlwp9bic4QeT/view?usp=sharing) (test des capitales) et [là](https://drive.google.com/file/d/13iMRbPVeOHG3UGYa4ajhLX3yHgdtg6R7/view?usp=sharing) (test des citations célèbres).
 
 ## Comment utiliser maven :
 
@@ -60,7 +60,7 @@ mvn clean
 - Lancer l'application 
 
 ```bash
-mvn mvn javafx:run
+mvn javafx:run
 ```
 
 - Créer le Fat Jar (les tests sont réalisés avant de créer le Fat Jar) : on le retrouve dans target
